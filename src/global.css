@@ -1,1 +1,50 @@
 @import 'tailwindcss';
+
+@theme inline {
+	--color-base: hsl(249deg, 22%, 12%);
+	--color-surface: hsl(247deg, 23%, 15%);
+	--color-overlay: hsl(248deg, 25%, 18%);
+	--color-muted: hsl(249deg, 12%, 47%);
+	--color-subtle: hsl(248deg, 15%, 61%);
+	--color-text: hsl(245deg, 50%, 91%);
+	--color-love: hsl(343deg, 76%, 68%);
+	--color-gold: hsl(35deg, 88%, 72%);
+	--color-rose: hsl(2deg, 55%, 83%);
+	--color-pine: hsl(197deg, 49%, 38%);
+	--color-foam: hsl(189deg, 43%, 73%);
+	--color-iris: hsl(267deg, 57%, 78%);
+	--color-highlight-low: hsl(244deg, 18%, 15%);
+	--color-highlight-med: hsl(249deg, 15%, 28%);
+	--color-highlight-high: hsl(248deg, 13%, 36%);
+}
+
+:root {
+	color-scheme: dark;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+::selection {
+	@apply bg-iris text-highlight-low;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	@apply bg-base text-text font-medium;
+}
+
+@utility container {
+	@apply px-4 mx-auto;
+}
