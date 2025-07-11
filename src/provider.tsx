@@ -79,6 +79,7 @@ export class Provider extends Component<Props> {
 
 	fetchPhotos = async () => {
 		this.setState({ items: null, isLoading: true })
+		let isAbortError = false
 
 		try {
 			const items = this.state.searchQuery
@@ -87,10 +88,15 @@ export class Provider extends Component<Props> {
 
 			this.setState({ items })
 		} catch (error) {
-			if (error instanceof Error && error.name === ABORT_ERROR_NAME) return
+			if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
+				isAbortError = true
+				return
+			}
 			this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
 		} finally {
-			this.setState({ isLoading: false })
+			if (!isAbortError) {
+				this.setState({ isLoading: false })
+			}
 		}
 	}
 

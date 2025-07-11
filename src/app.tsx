@@ -26,9 +26,11 @@ export class App extends PureComponent {
 					<section className='container h-full grid grid-rows-[min-content_1fr]'>
 						<h1 className='mb-10 text-4xl capitalize font-bold text-balance'>{searchQuery}</h1>
 
-						{isLoading && <LoaderCircle size={48} className='animate-spin text-text place-self-center' />}
-
-						{hasItems(items) && <PhotoList items={items} />}
+						{isLoading ? (
+							<LoaderCircle size={48} className='animate-spin text-text place-self-center' />
+						) : (
+							hasItems(items) && <PhotoList items={items} />
+						)}
 					</section>
 				</main>
 			</>
