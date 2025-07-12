@@ -18,6 +18,9 @@
         "src/*"
       ]
     },
+    "types": [
+      "vitest/globals"
+    ],
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -32,6 +35,6 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src"
+    "src",
   ]
 }
