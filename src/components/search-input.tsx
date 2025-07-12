@@ -1,9 +1,9 @@
 import { X } from 'lucide-react'
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
 import { Context } from '@/provider'
 
-export class SearchInput extends PureComponent {
+export class SearchInput extends Component {
 	static contextType = Context
 	declare context: React.ContextType<typeof Context>
 
@@ -27,6 +27,7 @@ export class SearchInput extends PureComponent {
 				/>
 
 				<button
+					aria-label='Reset'
 					type='reset'
 					className='peer-placeholder-shown:opacity-0 peer-placeholder-shown:invisible visible opacity-100 absolute right-0 top-1/2 -translate-1/2 cursor-pointer text-text p-2 duration-200'
 				>
