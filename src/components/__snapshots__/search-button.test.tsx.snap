@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SearchButton > search button render correctly 1`] = `
+<p>
+  <button
+    aria-label="Search"
+    class="py-2 px-4 lg:px-10 bg-iris hover:bg-iris/80 duration-200 transition-colors h-full rounded-r-full cursor-pointer text-highlight-low"
+    type="submit"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-search"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="m21 21-4.34-4.34"
+      />
+      <circle
+        cx="11"
+        cy="11"
+        r="8"
+      />
+    </svg>
+  </button>
+</p>
+`;
+
+exports[`SearchButton > search button visibility 1`] = `
+<button
+  aria-label="Search"
+  class="py-2 px-4 lg:px-10 bg-iris hover:bg-iris/80 duration-200 transition-colors h-full rounded-r-full cursor-pointer text-highlight-low"
+  type="submit"
+>
+  <svg
+    aria-hidden="true"
+    class="lucide lucide-search"
+    fill="none"
+    height="24"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="m21 21-4.34-4.34"
+    />
+    <circle
+      cx="11"
+      cy="11"
+      r="8"
+    />
+  </svg>
+</button>
+`;
+
+exports[`should render search button with accessible name and match snapshot 1`] = `
+<p>
+  <button
+    aria-label="Search"
+    class="py-2 px-4 lg:px-10 bg-iris hover:bg-iris/80 duration-200 transition-colors h-full rounded-r-full cursor-pointer text-highlight-low"
+    type="submit"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-search"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="m21 21-4.34-4.34"
+      />
+      <circle
+        cx="11"
+        cy="11"
+        r="8"
+      />
+    </svg>
+  </button>
+</p>
+`;

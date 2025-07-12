@@ -38,7 +38,12 @@ export class SearchForm extends PureComponent {
 
 	render() {
 		return (
-			<form onReset={this.clearSearch} onSubmit={this.handleFormSubmit} className='flex h-full order-2 sm:order-1'>
+			<form
+				aria-label='Search Form'
+				onReset={this.clearSearch}
+				onSubmit={this.handleFormSubmit}
+				className='flex h-full order-2 sm:order-1'
+			>
 				<SearchInput />
 				<SearchButton />
 			</form>
