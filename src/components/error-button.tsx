@@ -1,7 +1,7 @@
 import { TriangleAlert } from 'lucide-react'
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
-export class ErrorButton extends PureComponent {
+export class ErrorButton extends Component {
 	state = { hasError: false }
 
 	triggerError = () => this.setState({ hasError: true })
@@ -17,6 +17,7 @@ export class ErrorButton extends PureComponent {
 					className='flex items-center justify-center rounded-full cursor-pointer aspect-square h-full'
 					onClick={this.triggerError}
 					aria-label='Trigger error'
+					type='button'
 				>
 					<TriangleAlert size='32' className='text-love' />
 				</button>

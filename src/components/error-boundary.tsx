@@ -1,22 +1,18 @@
-import { PureComponent, type ReactNode } from 'react'
+import { Component, type ReactNode } from 'react'
 
 import { ErrorComponent } from '@/components/error-component'
-
-interface State {
-	error: Error | null
-}
 
 interface Props {
 	children: ReactNode
 }
 
-export class ErrorBoundary extends PureComponent<Props, State> {
-	state: State = {
-		error: null
+export class ErrorBoundary extends Component<Props> {
+	state = {
+		hasError: false
 	}
 
-	static getDerivedStateFromError(error: Error) {
-		return { error }
+	static getDerivedStateFromError() {
+		return { hasError: true }
 	}
 
 	componentDidCatch(error: Error) {
@@ -24,17 +20,13 @@ export class ErrorBoundary extends PureComponent<Props, State> {
 	}
 
 	handleResetError = () => {
-		this.setState({ error: null })
+		this.setState({ hasError: false })
 	}
 
 	render() {
-		if (this.state.error) {
+		if (this.state.hasError) {
 			return (
-				<ErrorComponent
-					title='Something went wrong!'
-					handleResetError={this.handleResetError}
-					buttonText='Reset Error'
-				/>
+				<ErrorComponent title='Something went wrong!' handleResetError={this.handleResetError} buttonText='Try again' />
 			)
 		}
 

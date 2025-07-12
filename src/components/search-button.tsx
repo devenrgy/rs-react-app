@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react'
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
-export class SearchButton extends PureComponent {
+export class SearchButton extends Component {
 	render() {
 		return (
 			<p>

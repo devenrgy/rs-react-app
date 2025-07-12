@@ -1,14 +1,26 @@
 export const hasItems = <T>(items: T[] | null | undefined): items is T[] => !!items && items.length > 0
 
-export const getUrlParam = (name: string) => new URLSearchParams(window.location.search).get(name) ?? undefined
+export const addUrlParams = (url: string, params: Record<string, unknown>) => {
+	const newUrl = new URL(url)
 
-export const setUrlParam = (name: string, value: string) => {
+	Object.entries(params).forEach(([key, value]) => {
+		if (value !== undefined) {
+			newUrl.searchParams.append(key, String(value))
+		}
+	})
+
+	return newUrl
+}
+
+export const getPageUrlParams = (name: string) => new URLSearchParams(window.location.search).get(name) ?? undefined
+
+export const setPageUrlParams = (name: string, value: string) => {
 	const searchParams = new URLSearchParams(window.location.search)
 	searchParams.set(name, value)
 	window.history.pushState({}, '', `${window.location.pathname}?${searchParams}`)
 }
 
-export const removeUrlParam = (name: string) => {
+export const removePageUrlParams = (name: string) => {
 	const searchParams = new URLSearchParams(window.location.search)
 	searchParams.delete(name)
 	const newUrl = searchParams.toString() ? `${window.location.pathname}?${searchParams}` : window.location.pathname
@@ -40,5 +52,3 @@ export const removeLocalStorage = (key: string) => {
 		console.error('LocalStorage remove error:', error)
 	}
 }
-
-export const sleep = (ms: number) => new Promise(res => setTimeout(res, ms))

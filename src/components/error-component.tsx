@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
 interface Props {
 	title: string
@@ -6,15 +6,16 @@ interface Props {
 	buttonText: string
 }
 
-export class ErrorComponent extends PureComponent<Props> {
+export class ErrorComponent extends Component<Props> {
 	render() {
 		return (
 			<main className='container h-dvh grid place-items-center'>
 				<section className='flex flex-col gap-10 items-center'>
-					<h1 className='text-balance text-center text-4xl font-bold'>{this.props.title}</h1>
+					<h1 className='first-letter:capitalize text-balance text-center text-4xl font-bold'>{this.props.title}</h1>
 					<button
+						type='button'
 						onClick={this.props.handleResetError}
-						className='max-w-[200px] cursor-pointer w-full py-3 px-5 bg-pine rounded-3xl text-xl hover:bg-pine/80 duration-200 transition-colors'
+						className='max-w-[200px] capitalize cursor-pointer w-full py-3 px-5 bg-pine rounded-3xl text-xl hover:bg-pine/80 duration-200 transition-colors'
 					>
 						{this.props.buttonText}
 					</button>

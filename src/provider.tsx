@@ -2,7 +2,7 @@ import { Component, createContext } from 'react'
 
 import { getPhotos, getPhotosByQuery } from '@/lib/api/requests'
 import { ABORT_ERROR_NAME, SEARCH_PARAM_KEY, STORAGE_KEY } from '@/lib/constants'
-import { getLocalStorage, getUrlParam, setLocalStorage, setUrlParam } from '@/lib/utils'
+import { getLocalStorage, getPageUrlParams, setLocalStorage, setPageUrlParams } from '@/lib/utils'
 import type { Photo } from '@/types'
 
 const DEFAULT_STATE: State = {
@@ -15,13 +15,17 @@ const DEFAULT_STATE: State = {
 export interface ContextValue extends State {
 	handleUpdateSearchQuery: (newQuery: string | undefined) => void
 	handleResetError: () => void
+	abortRequest: () => void
+	fetchPhotos: () => void
 }
 
 export const Context = createContext<ContextValue>({
 	...DEFAULT_STATE,
 	isLoading: true,
 	handleUpdateSearchQuery: () => null,
-	handleResetError: () => null
+	handleResetError: () => null,
+	abortRequest: () => null,
+	fetchPhotos: () => null
 })
 
 interface Props {
@@ -37,6 +41,10 @@ interface State {
 
 export class Provider extends Component<Props> {
 	state: State
+	userAbortController: AbortController | null = null
+	timeoutMS = 60000
+	timeoutSignal: AbortSignal | null = null
+	activeRequestsCounter = 0
 
 	constructor(props: Props) {
 		super(props)
@@ -48,7 +56,7 @@ export class Provider extends Component<Props> {
 	}
 
 	private initializeSearchQuery() {
-		const urlQuery = getUrlParam(SEARCH_PARAM_KEY)
+		const urlQuery = getPageUrlParams(SEARCH_PARAM_KEY)
 		const storageQuery = getLocalStorage(STORAGE_KEY, undefined)
 
 		if (urlQuery) {
@@ -56,7 +64,7 @@ export class Provider extends Component<Props> {
 			return urlQuery
 		}
 
-		return storageQuery && setUrlParam(SEARCH_PARAM_KEY, storageQuery)
+		return storageQuery && setPageUrlParams(SEARCH_PARAM_KEY, storageQuery)
 	}
 
 	async componentDidMount() {
@@ -77,27 +85,56 @@ export class Provider extends Component<Props> {
 		this.setState({ error: null })
 	}
 
+	abort = () => {
+		if (this.userAbortController) {
+			this.userAbortController.abort()
+		}
+	}
+
 	fetchPhotos = async () => {
+		this.abort()
+
+		this.userAbortController = new AbortController()
+		this.timeoutSignal = AbortSignal.timeout(this.timeoutMS)
+
+		this.activeRequestsCounter++
 		this.setState({ items: null, isLoading: true })
-		let isAbortError = false
+
+		const signal = AbortSignal.any([this.timeoutSignal, this.userAbortController.signal])
 
 		try {
-			const items = this.state.searchQuery
-				? (await getPhotosByQuery({ query: this.state.searchQuery })).results
-				: await getPhotos()
+			const response = this.state.searchQuery
+				? await getPhotosByQuery({ query: this.state.searchQuery, signal })
+				: await getPhotos({ signal })
+
+			if (!response.ok) {
+				throw new Error(`Response status: ${response.status}`)
+			}
+
+			const data = await response.json()
+
+			const items = 'results' in data ? data.results : data
 
 			this.setState({ items })
 		} catch (error) {
-			if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
-				isAbortError = true
-				return
+			if (this.timeoutSignal.aborted) {
+				console.error(`Operation timed out after ${this.timeoutMS} ms`)
+			} else if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
+				console.error('Operation aborted by user')
+			} else {
+				this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
 			}
-			this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
 		} finally {
-			if (!isAbortError) {
-				this.setState({ isLoading: false })
-			}
+			this.userAbortController = null
 		}
+
+		this.activeRequestsCounter--
+
+		this.setState({ isLoading: this.activeRequestsCounter > 0 })
+	}
+
+	componentWillUnmount() {
+		this.abort()
 	}
 
 	render() {
@@ -109,7 +146,9 @@ export class Provider extends Component<Props> {
 					items,
 					error,
 					isLoading,
-					searchQuery: searchQuery,
+					searchQuery,
+					fetchPhotos: this.fetchPhotos,
+					abortRequest: this.abort,
 					handleResetError: this.handleResetError,
 					handleUpdateSearchQuery: this.handleUpdateSearchQuery
 				}}

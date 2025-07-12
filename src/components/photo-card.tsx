@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
 import type { Photo } from '@/types'
 
@@ -6,12 +6,12 @@ interface Props {
 	data: Photo
 }
 
-export class PhotoCard extends PureComponent<Props> {
+export class PhotoCard extends Component<Props> {
 	render() {
 		const { urls, width, height, alt_description } = this.props.data
 
 		return (
-			<div className='flex break-inside-avoid flex-col border border-highlight-low rounded-3xl overflow-clip'>
+			<figure className='flex break-inside-avoid flex-col border border-highlight-low rounded-3xl overflow-clip'>
 				<img
 					className='object-cover w-full h-full'
 					src={urls.regular}
@@ -21,10 +21,10 @@ export class PhotoCard extends PureComponent<Props> {
 					alt={alt_description}
 				/>
 
-				<div className='py-6 px-4 bg-highlight-med text-center'>
+				<figcaption className='py-6 px-4 bg-highlight-med text-center'>
 					<p className='first-letter:capitalize text-sm text-balance'>{alt_description}</p>
-				</div>
-			</div>
+				</figcaption>
+			</figure>
 		)
 	}
 }

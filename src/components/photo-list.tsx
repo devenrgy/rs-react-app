@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+import { Component } from 'react'
 
 import { PhotoCard } from '@/components/photo-card'
 import type { Photo } from '@/types'
@@ -7,7 +7,7 @@ interface Props {
 	items: Photo[]
 }
 
-export class PhotoList extends PureComponent<Props> {
+export class PhotoList extends Component<Props> {
 	render() {
 		return (
 			<ul className='columns-1 sm:columns-2 lg:space-y-10 lg:columns-3 gap-5 lg:gap-x-10 space-y-5'>
