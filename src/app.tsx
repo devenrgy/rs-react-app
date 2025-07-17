@@ -4,8 +4,8 @@ import { Component, type ContextType } from 'react'
 import { ErrorComponent } from '@/components/error-component'
 import { Header } from '@/components/header'
 import { PhotoList } from '@/components/photo-list'
-import { hasItems } from '@/lib/utils'
 import { Context } from '@/provider'
+import { hasItems } from '@/utils/helpers'
 
 export class App extends Component {
 	static contextType = Context
@@ -30,18 +30,18 @@ export class App extends Component {
 			<>
 				<Header />
 
-				<main className='pt-40 pb-20 min-h-dvh grid'>
-					<section className='container h-full grid grid-rows-[min-content_1fr]'>
-						<h1 className='mb-10 text-4xl capitalize font-bold text-balance'>{searchQuery}</h1>
+				<main className='grid min-h-dvh pt-40 pb-20'>
+					<section className='container grid h-full grid-rows-[min-content_1fr]'>
+						<h1 className='mb-10 text-4xl font-bold text-balance capitalize'>{searchQuery}</h1>
 
 						{isLoading ? (
-							<div className='flex max-w-[200px] w-full flex-col gap-10 place-self-center items-center'>
+							<div className='flex w-full max-w-[200px] flex-col items-center gap-10 place-self-center'>
 								<LoaderCircle size={48} className='animate-spin text-text' />
 
 								<button
 									type='button'
 									onClick={abortRequest}
-									className='max-w-[200px] capitalize cursor-pointer w-full py-3 px-5 bg-pine rounded-3xl text-xl hover:bg-pine/80 duration-200 transition-colors'
+									className='w-full max-w-[200px] cursor-pointer rounded-3xl bg-pine px-5 py-3 text-xl capitalize transition-colors duration-200 hover:bg-pine/80'
 								>
 									Cancel
 								</button>
@@ -49,13 +49,13 @@ export class App extends Component {
 						) : hasItems(items) ? (
 							<PhotoList items={items} />
 						) : (
-							<div className='flex flex-col gap-5 place-self-center items-center'>
-								<p className='text-3xl text-balance text-center'>Nothing found</p>
+							<div className='flex flex-col items-center gap-5 place-self-center'>
+								<p className='text-center text-3xl text-balance'>Nothing found</p>
 
 								<button
 									type='button'
 									onClick={fetchPhotos}
-									className='max-w-[200px] capitalize cursor-pointer w-full py-3 px-5 bg-pine rounded-3xl text-xl hover:bg-pine/80 duration-200 transition-colors'
+									className='w-full max-w-[200px] cursor-pointer rounded-3xl bg-pine px-5 py-3 text-xl capitalize transition-colors duration-200 hover:bg-pine/80'
 								>
 									Retry
 								</button>

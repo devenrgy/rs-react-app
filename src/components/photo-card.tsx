@@ -11,9 +11,9 @@ export class PhotoCard extends Component<Props> {
 		const { urls, width, height, alt_description } = this.props.data
 
 		return (
-			<figure className='flex break-inside-avoid flex-col border border-highlight-low rounded-3xl overflow-clip'>
+			<figure className='flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low'>
 				<img
-					className='object-cover w-full h-full'
+					className='h-full w-full object-cover'
 					src={urls.regular}
 					width={width}
 					height={height}
@@ -21,8 +21,8 @@ export class PhotoCard extends Component<Props> {
 					alt={alt_description}
 				/>
 
-				<figcaption className='py-6 px-4 bg-highlight-med text-center'>
-					<p className='first-letter:capitalize text-sm text-balance'>{alt_description}</p>
+				<figcaption className='bg-highlight-med px-4 py-6 text-center'>
+					<p className='text-sm text-balance first-letter:capitalize'>{alt_description}</p>
 				</figcaption>
 			</figure>
 		)

@@ -10,7 +10,7 @@ interface Props {
 export class PhotoList extends Component<Props> {
 	render() {
 		return (
-			<ul className='columns-1 sm:columns-2 lg:space-y-10 lg:columns-3 gap-5 lg:gap-x-10 space-y-5'>
+			<ul className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 lg:space-y-10 lg:gap-x-10'>
 				{this.props.items.map(item => (
 					<li key={item.id}>
 						<PhotoCard data={item} />

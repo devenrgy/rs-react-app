@@ -12,9 +12,9 @@ export class ErrorButton extends Component {
 		}
 
 		return (
-			<p className='flex justify-center order-1'>
+			<p className='order-1 flex justify-center'>
 				<button
-					className='flex items-center justify-center rounded-full cursor-pointer aspect-square h-full'
+					className='flex aspect-square h-full cursor-pointer items-center justify-center rounded-full'
 					onClick={this.triggerError}
 					aria-label='Trigger error'
 					type='button'

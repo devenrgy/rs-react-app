@@ -1,9 +1,10 @@
-import { Component, createContext } from 'react'
+import { Component, createContext, type ReactNode } from 'react'
 
 import { getPhotos, getPhotosByQuery } from '@/lib/api/requests'
 import { ABORT_ERROR_NAME, SEARCH_PARAM_KEY, STORAGE_KEY } from '@/lib/constants'
-import { getLocalStorage, getPageUrlParams, setLocalStorage, setPageUrlParams } from '@/lib/utils'
 import type { Photo } from '@/types'
+import { getLocalStorage, setLocalStorage } from '@/utils/localstorage'
+import { getPageUrlParams, setPageUrlParams } from '@/utils/url'
 
 const DEFAULT_STATE: State = {
 	items: null,
@@ -29,7 +30,7 @@ export const Context = createContext<ContextValue>({
 })
 
 interface Props {
-	children: React.ReactNode
+	children: ReactNode
 }
 
 interface State {

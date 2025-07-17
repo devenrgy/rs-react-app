@@ -7,7 +7,7 @@ export class SearchButton extends Component {
 			<p>
 				<button
 					aria-label='Search'
-					className='py-2 px-4 lg:px-10 bg-iris hover:bg-iris/80 duration-200 transition-colors h-full rounded-r-full cursor-pointer text-highlight-low'
+					className='h-full cursor-pointer rounded-r-full bg-iris px-4 py-2 text-highlight-low transition-colors duration-200 hover:bg-iris/80 lg:px-10'
 					type='submit'
 				>
 					<Search />

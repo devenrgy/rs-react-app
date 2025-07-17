@@ -1,14 +1,15 @@
-import { Component, type FormEvent } from 'react'
+import { Component, type ContextType, type FormEvent } from 'react'
 
 import { SearchButton } from '@/components/search-button'
 import { SearchInput } from '@/components/search-input'
 import { SEARCH_PARAM_KEY, STORAGE_KEY } from '@/lib/constants'
-import { removeLocalStorage, removePageUrlParams, setLocalStorage, setPageUrlParams } from '@/lib/utils'
 import { Context } from '@/provider'
+import { removeLocalStorage, setLocalStorage } from '@/utils/localstorage'
+import { removePageUrlParams, setPageUrlParams } from '@/utils/url'
 
 export class SearchForm extends Component {
 	static contextType = Context
-	declare context: React.ContextType<typeof Context>
+	declare context: ContextType<typeof Context>
 
 	handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -42,7 +43,7 @@ export class SearchForm extends Component {
 				aria-label='Search Form'
 				onReset={this.clearSearch}
 				onSubmit={this.handleFormSubmit}
-				className='flex h-full order-2 sm:order-1'
+				className='order-2 flex h-full sm:order-1'
 			>
 				<SearchInput />
 				<SearchButton />
