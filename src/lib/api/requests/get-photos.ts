@@ -1,5 +1,5 @@
 import { BASE_API_URL } from '@/lib/constants'
-import { addUrlParams } from '@/lib/utils'
+import { addUrlParams } from '@/utils/url'
 
 type Params = {
 	page?: number
