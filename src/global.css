@@ -42,9 +42,9 @@ body {
 }
 
 body {
-	@apply bg-base text-text font-medium;
+	@apply bg-base font-medium text-text;
 }
 
 @utility container {
-	@apply px-4 mx-auto;
+	@apply mx-auto px-4;
 }
