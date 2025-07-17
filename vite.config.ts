@@ -7,7 +7,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
 	test: {
+		// reporters: ['default', 'html'],
 		coverage: {
+			enabled: false,
 			include: ['src/**/*.{ts,tsx}'],
 			exclude: ['src/**/*.test.{ts,tsx}', 'src/index.{ts,tsx}', 'src/setup-tests.ts', 'src/**/*.d.ts'],
 			thresholds: {
@@ -19,7 +21,7 @@ export default defineConfig({
 		},
 		clearMocks: true,
 		globals: true,
-		setupFiles: ['./src/setup-tests.ts'],
+		setupFiles: ['src/setup-tests.ts'],
 		environment: 'happy-dom',
 		css: true
 	},
