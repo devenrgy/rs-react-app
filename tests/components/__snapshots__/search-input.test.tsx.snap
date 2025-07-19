@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SearchInput > should display the default placeholder when searchQuery is undefined 1`] = `
+<p
+  class="relative w-full"
+>
+  <label
+    class="sr-only"
+    for="search"
+  >
+    Search:
+     
+  </label>
+  <input
+    class="peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80"
+    id="search"
+    inputmode="search"
+    name="search"
+    placeholder="Find awesome images..."
+    type="text"
+  />
+  <button
+    aria-label="Reset"
+    class="visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0"
+    type="reset"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-x"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18 6 6 18"
+      />
+      <path
+        d="m6 6 12 12"
+      />
+    </svg>
+  </button>
+</p>
+`;
