@@ -36,7 +36,7 @@ export class App extends Component {
 
 						{isLoading ? (
 							<div className='flex w-full max-w-[200px] flex-col items-center gap-10 place-self-center'>
-								<LoaderCircle size={48} className='animate-spin text-text' />
+								<LoaderCircle size={48} aria-label='spinner' className='animate-spin text-text' />
 
 								<button
 									type='button'
