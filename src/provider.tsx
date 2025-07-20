@@ -135,7 +135,6 @@ export class Provider extends Component<Props> {
 				this.setState({ error: new Error('Operation timed out') })
 			} else if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
 				console.error('Operation aborted by user')
-				this.setState({ error: new Error('Operation aborted') })
 			} else {
 				this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
 			}
