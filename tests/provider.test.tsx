@@ -108,4 +108,26 @@ describe('Provider', () => {
 		expect(cards).toHaveLength(2)
 		expect(searchInput).toHaveValue('Cat')
 	})
+
+	it('should timeout', async () => {
+		const fn = vi.spyOn(AbortController.prototype, 'abort')
+
+		server.use(
+			http.get(
+				`${BASE_API_URL}/photos`,
+				() => {
+					return HttpResponse.json([{ id: '1' }, { id: '2' }])
+				},
+				{ once: true }
+			)
+		)
+
+		render(
+			<Provider timeout>
+				<Test />
+			</Provider>
+		)
+
+		expect(fn).toBeCalledTimes(1)
+	})
 })

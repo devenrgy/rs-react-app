@@ -30,6 +30,7 @@ export const Context = createContext<ContextValue>({
 })
 
 interface Props {
+	timeout?: boolean
 	children: ReactNode
 }
 
@@ -44,7 +45,8 @@ export class Provider extends Component<Props> {
 	state: State
 	userAbortController: AbortController | null = null
 	timeoutMS = 60000
-	timeoutSignal: AbortSignal | null = null
+	timeoutAbortController: AbortController | null = null
+	timeoutId: NodeJS.Timeout | undefined = undefined
 	activeRequestsCounter = 0
 
 	constructor(props: Props) {
@@ -87,24 +89,31 @@ export class Provider extends Component<Props> {
 
 	handleResetError = () => {
 		this.setState({ error: null })
+		this.fetchPhotos()
 	}
 
 	abort = () => {
-		if (this.userAbortController) {
-			this.userAbortController.abort()
-		}
+		clearTimeout(this?.timeoutId)
+		this.userAbortController?.abort()
 	}
 
 	fetchPhotos = async () => {
 		this.abort()
 
 		this.userAbortController = new AbortController()
-		this.timeoutSignal = AbortSignal.timeout(this.timeoutMS)
+		this.timeoutAbortController = new AbortController()
+
+		this.timeoutId = setTimeout(() => this.timeoutAbortController?.abort(), this.timeoutMS)
 
 		this.activeRequestsCounter++
 		this.setState({ items: null, isLoading: true })
 
-		const signal = AbortSignal.any([this.timeoutSignal, this.userAbortController.signal])
+		const signal = AbortSignal.any([this.timeoutAbortController.signal, this.userAbortController.signal])
+
+		if (this.props.timeout) {
+			clearTimeout(this.timeoutId)
+			this.timeoutAbortController.abort()
+		}
 
 		try {
 			const response = this.state.searchQuery
@@ -121,10 +130,12 @@ export class Provider extends Component<Props> {
 
 			this.setState({ items })
 		} catch (error) {
-			if (this.timeoutSignal.aborted) {
+			if (this.timeoutAbortController.signal.aborted) {
 				console.error(`Operation timed out after ${this.timeoutMS} ms`)
+				this.setState({ error: new Error('Operation timed out') })
 			} else if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
 				console.error('Operation aborted by user')
+				this.setState({ error: new Error('Operation aborted') })
 			} else {
 				this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
 			}
@@ -139,6 +150,8 @@ export class Provider extends Component<Props> {
 
 	componentWillUnmount() {
 		this.abort()
+		clearTimeout(this?.timeoutId)
+		this.timeoutAbortController?.abort()
 	}
 
 	render() {
