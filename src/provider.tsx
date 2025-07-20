@@ -65,7 +65,10 @@ export class Provider extends Component<Props> {
 			return urlQuery
 		}
 
-		return storageQuery && setPageUrlParams(SEARCH_PARAM_KEY, storageQuery)
+		if (storageQuery) {
+			setPageUrlParams(SEARCH_PARAM_KEY, storageQuery)
+			return storageQuery
+		}
 	}
 
 	async componentDidMount() {
