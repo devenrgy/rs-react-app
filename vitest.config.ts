@@ -10,7 +10,7 @@ export default mergeConfig(
 			coverage: {
 				enabled: true,
 				include: ['src/**/*.{ts,tsx}'],
-				exclude: ['src/index.{ts,tsx}', 'src/**/*.d.ts'],
+				exclude: ['src/index.{ts,tsx}', 'src/**/*.d.ts', 'src/main.tsx'],
 				thresholds: {
 					statements: 80,
 					branches: 50,
