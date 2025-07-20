@@ -21,6 +21,7 @@ describe('localstorage', () => {
 	})()
 
 	beforeEach(() => {
+		vi.spyOn(console, 'error').mockImplementation(() => {})
 		vi.stubGlobal('localStorage', mockLocalStorage)
 		mockLocalStorage.clear()
 		vi.clearAllMocks()

@@ -133,30 +133,4 @@ describe('App', () => {
 		expect(title).toBeInTheDocument()
 		expect(button).toBeInTheDocument()
 	})
-
-	it.skip('should error page with unknown', async () => {
-		const errorMsg = 'Response status: 500'
-
-		server.use(
-			http.get(
-				`${BASE_API_URL}/photos`,
-				() => {
-					return new HttpResponse(null, { status: 700, statusText: errorMsg })
-				},
-				{ once: true }
-			)
-		)
-
-		const { container } = render(
-			<Provider>
-				<App />
-			</Provider>
-		)
-
-		const title = await within(container).findByRole('heading', { name: errorMsg })
-		const button = await within(container).findByRole('button', { name: /try again/i })
-
-		expect(title).toBeInTheDocument()
-		expect(button).toBeInTheDocument()
-	})
 })
