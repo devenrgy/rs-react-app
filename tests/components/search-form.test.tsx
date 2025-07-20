@@ -1,6 +1,9 @@
 import { render, within } from '@testing-library/react'
 
 import { SearchForm } from '@/components/search-form'
+import { STORAGE_KEY } from '@/lib/constants.ts'
+import * as LS from '@/utils/localstorage'
+import { getLocalStorage } from '@/utils/localstorage'
 
 import { mockContext } from '../mocks/custom-renders'
 import { setup, setupWithContextProvider } from '../vitest.setup.ts'
@@ -75,5 +78,36 @@ describe('SearchForm', () => {
 		await user.click(searchResetButton)
 
 		expect(searchInput).toHaveValue('')
+	})
+
+	it('should save trimmed value in localstorage', async () => {
+		const fn = vi.spyOn(LS, 'setLocalStorage')
+
+		const { container, user } = setup(<SearchForm />)
+
+		const searchInput = within(container).getByRole('textbox', { name: /search/i })
+
+		await user.type(searchInput, '  Cat  ')
+
+		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
+
+		await user.click(searchSubmitButton)
+
+		expect(fn).toBeCalledTimes(1)
+		expect(fn).toBeCalledWith(STORAGE_KEY, 'Cat')
+	})
+
+	it('should overwrites value in localstorage to new', async () => {
+		const { container, user } = setup(<SearchForm />)
+
+		const searchInput = within(container).getByRole('textbox', { name: /search/i })
+
+		await user.type(searchInput, '  Cat  ')
+
+		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
+
+		await user.click(searchSubmitButton)
+
+		expect(getLocalStorage(STORAGE_KEY, undefined)).toBe('Cat')
 	})
 })

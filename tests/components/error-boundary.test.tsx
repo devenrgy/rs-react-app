@@ -5,8 +5,8 @@ import { ErrorBoundary } from '@/components/error-boundary'
 import { Header } from '@/components/header'
 
 describe('ErrorBoundary', () => {
-	it('should click error button to show error component', async () => {
-		vi.spyOn(console, 'error').mockImplementation(() => {})
+	it('should click error button to show error component and console error', async () => {
+		const fn = vi.spyOn(console, 'error').mockImplementation(() => {})
 
 		const { user, container } = setup(
 			<ErrorBoundary>
@@ -26,6 +26,7 @@ describe('ErrorBoundary', () => {
 
 		await user.click(button)
 
+		expect(fn).toHaveBeenCalledTimes(2)
 		expect(title).not.toBeInTheDocument()
 		expect(button).not.toBeInTheDocument()
 	})
