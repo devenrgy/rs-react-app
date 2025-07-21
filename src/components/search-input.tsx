@@ -1,39 +1,33 @@
 import { X } from 'lucide-react'
-import { Component, type ContextType } from 'react'
 
-import { Context } from '@/provider'
+import { useAppContext } from '@/provider'
 
-export class SearchInput extends Component {
-	static contextType = Context
-	declare context: ContextType<typeof Context>
+export const SearchInput = () => {
+	const { searchQuery } = useAppContext()
 
-	render() {
-		const { searchQuery } = this.context
+	return (
+		<p className='relative w-full'>
+			<label htmlFor='search' className='sr-only'>
+				Search:{' '}
+			</label>
 
-		return (
-			<p className='relative w-full'>
-				<label htmlFor='search' className='sr-only'>
-					Search:{' '}
-				</label>
+			<input
+				className='peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80'
+				name='search'
+				id='search'
+				type='text'
+				defaultValue={searchQuery ?? ''}
+				inputMode='search'
+				placeholder='Find awesome images...'
+			/>
 
-				<input
-					className='peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80'
-					name='search'
-					id='search'
-					type='text'
-					defaultValue={searchQuery}
-					inputMode='search'
-					placeholder='Find awesome images...'
-				/>
-
-				<button
-					aria-label='Reset'
-					type='reset'
-					className='visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0'
-				>
-					<X />
-				</button>
-			</p>
-		)
-	}
+			<button
+				aria-label='Reset'
+				type='reset'
+				className='visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0'
+			>
+				<X />
+			</button>
+		</p>
+	)
 }

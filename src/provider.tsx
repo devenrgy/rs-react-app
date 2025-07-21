@@ -1,4 +1,4 @@
-import { Component, createContext, type ReactNode } from 'react'
+import { createContext, type ReactNode, useContext, useEffect, useState } from 'react'
 
 import { getPhotos, getPhotosByQuery } from '@/lib/api/requests'
 import { ABORT_ERROR_NAME, SEARCH_PARAM_KEY, STORAGE_KEY } from '@/lib/constants'
@@ -6,118 +6,78 @@ import type { Photo } from '@/types'
 import { getLocalStorage, setLocalStorage } from '@/utils/localstorage'
 import { getPageUrlParams, setPageUrlParams } from '@/utils/url'
 
-const DEFAULT_STATE: State = {
-	items: null,
-	isLoading: false,
-	searchQuery: undefined,
-	error: null
-}
-
-export interface ContextValue extends State {
-	handleUpdateSearchQuery: (newQuery: string | undefined) => void
+export interface AppContext {
+	isLoading: boolean
+	items: null | Photo[]
+	searchQuery: null | string
+	error: null | Error
+	handleUpdateSearchQuery: (newQuery: null | string) => void
 	handleResetError: () => void
 	abortRequest: () => void
 	fetchPhotos: () => void
 }
 
-export const Context = createContext<ContextValue>({
-	...DEFAULT_STATE,
-	isLoading: true,
-	handleUpdateSearchQuery: () => null,
-	handleResetError: () => null,
-	abortRequest: () => null,
-	fetchPhotos: () => null
-})
+const initializeSearchQuery = () => {
+	const urlQuery = getPageUrlParams(SEARCH_PARAM_KEY)
+	const storageQuery = getLocalStorage(STORAGE_KEY, null)
+
+	if (urlQuery) {
+		setLocalStorage(STORAGE_KEY, urlQuery)
+		return urlQuery
+	}
+
+	if (storageQuery) {
+		setPageUrlParams(SEARCH_PARAM_KEY, storageQuery)
+		return storageQuery
+	}
+
+	return null
+}
+
+export const Context = createContext<AppContext | null>(null)
 
 interface Props {
 	timeout?: boolean
 	children: ReactNode
 }
 
-interface State {
-	items: Photo[] | null
-	isLoading: boolean
-	searchQuery: string | undefined
-	error: Error | null
-}
+export const Provider = ({ children, timeout }: Props) => {
+	const [isLoading, setIsLoading] = useState(false)
+	const [items, setItems] = useState<null | Photo[]>(null)
+	const [searchQuery, setSearchQuery] = useState<null | string>(initializeSearchQuery)
+	const [error, setError] = useState<null | Error>(null)
 
-export class Provider extends Component<Props> {
-	state: State
-	userAbortController: AbortController | null = null
-	timeoutMS = 60000
-	timeoutAbortController: AbortController | null = null
-	timeoutId: NodeJS.Timeout | undefined = undefined
-	activeRequestsCounter = 0
+	let userAbortController: AbortController | null = null
+	const timeoutMS = 60000
+	let timeoutAbortController: AbortController | null = null
+	let timeoutId: NodeJS.Timeout | undefined = undefined
+	let activeRequestsCounter = 0
 
-	constructor(props: Props) {
-		super(props)
-
-		this.state = {
-			...DEFAULT_STATE,
-			searchQuery: this.initializeSearchQuery()
-		}
+	const abortRequest = () => {
+		clearTimeout(timeoutId)
+		userAbortController?.abort()
 	}
 
-	private initializeSearchQuery() {
-		const urlQuery = getPageUrlParams(SEARCH_PARAM_KEY)
-		const storageQuery = getLocalStorage(STORAGE_KEY, undefined)
+	const fetchPhotos = async () => {
+		abortRequest()
 
-		if (urlQuery) {
-			setLocalStorage(STORAGE_KEY, urlQuery)
-			return urlQuery
-		}
+		userAbortController = new AbortController()
+		timeoutAbortController = new AbortController()
+		timeoutId = setTimeout(() => timeoutAbortController?.abort(), timeoutMS)
 
-		if (storageQuery) {
-			setPageUrlParams(SEARCH_PARAM_KEY, storageQuery)
-			return storageQuery
-		}
-	}
+		activeRequestsCounter++
+		setIsLoading(true)
 
-	async componentDidMount() {
-		await this.fetchPhotos()
-	}
+		const signal = AbortSignal.any([timeoutAbortController.signal, userAbortController.signal])
 
-	async componentDidUpdate(_: Props, prevState: State) {
-		if (this.state.searchQuery !== prevState.searchQuery) {
-			await this.fetchPhotos()
-		}
-	}
-
-	handleUpdateSearchQuery = (newQuery: string | undefined) => {
-		this.setState({ searchQuery: newQuery })
-	}
-
-	handleResetError = () => {
-		this.setState({ error: null })
-		this.fetchPhotos()
-	}
-
-	abort = () => {
-		clearTimeout(this?.timeoutId)
-		this.userAbortController?.abort()
-	}
-
-	fetchPhotos = async () => {
-		this.abort()
-
-		this.userAbortController = new AbortController()
-		this.timeoutAbortController = new AbortController()
-
-		this.timeoutId = setTimeout(() => this.timeoutAbortController?.abort(), this.timeoutMS)
-
-		this.activeRequestsCounter++
-		this.setState({ items: null, isLoading: true })
-
-		const signal = AbortSignal.any([this.timeoutAbortController.signal, this.userAbortController.signal])
-
-		if (this.props.timeout) {
-			clearTimeout(this.timeoutId)
-			this.timeoutAbortController.abort()
+		if (timeout) {
+			clearTimeout(timeoutId)
+			timeoutAbortController.abort()
 		}
 
 		try {
-			const response = this.state.searchQuery
-				? await getPhotosByQuery({ query: this.state.searchQuery, signal })
+			const response = searchQuery
+				? await getPhotosByQuery({ query: searchQuery, signal })
 				: await getPhotos({ signal })
 
 			if (!response.ok) {
@@ -128,49 +88,68 @@ export class Provider extends Component<Props> {
 
 			const items = 'results' in data ? data.results : data
 
-			this.setState({ items })
+			setItems(items)
 		} catch (error) {
-			if (this.timeoutAbortController.signal.aborted) {
-				console.error(`Operation timed out after ${this.timeoutMS} ms`)
-				this.setState({ error: new Error('Operation timed out') })
+			if (timeoutAbortController.signal.aborted) {
+				console.error(`Operation timed out after ${timeoutMS} ms`)
+				setError(new Error('Operation timed out'))
 			} else if (error instanceof Error && error.name === ABORT_ERROR_NAME) {
 				console.error('Operation aborted by user')
 			} else {
-				this.setState({ error: error instanceof Error ? error : new Error('Unknown error') })
+				setError(error instanceof Error ? error : new Error('Unknown error'))
 			}
 		} finally {
-			this.userAbortController = null
+			userAbortController = null
 		}
 
-		this.activeRequestsCounter--
+		activeRequestsCounter--
 
-		this.setState({ isLoading: this.activeRequestsCounter > 0 })
+		setIsLoading(activeRequestsCounter > 0)
 	}
 
-	componentWillUnmount() {
-		this.abort()
-		clearTimeout(this?.timeoutId)
-		this.timeoutAbortController?.abort()
+	useEffect(() => {
+		fetchPhotos()
+
+		return () => {
+			abortRequest()
+			clearTimeout(timeoutId)
+			timeoutAbortController?.abort()
+		}
+	}, [searchQuery])
+
+	const handleUpdateSearchQuery = (newQuery: null | string) => {
+		setSearchQuery(newQuery)
 	}
 
-	render() {
-		const { error, isLoading, searchQuery, items } = this.state
-
-		return (
-			<Context.Provider
-				value={{
-					items,
-					error,
-					isLoading,
-					searchQuery,
-					fetchPhotos: this.fetchPhotos,
-					abortRequest: this.abort,
-					handleResetError: this.handleResetError,
-					handleUpdateSearchQuery: this.handleUpdateSearchQuery
-				}}
-			>
-				{this.props.children}
-			</Context.Provider>
-		)
+	const handleResetError = () => {
+		setError(null)
+		fetchPhotos()
 	}
+
+	return (
+		<Context
+			value={{
+				items,
+				error,
+				isLoading,
+				searchQuery,
+				fetchPhotos,
+				abortRequest,
+				handleResetError,
+				handleUpdateSearchQuery
+			}}
+		>
+			{children}
+		</Context>
+	)
+}
+
+export const useAppContext = () => {
+	const appContext = useContext(Context)
+
+	if (!appContext) {
+		throw new Error('appContext has to be used within <Context.Provider>')
+	}
+
+	return appContext
 }
