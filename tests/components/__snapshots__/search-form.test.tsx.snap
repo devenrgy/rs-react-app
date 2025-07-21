@@ -22,6 +22,7 @@ exports[`SearchForm > should render search form and match snapshot 1`] = `
       name="search"
       placeholder="Find awesome images..."
       type="text"
+      value=""
     />
     <button
       aria-label="Reset"

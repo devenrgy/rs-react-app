@@ -18,6 +18,7 @@ exports[`SearchInput > should display the default placeholder when searchQuery i
     name="search"
     placeholder="Find awesome images..."
     type="text"
+    value=""
   />
   <button
     aria-label="Reset"

@@ -1,6 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 
 import { SearchInput } from '@/components/search-input'
+import { Provider } from '@/provider'
 
 import { mockContext, renderWithContextProvider } from '../mocks/custom-renders'
 
@@ -32,7 +33,11 @@ describe('SearchInput', () => {
 	})
 
 	it('should render reset button', async () => {
-		render(<SearchInput />)
+		render(
+			<Provider>
+				<SearchInput />
+			</Provider>
+		)
 
 		const searchResetButton = screen.getByRole('button', { name: /reset/i })
 

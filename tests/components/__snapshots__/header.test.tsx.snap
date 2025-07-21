@@ -25,6 +25,7 @@ exports[`Header > should render header with search form, trigger error button, a
         name="search"
         placeholder="Find awesome images..."
         type="text"
+        value=""
       />
       <button
         aria-label="Reset"

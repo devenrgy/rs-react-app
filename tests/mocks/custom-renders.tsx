@@ -1,7 +1,7 @@
 import { render, type RenderOptions } from '@testing-library/react'
 import type { ReactNode } from 'react'
 
-import { Context, type ContextValue } from '@/provider'
+import { type AppContext, Context } from '@/provider'
 
 export const mockContext = {
 	handleUpdateSearchQuery: () => null,
@@ -15,9 +15,9 @@ export const mockContext = {
 }
 
 interface CustomRenderOptions extends RenderOptions {
-	props: ContextValue
+	props: AppContext
 }
 
 export const renderWithContextProvider = (ui: ReactNode, { props, ...renderOptions }: CustomRenderOptions) => {
-	return render(<Context.Provider value={props}>{ui}</Context.Provider>, renderOptions)
+	return render(<Context value={props}>{ui}</Context>, renderOptions)
 }

@@ -2,6 +2,7 @@ import { render, within } from '@testing-library/react'
 
 import { SearchForm } from '@/components/search-form'
 import { STORAGE_KEY } from '@/lib/constants.ts'
+import { Provider } from '@/provider'
 import * as LS from '@/utils/localstorage'
 import { getLocalStorage } from '@/utils/localstorage'
 
@@ -10,7 +11,11 @@ import { setup, setupWithContextProvider } from '../vitest.setup.ts'
 
 describe('SearchForm', () => {
 	it('should render search form and match snapshot', () => {
-		const { container } = render(<SearchForm />)
+		const { container } = render(
+			<Provider>
+				<SearchForm />
+			</Provider>
+		)
 
 		const searchInput = within(container).getByRole('textbox', { name: /search/i })
 		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
@@ -45,7 +50,7 @@ describe('SearchForm', () => {
 		await user.click(searchSubmitButton)
 
 		expect(fn).toHaveBeenCalledTimes(2)
-		expect(fn).toHaveBeenCalledWith(undefined)
+		expect(fn).toHaveBeenCalledWith(null)
 	})
 
 	it('should call handleUpdateSearchQuery with search term simmilar', async () => {
@@ -67,7 +72,11 @@ describe('SearchForm', () => {
 	})
 
 	it('should clear value in input form', async () => {
-		const { container, user } = setup(<SearchForm />)
+		const { container, user } = setup(
+			<Provider>
+				<SearchForm />
+			</Provider>
+		)
 
 		const searchInput = within(container).getByRole('textbox', { name: /search/i })
 
@@ -83,7 +92,11 @@ describe('SearchForm', () => {
 	it('should save trimmed value in localstorage', async () => {
 		const fn = vi.spyOn(LS, 'setLocalStorage')
 
-		const { container, user } = setup(<SearchForm />)
+		const { container, user } = setup(
+			<Provider>
+				<SearchForm />
+			</Provider>
+		)
 
 		const searchInput = within(container).getByRole('textbox', { name: /search/i })
 
@@ -98,7 +111,9 @@ describe('SearchForm', () => {
 	})
 
 	it('should overwrites value in localstorage to new', async () => {
-		const { container, user } = setup(<SearchForm />)
+		const { container, user } = setupWithContextProvider(<SearchForm />, {
+			props: { ...mockContext, searchQuery: null }
+		})
 
 		const searchInput = within(container).getByRole('textbox', { name: /search/i })
 
@@ -108,6 +123,6 @@ describe('SearchForm', () => {
 
 		await user.click(searchSubmitButton)
 
-		expect(getLocalStorage(STORAGE_KEY, undefined)).toBe('Cat')
+		expect(getLocalStorage(STORAGE_KEY, null)).toBe('Cat')
 	})
 })
