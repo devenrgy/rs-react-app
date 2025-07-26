@@ -1,22 +1,21 @@
-import '@/global.css'
-
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
 
-import { App } from '@/app'
+import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from '@/components/error-boundary'
-import { Provider } from '@/provider'
+
+import { Providers } from './providers'
+import '@/styles/global.css'
 
 const rootElement = document.getElementById('root')
 
-if (!rootElement) throw new Error('Root element not found')
+if (!rootElement) {
+	throw new Error('Root element not found')
+}
 
 createRoot(rootElement).render(
 	<StrictMode>
 		<ErrorBoundary>
-			<Provider>
-				<App />
-			</Provider>
+			<Providers />
 		</ErrorBoundary>
-	</StrictMode>
+	</StrictMode>,
 )
