@@ -1,14 +1,15 @@
-import { Component, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { Component } from 'react'
 
-import { ErrorComponent } from '@/components/error-component'
+import { ErrorFallback } from '@/components/error-fallback'
 
-interface Props {
+type Props = {
 	children: ReactNode
 }
 
 export class ErrorBoundary extends Component<Props> {
 	state = {
-		hasError: false
+		hasError: false,
 	}
 
 	static getDerivedStateFromError() {
@@ -25,9 +26,7 @@ export class ErrorBoundary extends Component<Props> {
 
 	render() {
 		if (this.state.hasError) {
-			return (
-				<ErrorComponent title='Something went wrong!' handleResetError={this.handleResetError} buttonText='Try again' />
-			)
+			return <ErrorFallback showButton handleResetError={this.handleResetError} />
 		}
 
 		return this.props.children
