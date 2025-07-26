@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`errorFallback > should render ErrorFallback component with title and button, matching snapshot 1`] = `
+<main
+  class="place-items-center grid h-dvh container"
+>
+  <section
+    class="flex flex-col items-center gap-10"
+  >
+    <h1
+      class="font-bold text-4xl text-center first-letter:capitalize text-balance"
+    >
+      Something went wrong
+    </h1>
+    <button
+      class="bg-pine hover:bg-pine/80 px-5 py-3 rounded-3xl w-full max-w-[200px] text-xl capitalize transition-colors duration-200 cursor-pointer"
+      type="button"
+    >
+      Try again
+    </button>
+  </section>
+</main>
+`;
+
+exports[`errorFallback > should render ErrorFallback with heading and button, matching snapshot 1`] = `
+<main
+  class="place-items-center grid h-dvh container"
+>
+  <section
+    class="flex flex-col items-center gap-10"
+  >
+    <h1
+      class="font-bold text-4xl text-center first-letter:capitalize text-balance"
+    >
+      Something went wrong
+    </h1>
+    <button
+      class="bg-pine hover:bg-pine/80 px-5 py-3 rounded-3xl w-full max-w-[200px] text-xl capitalize transition-colors duration-200 cursor-pointer"
+      type="button"
+    >
+      Try again
+    </button>
+  </section>
+</main>
+`;
+
+exports[`errorFallback > should render title and button 1`] = `
+<main
+  class="place-items-center grid h-dvh container"
+>
+  <section
+    class="flex flex-col items-center gap-10"
+  >
+    <h1
+      class="font-bold text-4xl text-center first-letter:capitalize text-balance"
+    >
+      Something went wrong
+    </h1>
+    <button
+      class="bg-pine hover:bg-pine/80 px-5 py-3 rounded-3xl w-full max-w-[200px] text-xl capitalize transition-colors duration-200 cursor-pointer"
+      type="button"
+    >
+      Try again
+    </button>
+  </section>
+</main>
+`;

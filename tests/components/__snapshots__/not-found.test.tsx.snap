@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`notFound > should render NotFound component with correct structure and match snapshot 1`] = `
+<main
+  class="grid pt-40 pb-20 min-h-dvh"
+>
+  <section
+    class="flex flex-col justify-center items-center mx-auto px-4 h-full text-lg container"
+  >
+    <h1
+      class="mb-6 font-medium text-love text-7xl capitalize text-balance"
+    >
+      404
+    </h1>
+    <p
+      class="mb-8 max-w-md text-muted text-center"
+    >
+      Sorry, we couldn't find the page you're looking for.
+    </p>
+    <a
+      class="inline-block bg-pine hover:bg-pine/80 px-5 py-2 rounded-full text-white transition-colors"
+      data-discover="true"
+      href="/"
+    >
+      Return to Home
+    </a>
+  </section>
+</main>
+`;

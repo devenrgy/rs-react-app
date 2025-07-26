@@ -1,52 +1,74 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`PhotoList > should render PhotoList if have items 1`] = `
+exports[`photoList > should match snapshot when items are provided 1`] = `
 <ul
-  class="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 lg:space-y-10 lg:gap-x-10"
+  class="gap-5 lg:gap-x-10 space-y-5 lg:space-y-10 columns-1 sm:columns-2 lg:columns-3"
 >
   <li>
     <figure
-      class="flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low"
+      class="group relative flex flex-col shadow-iris/20 hover:shadow-xl border border-highlight-low rounded-3xl overflow-clip break-inside-avoid duration-200"
     >
-      <img
-        alt="Beatiful Photo"
-        class="h-full w-full object-cover"
-        fetchpriority="high"
-        height="100"
-        src="https://www.test.com/some-beatiful-image.png"
-        width="100"
-      />
+      <p
+        class="overflow-clip"
+      >
+        <img
+          alt="A serene mountain landscape"
+          class="w-full h-full object-cover group-hover:scale-101 duration-200"
+          fetchpriority="high"
+          height="4000"
+          src="https://example.com/photos/photo-12345/regular"
+          width="6000"
+        />
+      </p>
       <figcaption
-        class="bg-highlight-med px-4 py-6 text-center"
+        class="flex flex-col gap-5 bg-base px-4 py-6"
       >
         <p
-          class="text-sm text-balance first-letter:capitalize"
+          class="text-sm text-center first-letter:capitalize text-balance"
         >
-          Beatiful Photo
+          A serene mountain landscape
         </p>
+        <a
+          class="before:absolute before:inset-0 self-end bg-pine group-hover:bg-pine/80 px-3 py-2 rounded-full text-xs text-right duration-200"
+          data-discover="true"
+          href="/id=photo-12345?page=1"
+        >
+          More details
+        </a>
       </figcaption>
     </figure>
   </li>
   <li>
     <figure
-      class="flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low"
+      class="group relative flex flex-col shadow-iris/20 hover:shadow-xl border border-highlight-low rounded-3xl overflow-clip break-inside-avoid duration-200"
     >
-      <img
-        alt="Another Photo"
-        class="h-full w-full object-cover"
-        fetchpriority="high"
-        height="50"
-        src="https://www.test.com/some-another-image.png"
-        width="50"
-      />
+      <p
+        class="overflow-clip"
+      >
+        <img
+          alt="A vibrant city skyline at dusk"
+          class="w-full h-full object-cover group-hover:scale-101 duration-200"
+          fetchpriority="high"
+          height="3000"
+          src="https://example.com/photos/photo-67890/regular"
+          width="4500"
+        />
+      </p>
       <figcaption
-        class="bg-highlight-med px-4 py-6 text-center"
+        class="flex flex-col gap-5 bg-base px-4 py-6"
       >
         <p
-          class="text-sm text-balance first-letter:capitalize"
+          class="text-sm text-center first-letter:capitalize text-balance"
         >
-          Another Photo
+          A vibrant city skyline at dusk
         </p>
+        <a
+          class="before:absolute before:inset-0 self-end bg-pine group-hover:bg-pine/80 px-3 py-2 rounded-full text-xs text-right duration-200"
+          data-discover="true"
+          href="/id=photo-67890?page=1"
+        >
+          More details
+        </a>
       </figcaption>
     </figure>
   </li>

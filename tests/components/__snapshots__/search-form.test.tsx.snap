@@ -1,32 +1,32 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`SearchForm > should render search form and match snapshot 1`] = `
+exports[`searchForm > should match snapshot 1`] = `
 <form
   aria-label="Search Form"
-  class="order-2 flex h-full sm:order-1"
+  class="flex order-2 sm:order-1 rounded-full ring-iris has-[input:focus-visible]:ring-2 h-full duration-200"
 >
   <p
     class="relative w-full"
   >
     <label
       class="sr-only"
-      for="search"
+      for="query"
     >
       Search:
        
     </label>
     <input
-      class="peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80"
-      id="search"
+      class="peer bg-highlight-low focus-visible:bg-overlay/80 py-3 pr-18 pl-5 rounded-l-full outline-none w-full h-full text-lg transition-colors duration-200"
+      id="query"
       inputmode="search"
-      name="search"
+      name="query"
       placeholder="Find awesome images..."
       type="text"
-      value=""
+      value="test"
     />
     <button
       aria-label="Reset"
-      class="visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0"
+      class="peer-placeholder-shown:invisible visible top-1/2 right-0 absolute opacity-100 peer-placeholder-shown:opacity-0 p-2 text-text -translate-1/2 duration-200 cursor-pointer"
       type="reset"
     >
       <svg
@@ -54,7 +54,7 @@ exports[`SearchForm > should render search form and match snapshot 1`] = `
   <p>
     <button
       aria-label="Search"
-      class="h-full cursor-pointer rounded-r-full bg-iris px-4 py-2 text-highlight-low transition-colors duration-200 hover:bg-iris/80 lg:px-10"
+      class="bg-iris hover:bg-iris/80 px-4 lg:px-10 py-2 rounded-r-full h-full text-highlight-low transition-colors duration-200 cursor-pointer"
       type="submit"
     >
       <svg
