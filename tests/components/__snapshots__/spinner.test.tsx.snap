@@ -2,11 +2,11 @@
 
 exports[`Spinner > should match snapshot 1`] = `
 <div
-  class="fixed inset-0 z-100 grid place-content-center bg-black/50"
+  class="z-100 fixed inset-0 grid place-content-center bg-black/50"
 >
   <svg
     aria-label="spinner"
-    class="lucide lucide-loader-circle animate-spin text-text"
+    class="lucide lucide-loader-circle text-text animate-spin"
     fill="none"
     height="48"
     stroke="currentColor"

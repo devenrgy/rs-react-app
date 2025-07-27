@@ -7,7 +7,7 @@ exports[`PhotoList > should not render when items is undefined 1`] = `<div />`;
 exports[`PhotoList > should render list of photo cards when items are provided 1`] = `
 <div>
   <ul
-    class="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 lg:space-y-10 lg:gap-x-10"
+    class="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 lg:gap-x-10 lg:space-y-10"
   >
     <li>
       <div
