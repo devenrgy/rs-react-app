@@ -11,7 +11,7 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 	const location = useLocation()
 
 	const hasPreviousPage = currentPage - 1 > 0
-	const hasNextPage = currentPage + 1 < Number(totalCount.at(-1))
+	const hasNextPage = currentPage + 1 <= Number(totalCount.at(-1))
 
 	const addUrlParams = (page: number) => {
 		const searchParams = new URLSearchParams(location.search)
@@ -21,29 +21,39 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 
 	return (
 		<div className='mx-auto flex items-center justify-center px-4 py-3 sm:px-6'>
-			<div className='flex flex-1 justify-between sm:hidden'>
+			<div className='grid grid-cols-2 justify-between gap-2 sm:hidden'>
 				{hasPreviousPage ? (
 					<Link
+						aria-label='mobile-previous'
 						to={{ search: addUrlParams(currentPage - 1) }}
-						className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium hover:bg-gray-50'
+						className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-base hover:bg-gray-50'
 					>
 						Previous
 					</Link>
 				) : (
-					<button className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
+					<button
+						aria-label='mobile-previous'
+						disabled
+						className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:text-black/50'
+					>
 						Previous
 					</button>
 				)}
 
 				{hasNextPage ? (
 					<Link
+						aria-label='mobile-next'
 						to={{ search: addUrlParams(currentPage + 1) }}
-						className='relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
+						className='relative grid place-content-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-base hover:bg-gray-50'
 					>
 						Next
 					</Link>
 				) : (
-					<button className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'>
+					<button
+						aria-label='mobile-next'
+						disabled
+						className='relative grid place-content-center rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium disabled:text-black/50'
+					>
 						Next
 					</button>
 				)}
@@ -53,6 +63,7 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 					<nav aria-label='Pagination' className='isolate inline-flex -space-x-px rounded-md shadow-xs'>
 						{hasPreviousPage ? (
 							<Link
+								aria-label='desktop-previous'
 								to={{ search: addUrlParams(currentPage - 1) }}
 								className='relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
 							>
@@ -66,7 +77,10 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 								</svg>
 							</Link>
 						) : (
-							<button className='relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0'>
+							<button
+								aria-label='desktop-previous'
+								className='relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0'
+							>
 								<span className='sr-only'>Previous</span>
 								<svg viewBox='0 0 20 20' fill='currentColor' data-slot='icon' aria-hidden='true' className='size-5'>
 									<path
@@ -108,6 +122,7 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 
 						{hasNextPage ? (
 							<Link
+								aria-label='desktop-next'
 								to={{ search: addUrlParams(currentPage + 1) }}
 								className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
 							>
@@ -121,7 +136,10 @@ export const Pagination = ({ totalCount, currentPage }: Props) => {
 								</svg>
 							</Link>
 						) : (
-							<button className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0'>
+							<button
+								aria-label='desktop-next'
+								className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0'
+							>
 								<span className='sr-only'>Next</span>
 								<svg viewBox='0 0 20 20' fill='currentColor' data-slot='icon' aria-hidden='true' className='size-5'>
 									<path
