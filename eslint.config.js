@@ -44,7 +44,10 @@ export default tseslint.config(
 			'simple-import-sort/exports': 'error',
 			...react.configs.recommended.rules,
 			...react.configs['jsx-runtime'].rules,
-			'testing-library/no-node-access': 'off'
+			'testing-library/no-node-access': 'off',
+			'react-hooks/exhaustive-deps': 'off',
+			'testing-library/no-container': 'off',
+			'react-refresh/only-export-components': 'off'
 		},
 		settings: {
 			react: {
