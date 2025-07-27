@@ -15,7 +15,7 @@ export type RootContext = {
 export const Root = () => {
 	const [searchParams] = useSearchParams()
 	const [searchQueryLS, setSearchQueryLS] = useLS(STORAGE_SEARCH_KEY, searchParams.get(SEARCH_PARAM_KEY) ?? '')
-	const [pageLS, setPageLS] = useLS(STORAGE_PAGE_KEY, searchParams.get(PAGE_PARAM_KEY) ?? '1')
+	const [pageLS] = useLS(STORAGE_PAGE_KEY, searchParams.get(PAGE_PARAM_KEY) ?? '1')
 
 	return (
 		<ThemeProvider>
