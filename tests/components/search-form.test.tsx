@@ -1,113 +1,80 @@
-import { render, within } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { setupWithRouter } from 'tests/vitest.setup'
 
 import { SearchForm } from '@/components/search-form'
-import { STORAGE_KEY } from '@/lib/constants.ts'
-import * as LS from '@/utils/localstorage'
-import { getLocalStorage } from '@/utils/localstorage'
-
-import { mockContext } from '../mocks/custom-renders'
-import { setup, setupWithContextProvider } from '../vitest.setup.ts'
 
 describe('SearchForm', () => {
-	it('should render search form and match snapshot', () => {
-		const { container } = render(<SearchForm />)
+	const mockHandleSearchQueryChange = vi.fn()
+	const mockHandleFormReset = vi.fn()
+	const mockHandleFormSubmit = vi.fn(e => e.preventDefault())
 
-		const searchInput = within(container).getByRole('textbox', { name: /search/i })
-		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
+	const defaultProps = {
+		searchQuery: '',
+		handleSearchQueryChange: mockHandleSearchQueryChange,
+		handleFormReset: mockHandleFormReset,
+		handleFormSubmit: mockHandleFormSubmit
+	}
 
-		expect(container.firstChild).toMatchSnapshot()
-		expect(searchSubmitButton).toBeInTheDocument()
-		expect(searchInput).toBeInTheDocument()
+	beforeEach(() => {
+		vi.clearAllMocks()
 	})
 
-	it('should call handleUpdateSearchQuery with search term and update input value on form submission', async () => {
-		const fn = vi.fn()
+	it('should render the search form with all required elements', () => {
+		render(<SearchForm {...defaultProps} />)
 
-		const { container, user } = setupWithContextProvider(<SearchForm />, {
-			props: {
-				...mockContext,
-				handleUpdateSearchQuery: fn
-			}
-		})
-
-		const searchInput = within(container).getByRole('textbox', { name: /search/i })
-
-		await user.type(searchInput, 'Cat')
-
-		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
-
-		await user.click(searchSubmitButton)
-
-		expect(fn).toHaveBeenCalledTimes(1)
-		expect(fn).toHaveBeenCalledWith('Cat')
-
-		await user.clear(searchInput)
-		await user.click(searchSubmitButton)
-
-		expect(fn).toHaveBeenCalledTimes(2)
-		expect(fn).toHaveBeenCalledWith(undefined)
+		expect(screen.getByRole('form', { name: /search form/i })).toBeInTheDocument()
+		expect(screen.getByPlaceholderText('Find awesome images...')).toBeInTheDocument()
+		expect(screen.getByLabelText('Search')).toBeInTheDocument()
+		expect(screen.getByLabelText('Reset')).toBeInTheDocument()
 	})
 
-	it('should call handleUpdateSearchQuery with search term simmilar', async () => {
-		const fn = vi.fn()
+	it('should call handleSearchQueryChange when input value changes', async () => {
+		const { user } = setupWithRouter(<SearchForm {...defaultProps} />)
+		const input = screen.getByPlaceholderText('Find awesome images...')
 
-		const { container, user } = setupWithContextProvider(<SearchForm />, {
-			props: {
-				...mockContext,
-				searchQuery: 'Cat',
-				handleUpdateSearchQuery: fn
-			}
-		})
-
-		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
-
-		await user.click(searchSubmitButton)
-
-		expect(fn).toHaveBeenCalledTimes(0)
+		await user.type(input, 'test')
+		expect(mockHandleSearchQueryChange).toHaveBeenCalledTimes(4)
 	})
 
-	it('should clear value in input form', async () => {
-		const { container, user } = setup(<SearchForm />)
-
-		const searchInput = within(container).getByRole('textbox', { name: /search/i })
-
-		await user.type(searchInput, 'Cat')
-
-		const searchResetButton = within(container).getByRole('button', { name: /reset/i })
-
-		await user.click(searchResetButton)
-
-		expect(searchInput).toHaveValue('')
+	it('should show reset button when input has value', () => {
+		render(<SearchForm {...defaultProps} searchQuery='test' />)
+		const resetButton = screen.getByLabelText('Reset')
+		expect(resetButton).toBeVisible()
 	})
 
-	it('should save trimmed value in localstorage', async () => {
-		const fn = vi.spyOn(LS, 'setLocalStorage')
+	it('should call handleFormReset when reset button is clicked', async () => {
+		const { user } = setupWithRouter(<SearchForm {...defaultProps} searchQuery='test' />)
+		const resetButton = screen.getByLabelText('Reset')
 
-		const { container, user } = setup(<SearchForm />)
-
-		const searchInput = within(container).getByRole('textbox', { name: /search/i })
-
-		await user.type(searchInput, '  Cat  ')
-
-		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
-
-		await user.click(searchSubmitButton)
-
-		expect(fn).toBeCalledTimes(1)
-		expect(fn).toBeCalledWith(STORAGE_KEY, 'Cat')
+		await user.click(resetButton)
+		expect(mockHandleFormReset).toHaveBeenCalledTimes(1)
 	})
 
-	it('should overwrites value in localstorage to new', async () => {
-		const { container, user } = setup(<SearchForm />)
+	it('should call handleFormSubmit when form is submitted', async () => {
+		const { user } = setupWithRouter(<SearchForm {...defaultProps} searchQuery='test' />)
 
-		const searchInput = within(container).getByRole('textbox', { name: /search/i })
+		await user.click(screen.getByLabelText('Search'))
+		expect(mockHandleFormSubmit).toHaveBeenCalledTimes(1)
+	})
 
-		await user.type(searchInput, '  Cat  ')
+	it('should apply custom className when provided', () => {
+		render(<SearchForm {...defaultProps} className='custom-class' />)
+		const form = screen.getByRole('form', { name: /search form/i })
+		expect(form).toHaveClass('custom-class')
+	})
 
-		const searchSubmitButton = within(container).getByRole('button', { name: /search/i })
+	it('should have proper accessibility attributes', () => {
+		render(<SearchForm {...defaultProps} />)
 
-		await user.click(searchSubmitButton)
+		expect(screen.getByLabelText('Search Form')).toBeInTheDocument()
+		expect(screen.getByLabelText('Search')).toHaveAttribute('type', 'submit')
+		expect(screen.getByLabelText('Reset')).toHaveAttribute('type', 'reset')
+		expect(screen.getByPlaceholderText('Find awesome images...')).toHaveAttribute('inputMode', 'search')
+	})
 
-		expect(getLocalStorage(STORAGE_KEY, undefined)).toBe('Cat')
+	it('should hide reset button when input is empty', () => {
+		render(<SearchForm {...defaultProps} searchQuery='' />)
+		const resetButton = screen.getByRole('button', { name: /reset/i })
+		expect(resetButton).toHaveClass('peer-placeholder-shown:invisible')
 	})
 })
