@@ -1,4 +1,4 @@
-interface Collection {
+export interface Collection {
 	id: string
 	title: string
 	description: string | null
@@ -11,14 +11,14 @@ interface Collection {
 	share_key: string
 }
 
-interface Breadcrumb {
+export interface Breadcrumb {
 	slug: string
 	title: string
 	index: number
 	type: string
 }
 
-interface User {
+export interface User {
 	id: string
 	username: string
 	name: string
@@ -55,21 +55,21 @@ interface User {
 	}
 }
 
-interface PhotoLinks {
+export interface PhotoLinks {
 	self: string
 	html: string
 	download: string
 	download_location: string
 }
 
-interface Sponsorship {
+export interface Sponsorship {
 	impression_urls: string[]
 	tagline: string
 	tagline_url: string
 	sponsor: User
 }
 
-interface TopicSubmissions {
+export interface TopicSubmissions {
 	travel?: {
 		status: string
 		approved_on: string
