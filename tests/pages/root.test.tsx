@@ -1,11 +1,10 @@
-import { renderHook, screen } from '@testing-library/react'
-import { useOutletContext, useSearchParams } from 'react-router'
+import { screen } from '@testing-library/react'
+import { useSearchParams } from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
 import { describe, expect, it, vi } from 'vitest'
-import { b } from 'vitest/dist/chunks/suite.d.FvehnV49.js'
 
 import { useLS } from '@/lib/hooks/use-ls'
-import { Root, type RootContext, useRootContext } from '@/pages/root'
+import { Root } from '@/pages/root'
 
 vi.mock('react-router', async () => {
 	const actual = await vi.importActual('react-router')

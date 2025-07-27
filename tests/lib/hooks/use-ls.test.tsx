@@ -13,7 +13,7 @@ describe('useLS', () => {
 	let consoleErrorSpy: MockInstance
 
 	beforeEach(() => {
-		vi.spyOn(window, 'localStorage', 'get').mockReturnValue(localStorageMock as any)
+		vi.spyOn(window, 'localStorage', 'get').mockReturnValue(localStorageMock as unknown as Storage)
 		localStorageMock.getItem.mockClear()
 		localStorageMock.setItem.mockClear()
 		localStorageMock.removeItem.mockClear()
@@ -103,7 +103,7 @@ describe('useLS', () => {
 	})
 
 	it('works when window is undefined', () => {
-		vi.spyOn(window, 'localStorage', 'get').mockReturnValue(undefined as any)
+		vi.spyOn(window, 'localStorage', 'get').mockReturnValue(undefined as unknown as Storage)
 		const initialValue = 'test'
 		const { result } = renderHook(() => useLS('key', initialValue))
 
