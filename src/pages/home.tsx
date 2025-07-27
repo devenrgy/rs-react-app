@@ -48,7 +48,9 @@ export const Home = () => {
 
 				{!loading && !error && (hasItems(data?.results) ? <PhotoList items={data.results} /> : <NotFound />)}
 
-				{!loading && !error && pagination && <Pagination totalCount={pagination} currentPage={page} />}
+				{!loading && !error && hasItems(data?.results) && pagination && (
+					<Pagination totalCount={pagination} currentPage={page} />
+				)}
 			</section>
 		</main>
 	)
