@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`About > matches snapshot 1`] = `
+<div>
+  <main
+    class="grid min-h-dvh pt-40 pb-20"
+  >
+    <section
+      class="container text-lg"
+    >
+      <h1
+        class="mb-10 text-4xl font-bold text-balance capitalize"
+      >
+        About
+      </h1>
+      <p
+        class="mb-5"
+      >
+        Hi! My name is Alex and I went crazy at 
+        <span
+          class="text-gold"
+        >
+          Rolling Scopes School
+        </span>
+      </p>
+      <p
+        class="mb-5"
+      >
+        This project is part of the
+         
+        <a
+          class="text-rose"
+          href="https://rs.school/courses/reactjs"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          RS School React course
+        </a>
+      </p>
+      <a
+        class="text-iris"
+        href="https://github.com/devenrgy"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        My Github
+      </a>
+    </section>
+  </main>
+</div>
+`;

@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ThemeContext > should match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    Test Children
+  </div>
+</DocumentFragment>
+`;

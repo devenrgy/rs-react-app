@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Root > matches snapshot 1`] = `
+<div>
+  <div
+    data-testid="theme-provider"
+  >
+    <div
+      data-testid="error-boundary"
+    >
+      <div
+        data-testid="header"
+      >
+        Header with 
+         and 
+        spy
+      </div>
+    </div>
+  </div>
+</div>
+`;

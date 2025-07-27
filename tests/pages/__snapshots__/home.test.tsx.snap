@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home > matches snapshot 1`] = `
+<div>
+  <main
+    class="grid min-h-dvh pt-40 pb-20"
+  >
+    <section
+      class="container grid h-full grid-rows-[min-content_1fr]"
+    >
+      <h1
+        class="mb-10 text-4xl font-bold text-balance capitalize"
+      >
+        Mountain
+      </h1>
+      <div
+        data-testid="photo-list"
+      >
+        Photo List
+      </div>
+      <div
+        data-testid="pagination"
+      >
+        Pagination
+      </div>
+    </section>
+  </main>
+</div>
+`;
