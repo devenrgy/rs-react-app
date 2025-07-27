@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Outlet, useOutletContext, useSearchParams } from 'react-router'
 
 import { ErrorBoundary } from '@/components/error-boundary'
@@ -22,7 +21,7 @@ export const Root = () => {
 		<ThemeProvider>
 			<ErrorBoundary>
 				<Header searchQueryLS={searchQueryLS} setSearchQueryLS={setSearchQueryLS} />
-				<Outlet context={{ searchQueryLS, pageLS, setSearchQueryLS, setPageLS }} />
+				<Outlet context={{ searchQueryLS, pageLS, setSearchQueryLS } satisfies RootContext} />
 			</ErrorBoundary>
 		</ThemeProvider>
 	)

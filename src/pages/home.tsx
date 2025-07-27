@@ -2,7 +2,6 @@ import { LoaderCircle } from 'lucide-react'
 import { useSearchParams } from 'react-router'
 
 import { ErrorFallback } from '@/components/error-fallback'
-import { Header } from '@/components/header'
 import { NotFound } from '@/components/not-found'
 import { Pagination } from '@/components/pagination'
 import { PhotoList } from '@/components/photo-list'
