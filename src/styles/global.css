@@ -1,6 +1,11 @@
+@import './fonts.css';
+
 @import 'tailwindcss';
 
 @theme inline {
+	--font-sans: 'Jost', sans-serif;
+	--font-brand: 'Playwrite US Modern', serif;
+
 	--color-base: hsl(249deg, 22%, 12%);
 	--color-surface: hsl(247deg, 23%, 15%);
 	--color-overlay: hsl(248deg, 25%, 18%);
@@ -43,7 +48,7 @@ body {
 }
 
 body {
-	@apply bg-base font-medium text-text;
+	@apply text-text bg-neutral-950 font-sans font-medium;
 }
 
 @utility container {

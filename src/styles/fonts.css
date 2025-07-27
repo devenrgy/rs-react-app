@@ -1,0 +1,29 @@
+@font-face {
+	font-display: swap;
+	font-family: 'Jost';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/jost-v19-latin-regular.woff2') format('woff2');
+}
+@font-face {
+	font-display: swap;
+	font-family: 'Jost';
+	font-style: normal;
+	font-weight: 500;
+	src: url('/fonts/jost-v19-latin-500.woff2') format('woff2');
+}
+@font-face {
+	font-display: swap;
+	font-family: 'Jost';
+	font-style: normal;
+	font-weight: 600;
+	src: url('/fonts/jost-v19-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Playwrite US Modern';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/playwrite-us-modern-v10-latin-regular.woff2') format('woff2');
+}
