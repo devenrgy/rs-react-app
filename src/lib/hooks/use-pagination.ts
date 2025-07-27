@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { range } from '../utils/helpers'
 
-const DOTS = '...'
+export const DOTS = '...'
 
 interface Props {
 	totalCount: number | undefined
