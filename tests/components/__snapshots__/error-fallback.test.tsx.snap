@@ -1,0 +1,106 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ErrorFallback > should call handleResetError when button is clicked 1`] = `
+<div>
+  <main
+    class="container grid h-dvh place-items-center"
+  >
+    <section
+      class="flex flex-col items-center gap-10"
+    >
+      <h1
+        class="text-center text-4xl font-bold text-balance first-letter:capitalize"
+      >
+        Something went wrong!
+      </h1>
+      <button
+        class="w-full max-w-[200px] cursor-pointer rounded-3xl bg-pine px-5 py-3 text-xl capitalize transition-colors duration-200 hover:bg-pine/80"
+        type="button"
+      >
+        Try again
+      </button>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`ErrorFallback > should not render button when showButton is false 1`] = `
+<div>
+  <main
+    class="container grid h-dvh place-items-center"
+  >
+    <section
+      class="flex flex-col items-center gap-10"
+    >
+      <h1
+        class="text-center text-4xl font-bold text-balance first-letter:capitalize"
+      >
+        Something went wrong!
+      </h1>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`ErrorFallback > should render button when showButton is true 1`] = `
+<div>
+  <main
+    class="container grid h-dvh place-items-center"
+  >
+    <section
+      class="flex flex-col items-center gap-10"
+    >
+      <h1
+        class="text-center text-4xl font-bold text-balance first-letter:capitalize"
+      >
+        Something went wrong!
+      </h1>
+      <button
+        class="w-full max-w-[200px] cursor-pointer rounded-3xl bg-pine px-5 py-3 text-xl capitalize transition-colors duration-200 hover:bg-pine/80"
+        type="button"
+      >
+        Try again
+      </button>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`ErrorFallback > should render custom message when provided 1`] = `
+<div>
+  <main
+    class="container grid h-dvh place-items-center"
+  >
+    <section
+      class="flex flex-col items-center gap-10"
+    >
+      <h1
+        class="text-center text-4xl font-bold text-balance first-letter:capitalize"
+      >
+        Something went wrong!
+      </h1>
+      <p>
+        Custom error message
+      </p>
+    </section>
+  </main>
+</div>
+`;
+
+exports[`ErrorFallback > should render default error message 1`] = `
+<div>
+  <main
+    class="container grid h-dvh place-items-center"
+  >
+    <section
+      class="flex flex-col items-center gap-10"
+    >
+      <h1
+        class="text-center text-4xl font-bold text-balance first-letter:capitalize"
+      >
+        Something went wrong!
+      </h1>
+    </section>
+  </main>
+</div>
+`;
