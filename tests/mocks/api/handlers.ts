@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
-import { BASE_API_URL } from '@/lib/constants'
+import { BASE_API_URL } from '@/configs/constants'
 
 export const handlers = [
 	http.get(`${BASE_API_URL}/photos`, ({ request }) => {
