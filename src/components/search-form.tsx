@@ -23,7 +23,7 @@ export const SearchForm = ({
 			aria-label='Search Form'
 			onReset={handleFormReset}
 			onSubmit={handleFormSubmit}
-			className={cn('flex h-full', className)}
+			className={cn('ring-iris group flex h-full rounded-full has-[input:focus-visible]:ring-2', className)}
 		>
 			<p className='relative w-full'>
 				<label htmlFor='search' className='sr-only'>
@@ -31,7 +31,7 @@ export const SearchForm = ({
 				</label>
 
 				<input
-					className='peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80'
+					className='pr-18 bg-iris/15 peer h-full w-full rounded-l-full py-3 pl-5 text-lg outline-none transition-colors duration-200'
 					name='search'
 					id='search'
 					type='text'
@@ -44,7 +44,7 @@ export const SearchForm = ({
 				<button
 					aria-label='Reset'
 					type='reset'
-					className='visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0'
+					className='-translate-1/2 text-text visible absolute right-0 top-1/2 cursor-pointer p-2 opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0'
 				>
 					<X />
 				</button>
@@ -53,7 +53,7 @@ export const SearchForm = ({
 			<p>
 				<button
 					aria-label='Search'
-					className='h-full cursor-pointer rounded-r-full bg-iris px-4 py-2 text-highlight-low transition-colors duration-200 hover:bg-iris/80 lg:px-10'
+					className='bg-iris text-highlight-low hover:bg-iris/80 h-full cursor-pointer rounded-r-full px-4 py-2 transition-colors duration-200 lg:px-10'
 					type='submit'
 				>
 					<Search />

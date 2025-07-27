@@ -34,13 +34,13 @@ export const Home = () => {
 	})
 
 	return (
-		<main className='grid min-h-dvh pt-40 pb-20'>
+		<main className='grid min-h-dvh pb-20 pt-40'>
 			<section className='container grid h-full grid-rows-[min-content_1fr]'>
-				<h1 className='mb-10 text-4xl font-bold text-balance capitalize'>{query}</h1>
+				<h1 className='mb-10 text-balance text-4xl font-medium capitalize'>{query}</h1>
 
 				{loading && (
 					<div className='flex w-full max-w-[200px] flex-col items-center gap-10 place-self-center'>
-						<LoaderCircle size={48} aria-label='spinner' className='animate-spin text-text' />
+						<LoaderCircle size={48} aria-label='spinner' className='text-text animate-spin' />
 					</div>
 				)}
 
@@ -49,7 +49,7 @@ export const Home = () => {
 				{!loading && !error && (hasItems(data?.results) ? <PhotoList items={data.results} /> : <NotFound />)}
 
 				{!loading && !error && hasItems(data?.results) && pagination && (
-					<Pagination totalCount={pagination} currentPage={page} />
+					<Pagination className='mt-10' totalCount={pagination} currentPage={page} />
 				)}
 			</section>
 		</main>

@@ -8,30 +8,31 @@ export const PhotoDetails = () => {
 	const data = useLoaderData<Photo>()
 
 	return (
-		<div className='fixed inset-0 z-20 grid grid-cols-[1fr_500px] bg-black/80'>
+		<div className='fixed inset-0 z-20 grid grid-cols-[1fr_400px] bg-black/70'>
 			<div className='relative grid place-content-center'>
-				<Link className='fixed inset-0' to={{ pathname: '..', search }} aria-label='close details' />
-
+				<Link className='fixed inset-0 cursor-auto' to={{ pathname: '..', search }} aria-label='close details' />
 				<img
 					src={data.urls.regular}
 					width={data.width}
 					height={data.height}
 					alt={data.alt_description}
-					className='z-30 h-[90dvh] w-full rounded-3xl object-cover'
+					className='z-30 h-[80dvh] w-full rounded-3xl object-cover'
 				/>
 			</div>
-			<div className='z-30 col-span-1 h-full overflow-y-auto bg-gray-900 p-6 text-white'>
-				<h2 className='mb-4 text-2xl font-bold text-balance first-letter:uppercase'>{data.alt_description}</h2>
+			<aside className='pt-30 z-30 col-span-1 h-full overflow-y-auto bg-neutral-950 px-5 text-white'>
+				<h2 className='text-rose mb-4 text-balance text-2xl font-bold first-letter:uppercase'>
+					{data.alt_description}
+				</h2>
 				<p className='mb-4 text-gray-300'>{data.description}</p>
 				<div className='space-y-4'>
 					<div>
-						<h3 className='text-lg font-semibold'>Photographer</h3>
+						<h3 className='text-foam text-lg font-semibold'>Photographer</h3>
 						<p>{data.user.name}</p>
-						<p className='text-sm text-gray-400'>{data.user.bio}</p>
-						<p className='text-sm text-gray-400'>Location: {data.user.location}</p>
+						<p className='text-sm'>{data.user.bio}</p>
+						<p className='text-sm'>Location: {data.user.location}</p>
 					</div>
 					<div>
-						<h3 className='text-lg font-semibold'>Details</h3>
+						<h3 className='text-foam text-lg font-semibold'>Details</h3>
 						<p>Likes: {data.likes}</p>
 						<p>
 							Dimensions: {data.width} x {data.height}
@@ -40,32 +41,35 @@ export const PhotoDetails = () => {
 						<p>Updated: {new Date(data.updated_at).toLocaleDateString()}</p>
 					</div>
 					<div>
-						<h3 className='text-lg font-semibold'>Links</h3>
+						<h3 className='text-foam text-lg font-semibold'>Links</h3>
 						<p>
-							<a
-								href={data.links.html}
+							<Link
+								to={data.links.html}
 								target='_blank'
 								rel='noopener noreferrer'
-								className='text-blue-400 hover:underline'
+								className='underline-offset-5 hover:underline'
 							>
 								View on Unsplash
-							</a>
+							</Link>
 						</p>
 						<p>
-							<a
-								href={data.links.download}
+							<Link
+								to={data.links.download}
 								target='_blank'
 								rel='noopener noreferrer'
-								className='text-blue-400 hover:underline'
+								className='underline-offset-5 hover:underline'
 							>
 								Download
-							</a>
+							</Link>
 						</p>
 					</div>
 				</div>
-			</div>
+			</aside>
 
-			<Link className='absolute top-5 right-5 z-30 rounded-full bg-iris p-2 text-base' to={{ pathname: '..', search }}>
+			<Link
+				className='bg-iris hover:bg-iris/80 absolute right-5 top-5 z-30 rounded-full p-2 text-base duration-200'
+				to={{ pathname: '..', search }}
+			>
 				<X />
 			</Link>
 		</div>

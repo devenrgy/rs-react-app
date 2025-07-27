@@ -1,6 +1,6 @@
 import { TriangleAlert } from 'lucide-react'
 import { type FormEvent, useState } from 'react'
-import { NavLink, useLocation, useSearchParams } from 'react-router'
+import { Link, NavLink, useLocation, useSearchParams } from 'react-router'
 
 import { SearchForm } from '@/components/search-form'
 import { SEARCH_PARAM_KEY } from '@/configs/constants'
@@ -45,18 +45,22 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 	}
 
 	return (
-		<header className='fixed inset-x-0 z-10 bg-base/80 backdrop-blur-3xl'>
-			<div className='container flex h-[80px] items-center gap-10'>
+		<header className='fixed inset-x-0 z-10 bg-neutral-950/80 backdrop-blur-3xl'>
+			<div className='container flex min-h-[80px] flex-col items-center gap-10 py-5 sm:flex-row lg:py-0'>
+				<Link className='font-brand text-3xl' to='/'>
+					<span className='text-iris'>RS</span> Gallery
+				</Link>
+
 				{!isAboutRoute && (
-					<div className='flex grow items-center justify-end gap-5'>
+					<div className='flex grow items-center justify-center gap-5'>
 						<SearchForm
-							className='max-w-lg grow'
+							className='w-full max-w-lg'
 							searchQuery={searchQuery}
 							handleFormReset={handleFormReset}
 							handleSearchQueryChange={handleSearchQueryChange}
 							handleFormSubmit={handleFormSubmit}
 						/>
-						<p className='flex justify-center'>
+						<p className='hidden justify-center lg:flex'>
 							<button
 								className='flex aspect-square h-full cursor-pointer items-center justify-center rounded-full'
 								onClick={handleTriggerError}
@@ -68,10 +72,10 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 						</p>
 					</div>
 				)}
-				<ul className='ml-auto flex gap-5 justify-self-end'>
+				<ul className='flex gap-5 justify-self-end text-xl lg:ml-auto'>
 					<li>
 						<NavLink
-							className={({ isActive }) => cn({ 'pointer-events-none text-rose duration-200': isActive })}
+							className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
 							to={{ pathname: '/' }}
 						>
 							Home
@@ -79,7 +83,7 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 					</li>
 					<li>
 						<NavLink
-							className={({ isActive }) => cn({ 'pointer-events-none text-rose duration-200': isActive })}
+							className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
 							to={{ pathname: '/about' }}
 						>
 							About
