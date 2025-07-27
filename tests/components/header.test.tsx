@@ -79,4 +79,12 @@ describe('Header', () => {
 		expect(consoleErrorSpy).toHaveBeenCalledWith(expect.any(String), expect.any(Error))
 		consoleErrorSpy.mockRestore()
 	})
+
+	it('should not call setSearchParams when searchQuery is empty on form submission', async () => {
+		const { user } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+
+		await user.click(screen.getByRole('button', { name: /search/i }))
+
+		expect(setSearchParams).not.toHaveBeenCalled()
+	})
 })
