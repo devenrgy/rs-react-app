@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react'
 import { setupWithRouter } from 'tests/vitest.setup'
-import { describe, expect, it, vi } from 'vitest'
 
 import { ErrorBoundary } from '@/components/error-boundary'
 import { Header } from '@/components/header'

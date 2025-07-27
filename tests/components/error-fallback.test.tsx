@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import { setup } from 'tests/vitest.setup'
-import { describe, expect, it, vi } from 'vitest'
 
 import { ErrorFallback } from '@/components/error-fallback'
 
