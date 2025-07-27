@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { setupWithRouter } from 'tests/vitest.setup'
-import { expect } from 'vitest'
 
 import { NotFound } from '@/components/not-found'
 

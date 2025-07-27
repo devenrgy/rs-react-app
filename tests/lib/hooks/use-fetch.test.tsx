@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest'
+import type { Mock } from 'vitest'
 
 import { useFetch } from '@/lib/hooks/use-fetch'
 

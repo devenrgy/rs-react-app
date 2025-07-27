@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react'
 import { useNavigation } from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
-import { describe, expect, it, vi } from 'vitest'
 
 import { HomeLayout } from '@/layouts/home-layout'
 

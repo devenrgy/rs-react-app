@@ -1,5 +1,4 @@
 import { mockPhoto } from 'tests/mocks/api/data'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { getPhoto } from '@/lib/api/requests'
 

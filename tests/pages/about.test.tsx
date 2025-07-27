@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react'
 import { setupWithRouter } from 'tests/vitest.setup'
-import { describe, expect, it } from 'vitest'
 
 import { About } from '@/pages/about'
 

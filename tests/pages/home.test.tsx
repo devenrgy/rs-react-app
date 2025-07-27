@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react'
 import { useSearchParams } from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
-import { describe, expect, it, vi } from 'vitest'
 
 import { useFetch } from '@/lib/hooks/use-fetch'
 import { usePagination } from '@/lib/hooks/use-pagination'
