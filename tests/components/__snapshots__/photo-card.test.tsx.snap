@@ -1,0 +1,94 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PhotoCard > should render image and caption 1`] = `
+<div>
+  <figure
+    class="relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low"
+  >
+    <img
+      alt="A beautiful landscape"
+      class="h-full w-full object-cover"
+      fetchpriority="high"
+      height="600"
+      src="https://example.com/photo.jpg"
+      width="800"
+    />
+    <figcaption
+      class="bg-highlight-med px-4 py-6 text-center"
+    >
+      <p
+        class="text-sm text-balance first-letter:capitalize"
+      >
+        A beautiful landscape
+      </p>
+    </figcaption>
+    <a
+      class="before:absolute before:inset-0"
+      data-testid="link"
+      href="/123?query=test"
+    />
+  </figure>
+</div>
+`;
+
+exports[`PhotoCard > should render image and caption with mockPhoto 1`] = `
+<div>
+  <figure
+    class="relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low"
+  >
+    <img
+      alt="mountain landscape at sunset"
+      class="h-full w-full object-cover"
+      fetchpriority="high"
+      height="1080"
+      src="https://example.com/photos/photo_789/regular"
+      width="1920"
+    />
+    <figcaption
+      class="bg-highlight-med px-4 py-6 text-center"
+    >
+      <p
+        class="text-sm text-balance first-letter:capitalize"
+      >
+        mountain landscape at sunset
+      </p>
+    </figcaption>
+    <a
+      class="before:absolute before:inset-0"
+      data-testid="link"
+      href="/photo_789?query=test"
+    />
+  </figure>
+</div>
+`;
+
+exports[`PhotoCard > should render image and caption with mockPhoto2 1`] = `
+<div>
+  <figure
+    class="relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border border-highlight-low"
+  >
+    <img
+      alt="ocean waves on rocky shore"
+      class="h-full w-full object-cover"
+      fetchpriority="high"
+      height="1440"
+      src="https://example.com/photos/photo_456/regular"
+      width="2560"
+    />
+    <figcaption
+      class="bg-highlight-med px-4 py-6 text-center"
+    >
+      <p
+        class="text-sm text-balance first-letter:capitalize"
+      >
+        ocean waves on rocky shore
+      </p>
+    </figcaption>
+    <a
+      class="before:absolute before:inset-0"
+      data-testid="link"
+      href="/photo_456?query=test"
+    />
+  </figure>
+</div>
+`;

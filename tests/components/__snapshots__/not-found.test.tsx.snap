@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NotFound > should render not found message and home link 1`] = `
+<div>
+  <div
+    class="grid min-h-dvh place-content-center"
+  >
+    <p
+      class="mb-5 text-center text-3xl text-balance"
+    >
+      Nothing found
+    </p>
+    <a
+      class="mt-4 rounded-full bg-iris px-4 py-2 text-center text-xl text-base"
+      data-testid="link"
+      href="/"
+    >
+      Go back to Home
+    </a>
+  </div>
+</div>
+`;
