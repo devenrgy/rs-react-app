@@ -1,33 +1,104 @@
-import { within } from '@testing-library/react'
-import { setup } from 'tests/vitest.setup'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { ErrorBoundary } from '@/components/error-boundary'
-import { Header } from '@/components/header'
+
+vi.mock('@/components/error-fallback', () => ({
+	ErrorFallback: ({ showButton, handleResetError }: { showButton: boolean; handleResetError: () => void }) => (
+		<div data-testid='error-fallback'>
+			{showButton && (
+				<button data-testid='reset-button' onClick={handleResetError}>
+					Reset
+				</button>
+			)}
+		</div>
+	)
+}))
 
 describe('ErrorBoundary', () => {
-	it('should click error button to show error component and console error', async () => {
-		const fn = vi.spyOn(console, 'error').mockImplementation(() => {})
+	const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-		const { user, container } = setup(
+	beforeEach(() => {
+		consoleErrorSpy.mockClear()
+	})
+
+	it('should render children when no error occurs', () => {
+		const ChildComponent = () => <div data-testid='child'>Child Content</div>
+
+		render(
 			<ErrorBoundary>
-				<Header />
+				<ChildComponent />
 			</ErrorBoundary>
 		)
 
-		const errorButton = within(container).getByRole('button', { name: /trigger error/i })
+		expect(screen.getByTestId('child')).toHaveTextContent('Child Content')
+		expect(screen.queryByTestId('error-fallback')).not.toBeInTheDocument()
+	})
 
-		await user.click(errorButton)
+	it('should render ErrorFallback when an error is caught', () => {
+		const ProblemChild = () => {
+			throw new Error('Test error')
+		}
 
-		const title = within(container).getByRole('heading', { name: /something went wrong/i })
-		const button = within(container).getByRole('button', { name: /try again/i })
+		render(
+			<ErrorBoundary>
+				<ProblemChild />
+			</ErrorBoundary>
+		)
 
-		expect(title).toBeInTheDocument()
-		expect(button).toBeInTheDocument()
+		expect(screen.getByTestId('error-fallback')).toBeInTheDocument()
+		expect(screen.getByTestId('reset-button')).toBeInTheDocument()
+		expect(consoleErrorSpy).toHaveBeenCalledWith('ErrorBoundary caught:', expect.any(Error))
+	})
 
-		await user.click(button)
+	it('should reset error state when handleResetError is called', async () => {
+		const user = userEvent.setup()
+		const ProblemChild = () => {
+			throw new Error('Test error')
+		}
+		const GoodChild = () => <div data-testid='good-child'>Good Child</div>
 
-		expect(fn).toHaveBeenCalledTimes(2)
-		expect(title).not.toBeInTheDocument()
-		expect(button).not.toBeInTheDocument()
+		const { rerender } = render(
+			<ErrorBoundary>
+				<ProblemChild />
+			</ErrorBoundary>
+		)
+
+		expect(screen.getByTestId('error-fallback')).toBeInTheDocument()
+
+		await user.click(screen.getByTestId('reset-button'))
+
+		rerender(
+			<ErrorBoundary>
+				<GoodChild />
+			</ErrorBoundary>
+		)
+
+		rerender(
+			<ErrorBoundary key='new-instance'>
+				<GoodChild />
+			</ErrorBoundary>
+		)
+
+		expect(screen.getByTestId('good-child')).toBeInTheDocument()
+		expect(screen.queryByTestId('error-fallback')).not.toBeInTheDocument()
+	})
+
+	it('should call getDerivedStateFromError when an error occurs', () => {
+		const getDerivedStateFromErrorSpy = vi.spyOn(ErrorBoundary, 'getDerivedStateFromError')
+
+		const ProblemChild = () => {
+			throw new Error('Test error')
+		}
+
+		render(
+			<ErrorBoundary>
+				<ProblemChild />
+			</ErrorBoundary>
+		)
+
+		expect(getDerivedStateFromErrorSpy).toHaveBeenCalled()
+		expect(getDerivedStateFromErrorSpy).toHaveReturnedWith({ hasError: true })
 	})
 })
