@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { setupWithRouter } from 'tests/vitest.setup'
+import { expect, expect } from 'vitest'
 
 import { NotFound } from '@/components/not-found'
 
@@ -20,8 +21,8 @@ describe('NotFound', () => {
 	it('should render not found message and home link', () => {
 		const { container } = setupWithRouter(<NotFound />, { route: '/404' })
 
-		expect(screen.getByText('Nothing found')).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /go back to home/i })).toBeInTheDocument()
+		expect(screen.getByText(/page not found/i)).toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /return to homepage/i })).toBeInTheDocument()
 		expect(screen.getByTestId('link')).toHaveAttribute('href', '/')
 		expect(container).toMatchSnapshot()
 	})
@@ -29,7 +30,7 @@ describe('NotFound', () => {
 	it('should navigate to home on link click', async () => {
 		const { user } = setupWithRouter(<NotFound />, { route: '/404' })
 
-		await user.click(screen.getByRole('link', { name: /go back to home/i }))
+		await user.click(screen.getByRole('link', { name: /return to homepage/i }))
 
 		expect(window.location.pathname).toBe('/')
 	})

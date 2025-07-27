@@ -3,13 +3,25 @@
 exports[`Header > should render header on about route 1`] = `
 <div>
   <header
-    class="fixed inset-x-0 z-10 bg-base/80 backdrop-blur-3xl"
+    class="fixed inset-x-0 z-10 bg-neutral-950/80 backdrop-blur-3xl"
   >
     <div
-      class="container flex h-[80px] items-center gap-10"
+      class="container flex min-h-[80px] flex-col items-center gap-10 py-5 sm:flex-row lg:py-0"
     >
+      <a
+        class="font-brand text-3xl"
+        data-discover="true"
+        href="/"
+      >
+        <span
+          class="text-iris"
+        >
+          RS
+        </span>
+         Gallery
+      </a>
       <ul
-        class="ml-auto flex gap-5 justify-self-end"
+        class="flex gap-5 justify-self-end text-xl lg:ml-auto"
       >
         <li>
           <a
@@ -23,7 +35,7 @@ exports[`Header > should render header on about route 1`] = `
         <li>
           <a
             aria-current="page"
-            class="pointer-events-none text-rose duration-200"
+            class="text-rose pointer-events-none duration-200"
             data-discover="true"
             href="/about"
           >
@@ -39,17 +51,29 @@ exports[`Header > should render header on about route 1`] = `
 exports[`Header > should render header on home route 1`] = `
 <div>
   <header
-    class="fixed inset-x-0 z-10 bg-base/80 backdrop-blur-3xl"
+    class="fixed inset-x-0 z-10 bg-neutral-950/80 backdrop-blur-3xl"
   >
     <div
-      class="container flex h-[80px] items-center gap-10"
+      class="container flex min-h-[80px] flex-col items-center gap-10 py-5 sm:flex-row lg:py-0"
     >
+      <a
+        class="font-brand text-3xl"
+        data-discover="true"
+        href="/"
+      >
+        <span
+          class="text-iris"
+        >
+          RS
+        </span>
+         Gallery
+      </a>
       <div
-        class="flex grow items-center justify-end gap-5"
+        class="flex grow items-center justify-center gap-5"
       >
         <form
           aria-label="Search Form"
-          class="flex h-full max-w-lg grow"
+          class="ring-iris group flex h-full rounded-full has-[input:focus-visible]:ring-2 w-full max-w-lg"
         >
           <p
             class="relative w-full"
@@ -62,7 +86,7 @@ exports[`Header > should render header on home route 1`] = `
                
             </label>
             <input
-              class="peer h-full w-full rounded-l-full bg-highlight-low py-3 pr-18 pl-5 text-lg transition-colors duration-200 outline-none focus-visible:bg-overlay/80"
+              class="pr-18 bg-iris/15 peer h-full w-full rounded-l-full py-3 pl-5 text-lg outline-none transition-colors duration-200"
               id="search"
               inputmode="search"
               name="search"
@@ -72,7 +96,7 @@ exports[`Header > should render header on home route 1`] = `
             />
             <button
               aria-label="Reset"
-              class="visible absolute top-1/2 right-0 -translate-1/2 cursor-pointer p-2 text-text opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0"
+              class="-translate-1/2 text-text visible absolute right-0 top-1/2 cursor-pointer p-2 opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0"
               type="reset"
             >
               <svg
@@ -100,7 +124,7 @@ exports[`Header > should render header on home route 1`] = `
           <p>
             <button
               aria-label="Search"
-              class="h-full cursor-pointer rounded-r-full bg-iris px-4 py-2 text-highlight-low transition-colors duration-200 hover:bg-iris/80 lg:px-10"
+              class="bg-iris text-highlight-low hover:bg-iris/80 h-full cursor-pointer rounded-r-full px-4 py-2 transition-colors duration-200 lg:px-10"
               type="submit"
             >
               <svg
@@ -129,7 +153,7 @@ exports[`Header > should render header on home route 1`] = `
           </p>
         </form>
         <p
-          class="flex justify-center"
+          class="hidden justify-center lg:flex"
         >
           <button
             aria-label="Trigger error"
@@ -163,12 +187,12 @@ exports[`Header > should render header on home route 1`] = `
         </p>
       </div>
       <ul
-        class="ml-auto flex gap-5 justify-self-end"
+        class="flex gap-5 justify-self-end text-xl lg:ml-auto"
       >
         <li>
           <a
             aria-current="page"
-            class="pointer-events-none text-rose duration-200"
+            class="text-rose pointer-events-none duration-200"
             data-discover="true"
             href="/"
           >

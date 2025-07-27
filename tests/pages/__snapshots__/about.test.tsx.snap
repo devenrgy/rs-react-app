@@ -3,13 +3,13 @@
 exports[`About > matches snapshot 1`] = `
 <div>
   <main
-    class="grid min-h-dvh pt-40 pb-20"
+    class="grid min-h-dvh pb-20 pt-40"
   >
     <section
       class="container text-lg"
     >
       <h1
-        class="mb-10 text-4xl font-bold text-balance capitalize"
+        class="mb-10 text-balance text-4xl font-bold capitalize"
       >
         About
       </h1>
@@ -29,7 +29,7 @@ exports[`About > matches snapshot 1`] = `
         This project is part of the
          
         <a
-          class="text-rose"
+          class="text-rose underline-offset-5 hover:underline"
           href="https://rs.school/courses/reactjs"
           rel="noopener noreferrer"
           target="_blank"
@@ -38,7 +38,7 @@ exports[`About > matches snapshot 1`] = `
         </a>
       </p>
       <a
-        class="text-iris"
+        class="text-iris underline-offset-5 hover:underline"
         href="https://github.com/devenrgy"
         rel="noopener noreferrer"
         target="_blank"
