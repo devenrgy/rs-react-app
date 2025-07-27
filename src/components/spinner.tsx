@@ -1,0 +1,9 @@
+import { LoaderCircle } from 'lucide-react'
+
+export const Spinner = () => {
+	return (
+		<div className='fixed inset-0 z-100 grid place-content-center'>
+			<LoaderCircle size={48} aria-label='spinner' className='animate-spin text-text' />
+		</div>
+	)
+}
