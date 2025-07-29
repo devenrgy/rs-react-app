@@ -6,13 +6,12 @@ export const DOTS = '...'
 
 interface Props {
 	totalCount: number | undefined
-	pageSize?: number
 	siblingCount?: number
 	currentPage?: number
 }
 
-export const usePagination = ({ totalCount, pageSize = 10, siblingCount = 1, currentPage = 1 }: Props) => {
-	const paginationRange = useMemo(() => {
+export const usePagination = ({ totalCount, siblingCount = 1, currentPage = 1 }: Props) => {
+	return useMemo(() => {
 		if (!totalCount) return
 
 		const totalPageCount = totalCount >= 200 ? 200 : totalCount
@@ -48,7 +47,5 @@ export const usePagination = ({ totalCount, pageSize = 10, siblingCount = 1, cur
 			const middleRange = range(leftSiblingIndex, rightSiblingIndex)
 			return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
 		}
-	}, [totalCount, pageSize, siblingCount, currentPage])
-
-	return paginationRange
+	}, [totalCount, siblingCount, currentPage])
 }
