@@ -4,7 +4,7 @@
  */
 const config = {
 	'*': ['prettier --write --ignore-unknown'],
-	'*.{js,mjs,ts,jsx,tsx}': ['eslint --quiet --fix --cache --max-warnings 0 --no-warn-ignored']
+	'*.{js,mjs,ts,jsx,tsx}': ['eslint --max-warnings 0 --no-warn-ignored --fix']
 }
 
 export default config
