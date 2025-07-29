@@ -4,9 +4,15 @@ import userEvent from '@testing-library/user-event'
 import { ErrorBoundary } from '@/components/error-boundary'
 
 vi.mock('@/components/error-fallback', () => ({
-	ErrorFallback: ({ showButton, handleResetError }: { showButton: boolean; handleResetError: () => void }) => (
+	ErrorFallback: ({
+		showRetryButton,
+		handleResetError
+	}: {
+		showRetryButton: boolean
+		handleResetError: () => void
+	}) => (
 		<div data-testid='error-fallback'>
-			{showButton && (
+			{showRetryButton && (
 				<button data-testid='reset-button' onClick={handleResetError}>
 					Reset
 				</button>

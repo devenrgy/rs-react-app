@@ -23,15 +23,15 @@ describe('ErrorFallback', () => {
 		expect(container).toMatchSnapshot()
 	})
 
-	it('should render button when showButton is true', () => {
-		const { container } = render(<ErrorFallback showButton={true} />)
+	it('should render button when showRetryButton is true', () => {
+		const { container } = render(<ErrorFallback showRetryButton={true} />)
 
 		expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
 		expect(container).toMatchSnapshot()
 	})
 
-	it('should not render button when showButton is false', () => {
-		const { container } = render(<ErrorFallback showButton={false} />)
+	it('should not render button when showRetryButton is false', () => {
+		const { container } = render(<ErrorFallback showRetryButton={false} />)
 
 		expect(screen.queryByRole('button')).not.toBeInTheDocument()
 		expect(container).toMatchSnapshot()
@@ -39,7 +39,7 @@ describe('ErrorFallback', () => {
 
 	it('should call handleResetError when button is clicked', async () => {
 		const handleResetError = vi.fn()
-		const { user, container } = setup(<ErrorFallback showButton={true} handleResetError={handleResetError} />)
+		const { user, container } = setup(<ErrorFallback showRetryButton={true} handleResetError={handleResetError} />)
 
 		const button = screen.getByRole('button', { name: /try again/i })
 		await user.click(button)

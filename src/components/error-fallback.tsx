@@ -1,10 +1,10 @@
 interface Props {
 	message?: string
 	handleResetError?: () => void
-	showButton?: boolean
+	showRetryButton?: boolean
 }
 
-export const ErrorFallback = ({ message, handleResetError, showButton = false }: Props) => {
+export const ErrorFallback = ({ message, handleResetError, showRetryButton = false }: Props) => {
 	return (
 		<main className='container grid h-dvh place-items-center'>
 			<section className='flex flex-col items-center gap-10'>
@@ -12,7 +12,7 @@ export const ErrorFallback = ({ message, handleResetError, showButton = false }:
 
 				{message && <p>{message}</p>}
 
-				{showButton && (
+				{showRetryButton && (
 					<button
 						type='button'
 						onClick={handleResetError}
