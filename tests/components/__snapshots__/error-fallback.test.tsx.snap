@@ -24,7 +24,7 @@ exports[`ErrorFallback > should call handleResetError when button is clicked 1`]
 </div>
 `;
 
-exports[`ErrorFallback > should not render button when showButton is false 1`] = `
+exports[`ErrorFallback > should not render button when showRetryButton is false 1`] = `
 <div>
   <main
     class="container grid h-dvh place-items-center"
@@ -42,7 +42,7 @@ exports[`ErrorFallback > should not render button when showButton is false 1`] =
 </div>
 `;
 
-exports[`ErrorFallback > should render button when showButton is true 1`] = `
+exports[`ErrorFallback > should render button when showRetryButton is true 1`] = `
 <div>
   <main
     class="container grid h-dvh place-items-center"
