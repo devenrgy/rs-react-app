@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation, useSearchParams } from 'react-router'
 
 import { SearchForm } from '@/components/search-form'
 import { SEARCH_PARAM_KEY } from '@/configs/constants'
+import { navigation } from '@/configs/navigation'
 import { cn } from '@/lib/utils/helpers'
 
 interface Props {
@@ -73,22 +74,16 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 					</div>
 				)}
 				<ul className='flex gap-5 justify-self-end text-xl lg:ml-auto'>
-					<li>
-						<NavLink
-							className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
-							to={{ pathname: '/' }}
-						>
-							Home
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
-							to={{ pathname: '/about' }}
-						>
-							About
-						</NavLink>
-					</li>
+					{navigation.map(({ label, href }) => (
+						<li key={href}>
+							<NavLink
+								className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
+								to={{ pathname: href }}
+							>
+								{label}
+							</NavLink>
+						</li>
+					))}
 				</ul>
 			</div>
 		</header>
