@@ -33,6 +33,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 					</Link>
 				) : (
 					<button
+						type='button'
 						aria-label='mobile-previous'
 						disabled
 						className='bg-iris disabled:bg-iris/70 relative inline-flex items-center rounded-md px-5 py-3 text-lg font-medium disabled:text-black/50'
@@ -51,6 +52,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 					</Link>
 				) : (
 					<button
+						type='button'
 						aria-label='mobile-next'
 						disabled
 						className='bg-iris disabled:bg-iris-70 relative grid place-content-center rounded-md px-5 py-3 text-center text-lg font-medium disabled:text-black/50'
@@ -79,6 +81,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 							</Link>
 						) : (
 							<button
+								type='button'
 								aria-label='desktop-previous'
 								className='ring-iris relative inline-flex items-center rounded-l-full px-5 py-3 text-white/50 ring-2 ring-inset focus:z-20 focus:outline-offset-0'
 							>
@@ -113,6 +116,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 								</Link>
 							) : (
 								<button
+									type='button'
 									className='ring-iris relative inline-flex items-center px-5 py-3 text-sm font-medium text-white ring-2 ring-inset focus:outline-offset-0'
 									key={`${page}-${index}`}
 								>
@@ -138,6 +142,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 							</Link>
 						) : (
 							<button
+								type='button'
 								aria-label='desktop-next'
 								className='ring-iris relative inline-flex items-center rounded-r-full px-5 py-3 text-white/50 ring-2 ring-inset focus:z-20 focus:outline-offset-0'
 							>

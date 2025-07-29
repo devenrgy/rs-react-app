@@ -13,7 +13,7 @@ vi.mock('@/components/error-fallback', () => ({
 	}) => (
 		<div data-testid='error-fallback'>
 			{showRetryButton && (
-				<button data-testid='reset-button' onClick={handleResetError}>
+				<button type='button' data-testid='reset-button' onClick={handleResetError}>
 					Reset
 				</button>
 			)}

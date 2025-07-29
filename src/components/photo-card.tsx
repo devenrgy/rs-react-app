@@ -26,7 +26,10 @@ export const PhotoCard = ({ data }: Props) => {
 			<figcaption className='bg-overlay flex flex-col gap-5 px-4 py-6 text-center'>
 				<p className='text-balance text-sm first-letter:capitalize'>{alt_description}</p>
 
-				<button className='group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200'>
+				<button
+					type='button'
+					className='group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200'
+				>
 					More details
 				</button>
 			</figcaption>

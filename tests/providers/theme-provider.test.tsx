@@ -8,7 +8,9 @@ const TestComponent = () => {
 	return (
 		<div>
 			<span data-testid='theme-value'>{theme}</span>
-			<button onClick={toggleTheme}>Toggle Theme</button>
+			<button type='button' onClick={toggleTheme}>
+				Toggle Theme
+			</button>
 		</div>
 	)
 }
