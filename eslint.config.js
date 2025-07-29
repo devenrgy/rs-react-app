@@ -2,7 +2,7 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import react from 'eslint-plugin-react'
+import eslintReact from '@eslint-react/eslint-plugin'
 import tseslint from 'typescript-eslint'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
@@ -18,38 +18,45 @@ export default tseslint.config(
 		extends: [
 			js.configs.recommended,
 			...tseslint.configs.strict,
+			eslintReact.configs['recommended-type-checked'],
 			eslintPluginPrettier,
+			reactHooks.configs['recommended-latest'],
+			reactRefresh.configs['recommended'],
+			reactCompiler.configs['recommended'],
+			vitest.configs['recommended'],
 			testingLibrary.configs['flat/react'],
 			jestDom.configs['flat/recommended']
 		],
 		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
 			ecmaVersion: 2020,
-			globals: globals.browser
+			globals: globals.browser,
+			parser: tseslint.parser,
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname
+			}
 		},
 		plugins: {
-			react,
-			vitest,
-			'react-hooks': reactHooks,
-			'react-refresh': reactRefresh,
-			'react-compiler': reactCompiler,
 			'simple-import-sort': simpleImportSort,
 			'unused-imports': unusedImports
 		},
 		rules: {
-			...reactHooks.configs.recommended.rules,
-			...vitest.configs.recommended.rules,
+			'@eslint-react/no-missing-key': 'warn',
+			'react-refresh/only-export-components': 'off',
 			'react-compiler/react-compiler': 'error',
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': 'warn',
 			'simple-import-sort/imports': 'error',
 			'simple-import-sort/exports': 'error',
-			...react.configs.recommended.rules,
-			...react.configs['jsx-runtime'].rules,
 			'testing-library/no-node-access': 'off',
-			'react-hooks/exhaustive-deps': 'off',
 			'testing-library/no-container': 'off',
-			'react-refresh/only-export-components': 'off',
 			'no-unused-vars': 'off',
 			'unused-imports/no-unused-imports': 'error',
+			'@eslint-react/no-unstable-context-value': 'off',
+			'@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
+			'@eslint-react/no-array-index-key': 'off',
+			'@eslint-react/hooks-extra/no-unnecessary-use-prefix': 'off',
 			'unused-imports/no-unused-vars': [
 				'warn',
 				{
