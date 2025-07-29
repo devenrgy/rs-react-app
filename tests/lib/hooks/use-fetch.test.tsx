@@ -15,12 +15,12 @@ describe('useFetch', () => {
 		) as Mock
 	})
 
-	it('should return initial loading state', () => {
+	it('should return initial isLoading state', () => {
 		const { result } = renderHook(() => useFetch('https://api.example.com/data'))
 
 		expect(result.current).toEqual({
 			data: null,
-			loading: true,
+			isLoading: true,
 			error: null
 		})
 	})
@@ -28,11 +28,11 @@ describe('useFetch', () => {
 	it('should fetch data successfully', async () => {
 		const { result } = renderHook(() => useFetch('https://api.example.com/data'))
 
-		await waitFor(() => expect(result.current.loading).toBe(false))
+		await waitFor(() => expect(result.current.isLoading).toBe(false))
 
 		expect(result.current).toEqual({
 			data: mockData,
-			loading: false,
+			isLoading: false,
 			error: null
 		})
 		expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', undefined)
@@ -44,11 +44,11 @@ describe('useFetch', () => {
 
 		const { result } = renderHook(() => useFetch('https://api.example.com/error'))
 
-		await waitFor(() => expect(result.current.loading).toBe(false))
+		await waitFor(() => expect(result.current.isLoading).toBe(false))
 
 		expect(result.current).toEqual({
 			data: null,
-			loading: false,
+			isLoading: false,
 			error: new Error(errorMessage)
 		})
 	})
@@ -65,11 +65,11 @@ describe('useFetch', () => {
 
 		const { result } = renderHook(() => useFetch('https://api.example.com/not-found'))
 
-		await waitFor(() => expect(result.current.loading).toBe(false))
+		await waitFor(() => expect(result.current.isLoading).toBe(false))
 
 		expect(result.current).toEqual({
 			data: null,
-			loading: false,
+			isLoading: false,
 			error: new Error(`Error: ${errorStatusText}`)
 		})
 	})

@@ -51,21 +51,21 @@ vi.mock('@/components/pagination', () => ({
 describe('Home', () => {
 	beforeEach(() => {
 		vi.mocked(useSearchParams()[0].get).mockReturnValue(null)
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, loading: false })
+		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, isLoading: false })
 		vi.mocked(usePagination).mockReturnValue([1, 2, 3])
 		vi.mocked(hasItems).mockReturnValue(true)
 	})
 
 	it('renders title with query from context', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: [], error: null, loading: false })
+		vi.mocked(useFetch).mockReturnValue({ data: [], error: null, isLoading: false })
 
 		setupWithRouter(<Home />, { route: '/?query=Mountain' })
 
 		expect(screen.getByRole('heading', { name: /Mountain/i, level: 1 })).toBeInTheDocument()
 	})
 
-	it('renders loading state', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, loading: true })
+	it('renders isLoading state', () => {
+		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, isLoading: true })
 
 		setupWithRouter(<Home />)
 
@@ -76,7 +76,7 @@ describe('Home', () => {
 	})
 
 	it('renders error state', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: new Error('Fetch error'), loading: false })
+		vi.mocked(useFetch).mockReturnValue({ data: null, error: new Error('Fetch error'), isLoading: false })
 
 		setupWithRouter(<Home />)
 
@@ -90,7 +90,7 @@ describe('Home', () => {
 		vi.mocked(useFetch).mockReturnValue({
 			data: { results: [{ id: '1' }], total_pages: 3 },
 			error: null,
-			loading: false
+			isLoading: false
 		})
 
 		setupWithRouter(<Home />)
@@ -106,7 +106,7 @@ describe('Home', () => {
 		vi.mocked(useFetch).mockReturnValue({
 			data: { results: [], total_pages: 0 },
 			error: null,
-			loading: false
+			isLoading: false
 		})
 
 		setupWithRouter(<Home />)
@@ -121,7 +121,7 @@ describe('Home', () => {
 		vi.mocked(useFetch).mockReturnValue({
 			data: { results: [{ id: '1' }], total_pages: 3 },
 			error: null,
-			loading: false
+			isLoading: false
 		})
 
 		const { container } = setupWithRouter(<Home />)

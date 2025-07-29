@@ -19,7 +19,7 @@ export const Home = () => {
 	const query = searchParams.get(SEARCH_PARAM_KEY) || searchQueryLS || 'Mountain'
 	const page = Number(searchParams.get(PAGE_PARAM_KEY) || pageLS || 1)
 
-	const { data, error, loading } = useFetch<SearchPhotosResponse>(
+	const { data, error, isLoading } = useFetch<SearchPhotosResponse>(
 		addUrlParams(API_SEARCH_URL, {
 			query,
 			page,
@@ -38,7 +38,7 @@ export const Home = () => {
 			<section className='container grid h-full grid-rows-[min-content_1fr]'>
 				<h1 className='mb-10 text-balance text-4xl font-medium capitalize'>{query}</h1>
 
-				{loading && (
+				{isLoading && (
 					<div className='flex w-full max-w-[200px] flex-col items-center gap-10 place-self-center'>
 						<LoaderCircle size={48} aria-label='spinner' className='text-text animate-spin' />
 					</div>
@@ -46,9 +46,9 @@ export const Home = () => {
 
 				{error && <ErrorFallback message={error.message} />}
 
-				{!loading && !error && (hasItems(data?.results) ? <PhotoList items={data.results} /> : <NotFound />)}
+				{!isLoading && !error && (hasItems(data?.results) ? <PhotoList items={data.results} /> : <NotFound />)}
 
-				{!loading && !error && hasItems(data?.results) && pagination && (
+				{!isLoading && !error && hasItems(data?.results) && pagination && (
 					<Pagination className='mt-10' totalCount={pagination} currentPage={page} />
 				)}
 			</section>

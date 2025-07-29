@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 
 export const useFetch = <T>(url: string, options?: RequestInit) => {
 	const [data, setData] = useState<T | null>(null)
-	const [loading, setLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState<Error | null>(null)
 
 	useEffect(() => {
 		let isMounted = true
 
 		const fetchData = async () => {
-			setLoading(true)
+			setIsLoading(true)
 			try {
 				const response = await fetch(url, options)
 				if (!response.ok) {
@@ -25,7 +25,7 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 				}
 			} finally {
 				if (isMounted) {
-					setLoading(false)
+					setIsLoading(false)
 				}
 			}
 		}
@@ -37,5 +37,5 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 		}
 	}, [url, options])
 
-	return { data, loading, error }
+	return { data, isLoading, error }
 }
