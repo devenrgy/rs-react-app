@@ -10,6 +10,7 @@ import reactCompiler from 'eslint-plugin-react-compiler'
 import vitest from '@vitest/eslint-plugin'
 import testingLibrary from 'eslint-plugin-testing-library'
 import jestDom from 'eslint-plugin-jest-dom'
+import unusedImports from 'eslint-plugin-unused-imports'
 
 export default tseslint.config(
 	{ ignores: ['dist', 'coverage'] },
@@ -32,13 +33,12 @@ export default tseslint.config(
 			'react-hooks': reactHooks,
 			'react-refresh': reactRefresh,
 			'react-compiler': reactCompiler,
-			'simple-import-sort': simpleImportSort
+			'simple-import-sort': simpleImportSort,
+			'unused-imports': unusedImports
 		},
 		rules: {
-			'no-unused-vars': 'off',
 			...reactHooks.configs.recommended.rules,
 			...vitest.configs.recommended.rules,
-			'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 			'react-compiler/react-compiler': 'error',
 			'simple-import-sort/imports': 'error',
 			'simple-import-sort/exports': 'error',
@@ -47,7 +47,18 @@ export default tseslint.config(
 			'testing-library/no-node-access': 'off',
 			'react-hooks/exhaustive-deps': 'off',
 			'testing-library/no-container': 'off',
-			'react-refresh/only-export-components': 'off'
+			'react-refresh/only-export-components': 'off',
+			'no-unused-vars': 'off',
+			'unused-imports/no-unused-imports': 'error',
+			'unused-imports/no-unused-vars': [
+				'warn',
+				{
+					vars: 'all',
+					varsIgnorePattern: '^_',
+					args: 'after-used',
+					argsIgnorePattern: '^_'
+				}
+			]
 		},
 		settings: {
 			react: {
