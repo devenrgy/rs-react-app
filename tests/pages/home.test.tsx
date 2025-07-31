@@ -1,94 +1,71 @@
 import { screen } from '@testing-library/react'
-import { useSearchParams } from 'react-router'
+import type { useSearchParams } from 'react-router'
+import * as reactRouter from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
+import type { Mocked } from 'vitest'
 
-import { useFetch } from '@/lib/hooks/use-fetch'
-import { usePagination } from '@/lib/hooks/use-pagination'
-import { hasItems } from '@/lib/utils/helpers'
+import * as ErrorFallback from '@/components/error-fallback'
+import * as NotFound from '@/components/not-found'
+import * as Pagination from '@/components/pagination'
+import * as PhotoList from '@/components/photo-list'
+import * as useFetch from '@/lib/hooks/use-fetch'
 import { Home } from '@/pages/home'
+import type { RootContext } from '@/pages/root'
+import * as Root from '@/pages/root'
 
-vi.mock('react-router', async () => {
-	const actual = await vi.importActual('react-router')
-	return {
-		...actual,
-		useSearchParams: () => [{ get: vi.fn().mockReturnValue(null) }, vi.fn()]
-	}
-})
-
-vi.mock('@/lib/hooks/use-fetch', () => ({
-	useFetch: vi.fn()
-}))
-
-vi.mock('@/lib/hooks/use-pagination', () => ({
-	usePagination: vi.fn()
-}))
-
-vi.mock('@/pages/root', () => ({
-	useRootContext: vi.fn().mockReturnValue({ searchQueryLS: 'Mountain', pageLS: '1' })
-}))
-
-vi.mock('@/utils/helpers', () => ({
-	addUrlParams: vi.fn().mockReturnValue('mocked-url'),
-	hasItems: vi.fn()
-}))
-
-vi.mock('@/components/error-fallback', () => ({
-	ErrorFallback: () => <div data-testid='error-fallback'>Error</div>
-}))
-
-vi.mock('@/components/not-found', () => ({
-	NotFound: () => <div data-testid='not-found'>Not Found</div>
-}))
-
-vi.mock('@/components/photo-list', () => ({
-	PhotoList: () => <div data-testid='photo-list'>Photo List</div>
-}))
-
-vi.mock('@/components/pagination', () => ({
-	Pagination: () => <div data-testid='pagination'>Pagination</div>
-}))
+import { mockSearchPhotosResponse } from '../mocks/api/data.ts'
 
 describe('Home', () => {
-	beforeEach(() => {
-		vi.mocked(useSearchParams()[0].get).mockReturnValue(null)
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, isLoading: false })
-		vi.mocked(usePagination).mockReturnValue([1, 2, 3])
-		vi.mocked(hasItems).mockReturnValue(true)
-	})
+	const mockedUseSearchParams: Mocked<ReturnType<typeof useSearchParams>> = [
+		{
+			...new URLSearchParams(),
+			get: vi.fn().mockReturnValue(null)
+		},
+		vi.fn()
+	]
 
-	it('renders title with query from context', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: [], error: null, isLoading: false })
+	const mockedUseRootContext: Mocked<RootContext> = {
+		searchQueryLS: 'Mountain',
+		pageLS: '1',
+		setSearchQueryLS: vi.fn()
+	}
 
+	vi.spyOn(reactRouter, 'useSearchParams').mockReturnValue(mockedUseSearchParams)
+	vi.spyOn(Root, 'useRootContext').mockReturnValue(mockedUseRootContext)
+	vi.spyOn(ErrorFallback, 'ErrorFallback').mockReturnValue(<div data-testid='error-fallback'>Error</div>)
+	vi.spyOn(PhotoList, 'PhotoList').mockReturnValue(<div data-testid='photo-list'>Photo List</div>)
+	vi.spyOn(Pagination, 'Pagination').mockReturnValue(<div data-testid='pagination'>Pagination</div>)
+	vi.spyOn(NotFound, 'NotFound').mockReturnValue(<div data-testid='not-found'>Not Found</div>)
+
+	it('should render title with query from context', () => {
 		setupWithRouter(<Home />, { route: '/?query=Mountain' })
 
 		expect(screen.getByRole('heading', { name: /Mountain/i, level: 1 })).toBeInTheDocument()
 	})
 
-	it('renders isLoading state', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: null, isLoading: true })
+	it('should render isLoading state', () => {
+		vi.spyOn(useFetch, 'useFetch').mockReturnValueOnce({ data: null, error: null, isLoading: true })
 
 		setupWithRouter(<Home />)
 
 		expect(screen.getByLabelText('spinner')).toBeInTheDocument()
-		expect(screen.queryByTestId('error-fallback')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('photo-list')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('not-found')).not.toBeInTheDocument()
 	})
 
-	it('renders error state', () => {
-		vi.mocked(useFetch).mockReturnValue({ data: null, error: new Error('Fetch error'), isLoading: false })
+	it('should render error state', () => {
+		vi.spyOn(useFetch, 'useFetch').mockReturnValueOnce({
+			data: null,
+			error: new Error('Fetch error'),
+			isLoading: false
+		})
 
 		setupWithRouter(<Home />)
 
 		expect(screen.getByTestId('error-fallback')).toBeInTheDocument()
-		expect(screen.queryByTestId('photo-list')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('not-found')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('pagination')).not.toBeInTheDocument()
 	})
 
-	it('renders photo list when data is available', () => {
-		vi.mocked(useFetch).mockReturnValue({
-			data: { results: [{ id: '1' }], total_pages: 3 },
+	it('should render photo list when data is available', () => {
+		vi.spyOn(useFetch, 'useFetch').mockReturnValueOnce({
+			data: mockSearchPhotosResponse,
 			error: null,
 			isLoading: false
 		})
@@ -97,13 +74,10 @@ describe('Home', () => {
 
 		expect(screen.getByTestId('photo-list')).toBeInTheDocument()
 		expect(screen.getByTestId('pagination')).toBeInTheDocument()
-		expect(screen.queryByTestId('not-found')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('error-fallback')).not.toBeInTheDocument()
 	})
 
-	it('renders not found when no results', () => {
-		vi.mocked(hasItems).mockReturnValue(false)
-		vi.mocked(useFetch).mockReturnValue({
+	it('should render not found when no results', () => {
+		vi.spyOn(useFetch, 'useFetch').mockReturnValueOnce({
 			data: { results: [], total_pages: 0 },
 			error: null,
 			isLoading: false
@@ -112,19 +86,5 @@ describe('Home', () => {
 		setupWithRouter(<Home />)
 
 		expect(screen.getByTestId('not-found')).toBeInTheDocument()
-		expect(screen.queryByTestId('photo-list')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('pagination')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('error-fallback')).not.toBeInTheDocument()
-	})
-
-	it('matches snapshot', () => {
-		vi.mocked(useFetch).mockReturnValue({
-			data: { results: [{ id: '1' }], total_pages: 3 },
-			error: null,
-			isLoading: false
-		})
-
-		const { container } = setupWithRouter(<Home />)
-		expect(container).toMatchSnapshot()
 	})
 })

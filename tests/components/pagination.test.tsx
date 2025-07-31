@@ -3,54 +3,38 @@ import { setupWithRouter } from 'tests/vitest.setup'
 
 import { Pagination } from '@/components/pagination'
 
-vi.mock('@/lib/utils/helpers', () => ({
-	cn: (...args: string[]) => args.filter(Boolean).join(' ')
-}))
-
 describe('Pagination', () => {
-	it('renders Previous and Next buttons correctly on mobile', () => {
-		setupWithRouter(<Pagination currentPage={2} totalCount={[1, 2, 3]} />, { route: '/?page=2' })
+	it('should render pagination component correctly', () => {
+		const { container } = setupWithRouter(<Pagination currentPage={2} totalCount={[1, 2, 3]} />)
 
-		expect(screen.getByLabelText('mobile-previous')).toHaveTextContent('Previous')
-		expect(screen.getByLabelText('mobile-next')).toHaveTextContent('Next')
-
-		expect(screen.getByLabelText('mobile-previous').closest('a')).toHaveAttribute('href', '/?page=1')
-		expect(screen.getByLabelText('mobile-next').closest('a')).toHaveAttribute('href', '/?page=3')
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
-	it('disables Previous button on first page', () => {
+	it('should disable Previous button on first page', () => {
 		setupWithRouter(<Pagination currentPage={1} totalCount={[1, 2, 3]} />)
 
-		const previousButton = screen.getByLabelText('mobile-previous')
-		expect(previousButton).toHaveTextContent('Previous')
-		expect(previousButton.closest('button')).toBeDisabled()
-		expect(previousButton.closest('a')).toBeNull()
+		const desktopPreviousButton = screen.getByRole('button', { name: /desktop-previous/i })
+		const mobilePreviousButton = screen.getByRole('button', { name: /mobile-previous/i })
+
+		expect(desktopPreviousButton).toBeDisabled()
+		expect(mobilePreviousButton).toBeDisabled()
 	})
 
-	it('disables Next button on last page', () => {
+	it('should disable Next button on last page', () => {
 		setupWithRouter(<Pagination currentPage={3} totalCount={[1, 2, 3]} />)
 
-		const nextButton = screen.getByLabelText('mobile-next')
-		expect(nextButton).toHaveTextContent('Next')
-		expect(nextButton.closest('button')).toBeDisabled()
-		expect(nextButton.closest('a')).toBeNull()
+		const desktopNextButton = screen.getByRole('button', { name: /desktop-next/i })
+		const mobileNextButton = screen.getByRole('button', { name: /mobile-next/i })
+
+		expect(desktopNextButton).toBeDisabled()
+		expect(mobileNextButton).toBeDisabled()
 	})
 
-	it('generates correct URL params with existing query', () => {
+	it('should generate correct URL params with existing query', () => {
 		setupWithRouter(<Pagination currentPage={1} totalCount={[1, 2, 3]} />, { route: '/?sort=asc' })
 
-		const page2Link = screen.getByText('2').closest('a')
+		const page2Link = screen.getByRole('link', { name: '2' })
+
 		expect(page2Link).toHaveAttribute('href', '/?sort=asc&page=2')
-	})
-
-	it('renders desktop layout with correct navigation', () => {
-		setupWithRouter(<Pagination currentPage={1} totalCount={[1, 2, 3]} />)
-
-		const nav = screen.getByLabelText('Pagination')
-		expect(nav).toBeInTheDocument()
-
-		expect(screen.getByLabelText('desktop-previous')).toBeInTheDocument()
-		expect(screen.getByLabelText('desktop-next')).toBeInTheDocument()
-		expect(nav.querySelectorAll('svg')).toHaveLength(2)
 	})
 })

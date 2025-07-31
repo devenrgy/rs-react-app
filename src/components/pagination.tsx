@@ -82,6 +82,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 						) : (
 							<button
 								type='button'
+								disabled
 								aria-label='desktop-previous'
 								className='ring-iris relative inline-flex items-center rounded-l-full px-5 py-3 text-white/50 ring-2 ring-inset focus:z-20 focus:outline-offset-0'
 							>
@@ -143,6 +144,7 @@ export const Pagination = ({ totalCount, currentPage, className }: Props) => {
 						) : (
 							<button
 								type='button'
+								disabled
 								aria-label='desktop-next'
 								className='ring-iris relative inline-flex items-center rounded-r-full px-5 py-3 text-white/50 ring-2 ring-inset focus:z-20 focus:outline-offset-0'
 							>

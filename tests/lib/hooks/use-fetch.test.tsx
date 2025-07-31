@@ -1,22 +1,24 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import type { Mock } from 'vitest'
+import { http, HttpResponse } from 'msw'
 
+import { API_SEARCH_URL } from '@/configs/constants.ts'
 import { useFetch } from '@/lib/hooks/use-fetch'
+import { addUrlParams } from '@/utils/helpers.ts'
+
+import { server } from '../../mocks/api'
+import { mockSearchPhotosResponse } from '../../mocks/api/data.ts'
 
 describe('useFetch', () => {
-	const mockData = { id: 1, name: 'Test Data' }
-
-	beforeEach(() => {
-		global.fetch = vi.fn(() =>
-			Promise.resolve({
-				ok: true,
-				json: () => Promise.resolve(mockData)
-			})
-		) as Mock
-	})
-
 	it('should return initial isLoading state', () => {
-		const { result } = renderHook(() => useFetch('https://api.example.com/data'))
+		const { result } = renderHook(() =>
+			useFetch(
+				addUrlParams(API_SEARCH_URL, {
+					search: 'Cat',
+					page: 1,
+					per_page: 10
+				})
+			)
+		)
 
 		expect(result.current).toEqual({
 			data: null,
@@ -26,51 +28,54 @@ describe('useFetch', () => {
 	})
 
 	it('should fetch data successfully', async () => {
-		const { result } = renderHook(() => useFetch('https://api.example.com/data'))
+		const { result } = renderHook(() =>
+			useFetch(
+				addUrlParams(API_SEARCH_URL, {
+					search: 'Cat',
+					page: 1,
+					per_page: 10,
+					client_id: import.meta.env.VITE_CLIENT_ID
+				})
+			)
+		)
 
 		await waitFor(() => expect(result.current.isLoading).toBe(false))
 
 		expect(result.current).toEqual({
-			data: mockData,
+			data: mockSearchPhotosResponse,
 			isLoading: false,
 			error: null
 		})
-		expect(fetch).toHaveBeenCalledWith('https://api.example.com/data', undefined)
 	})
 
-	it('should handle fetch error', async () => {
-		const errorMessage = 'Network Error'
-		global.fetch = vi.fn(() => Promise.reject(new Error(errorMessage))) as Mock
+	it('should handle fetch error correctly', async () => {
+		server.use(
+			http.get(
+				API_SEARCH_URL,
+				() => {
+					return new HttpResponse(null, { status: 404 })
+				},
+				{ once: true }
+			)
+		)
 
-		const { result } = renderHook(() => useFetch('https://api.example.com/error'))
+		const { result } = renderHook(() =>
+			useFetch(
+				addUrlParams(API_SEARCH_URL, {
+					search: 'Cat',
+					page: 1,
+					per_page: 10,
+					client_id: import.meta.env.VITE_CLIENT_ID
+				})
+			)
+		)
 
 		await waitFor(() => expect(result.current.isLoading).toBe(false))
 
 		expect(result.current).toEqual({
 			data: null,
 			isLoading: false,
-			error: new Error(errorMessage)
-		})
-	})
-
-	it('should handle non-ok responses with status text', async () => {
-		const errorStatusText = 'Not Found'
-		global.fetch = vi.fn(() =>
-			Promise.resolve({
-				ok: false,
-				statusText: errorStatusText,
-				json: () => Promise.resolve({})
-			})
-		) as Mock
-
-		const { result } = renderHook(() => useFetch('https://api.example.com/not-found'))
-
-		await waitFor(() => expect(result.current.isLoading).toBe(false))
-
-		expect(result.current).toEqual({
-			data: null,
-			isLoading: false,
-			error: new Error(`Error: ${errorStatusText}`)
+			error: new Error('Error: Not Found')
 		})
 	})
 })

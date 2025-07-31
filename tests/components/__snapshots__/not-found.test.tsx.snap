@@ -1,76 +1,74 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`NotFound > should render not found message and home link 1`] = `
-<div>
+<div
+  class="to-overlay flex min-h-dvh flex-col items-center justify-center bg-gradient-to-br from-neutral-950 px-4"
+>
   <div
-    class="to-overlay flex min-h-dvh flex-col items-center justify-center bg-gradient-to-br from-neutral-950 px-4"
+    class="bg-highlight-low w-full max-w-md space-y-6 rounded-2xl p-8 shadow-xl"
   >
     <div
-      class="bg-highlight-low w-full max-w-md space-y-6 rounded-2xl p-8 shadow-xl"
+      class="space-y-3 text-center"
     >
       <div
-        class="space-y-3 text-center"
+        class="inline-flex rounded-full bg-rose-100 p-4"
       >
         <div
-          class="inline-flex rounded-full bg-rose-100 p-4"
+          class="rounded-full bg-rose-200 p-4"
         >
-          <div
-            class="rounded-full bg-rose-200 p-4"
-          >
-            <svg
-              class="h-12 w-12 text-rose-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
-        <h1
-          class="text-love text-5xl font-semibold"
-        >
-          404
-        </h1>
-        <h2
-          class="text-rose text-2xl font-semibold"
-        >
-          Page Not Found
-        </h2>
-        <p
-          class="text-muted text-balance"
-        >
-          Oops! The page you're looking for doesn't exist or has been moved.
-        </p>
-      </div>
-      <a
-        class="bg-iris hover:bg-iris/90 focus:ring-iris/50 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-center text-base text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
-        data-testid="link"
-        href="/"
-      >
-        <svg
-          class="mr-2 h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <svg
+            class="h-12 w-12 text-rose-600"
+            fill="none"
+            stroke="currentColor"
             stroke-width="2"
-          />
-        </svg>
-        Return to Homepage
-      </a>
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+      <h1
+        class="text-love text-5xl font-semibold"
+      >
+        404
+      </h1>
+      <h2
+        class="text-rose text-2xl font-semibold"
+      >
+        Page Not Found
+      </h2>
+      <p
+        class="text-muted text-balance"
+      >
+        Oops! The page you're looking for doesn't exist or has been moved.
+      </p>
     </div>
+    <a
+      class="bg-iris hover:bg-iris/90 focus:ring-iris/50 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-center text-base text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+      data-discover="true"
+      href="/"
+    >
+      <svg
+        class="mr-2 h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+      Return to Homepage
+    </a>
   </div>
 </div>
 `;

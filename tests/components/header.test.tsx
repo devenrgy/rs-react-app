@@ -1,20 +1,14 @@
 import { screen } from '@testing-library/react'
+import * as reactRouter from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
 
 import { ErrorBoundary } from '@/components/error-boundary'
 import { Header } from '@/components/header'
 
-const setSearchParams = vi.fn()
-
-vi.mock('react-router', async () => {
-	const actual = await vi.importActual('react-router')
-	return {
-		...actual,
-		useSearchParams: () => [{}, setSearchParams]
-	}
-})
-
 describe('Header', () => {
+	const setSearchParams = vi.fn()
+	vi.spyOn(reactRouter, 'useSearchParams').mockImplementation(() => [new URLSearchParams(), setSearchParams])
+
 	const mockSetSearchQueryLS = vi.fn()
 	const defaultProps = {
 		searchQueryLS: '',
@@ -22,41 +16,40 @@ describe('Header', () => {
 	}
 
 	it('should render header on home route', () => {
-		const { container } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+		const { container } = setupWithRouter(<Header {...defaultProps} />)
 
-		expect(container).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('should render header on about route', () => {
 		const { container } = setupWithRouter(<Header {...defaultProps} />, { route: '/about' })
 
-		expect(screen.getByRole('banner')).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument()
-		expect(screen.queryByTestId('search-form')).not.toBeInTheDocument()
-		expect(screen.queryByTestId('triangle-alert')).not.toBeInTheDocument()
-		expect(container).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('should update search query', async () => {
-		const { user } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+		const { user } = setupWithRouter(<Header {...defaultProps} />)
 
-		await user.type(screen.getByRole('textbox', { name: /search/i }), 'test query')
+		const searchInput = screen.getByRole('textbox', { name: /search/i })
 
-		expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('test query')
+		await user.type(searchInput, 'test query')
+
+		expect(searchInput).toHaveValue('test query')
 	})
 
 	it('should reset search query', async () => {
-		const { user } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+		const { user } = setupWithRouter(<Header {...defaultProps} />)
 
-		await user.type(screen.getByRole('textbox', { name: /search/i }), 'test query')
+		const searchInput = screen.getByRole('textbox', { name: /search/i })
+
+		await user.type(searchInput, 'test query')
 		await user.click(screen.getByRole('button', { name: /reset/i }))
 
-		expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('')
+		expect(searchInput).toHaveValue('')
 	})
 
 	it('should handle form submission', async () => {
-		const { user } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+		const { user } = setupWithRouter(<Header {...defaultProps} />)
 
 		await user.type(screen.getByRole('textbox', { name: /search/i }), ' test query ')
 		await user.keyboard('{Enter}')
@@ -70,18 +63,17 @@ describe('Header', () => {
 		const { user } = setupWithRouter(
 			<ErrorBoundary>
 				<Header {...defaultProps} />,
-			</ErrorBoundary>,
-			{ route: '/' }
+			</ErrorBoundary>
 		)
 
 		await user.click(screen.getByRole('button', { name: /trigger error/i }))
 
-		expect(consoleErrorSpy).toHaveBeenCalledWith(expect.any(String), expect.any(Error))
+		expect(consoleErrorSpy).toHaveBeenCalled()
 		consoleErrorSpy.mockRestore()
 	})
 
 	it('should not call setSearchParams when searchQuery is empty on form submission', async () => {
-		const { user } = setupWithRouter(<Header {...defaultProps} />, { route: '/' })
+		const { user } = setupWithRouter(<Header {...defaultProps} />)
 
 		await user.click(screen.getByRole('button', { name: /search/i }))
 

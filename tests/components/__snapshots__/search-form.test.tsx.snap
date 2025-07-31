@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SearchForm > should render the search form with all required elements 1`] = `
+<form
+  aria-label="Search Form"
+  class="ring-iris group flex h-full rounded-full has-[input:focus-visible]:ring-2"
+>
+  <p
+    class="relative w-full"
+  >
+    <label
+      class="sr-only"
+      for="search"
+    >
+      Search:
+       
+    </label>
+    <input
+      class="pr-18 bg-iris/15 peer h-full w-full rounded-l-full py-3 pl-5 text-lg outline-none transition-colors duration-200"
+      id="search"
+      inputmode="search"
+      name="search"
+      placeholder="Find awesome images..."
+      type="text"
+      value=""
+    />
+    <button
+      aria-label="Reset"
+      class="-translate-1/2 text-text visible absolute right-0 top-1/2 cursor-pointer p-2 opacity-100 duration-200 peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0"
+      type="reset"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-x"
+        fill="none"
+        height="24"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6 6 18"
+        />
+        <path
+          d="m6 6 12 12"
+        />
+      </svg>
+    </button>
+  </p>
+  <p>
+    <button
+      aria-label="Search"
+      class="bg-iris text-highlight-low hover:bg-iris/80 h-full cursor-pointer rounded-r-full px-4 py-2 transition-colors duration-200 lg:px-10"
+      type="submit"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-search"
+        fill="none"
+        height="24"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m21 21-4.34-4.34"
+        />
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+      </svg>
+    </button>
+  </p>
+</form>
+`;

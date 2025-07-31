@@ -1,51 +1,49 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`About > matches snapshot 1`] = `
-<div>
-  <main
-    class="grid min-h-dvh pb-20 pt-40"
+exports[`About > should render About page content correctly 1`] = `
+<main
+  class="grid min-h-dvh pb-20 pt-40"
+>
+  <section
+    class="container text-lg"
   >
-    <section
-      class="container text-lg"
+    <h1
+      class="mb-10 text-balance text-4xl font-bold capitalize"
     >
-      <h1
-        class="mb-10 text-balance text-4xl font-bold capitalize"
+      About
+    </h1>
+    <p
+      class="mb-5"
+    >
+      Hi! My name is Alex and I went crazy at 
+      <span
+        class="text-gold"
       >
-        About
-      </h1>
-      <p
-        class="mb-5"
-      >
-        Hi! My name is Alex and I went crazy at 
-        <span
-          class="text-gold"
-        >
-          Rolling Scopes School
-        </span>
-      </p>
-      <p
-        class="mb-5"
-      >
-        This project is part of the
-         
-        <a
-          class="text-rose underline-offset-5 hover:underline"
-          href="https://rs.school/courses/reactjs"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          RS School React course
-        </a>
-      </p>
+        Rolling Scopes School
+      </span>
+    </p>
+    <p
+      class="mb-5"
+    >
+      This project is part of the
+       
       <a
-        class="text-iris underline-offset-5 hover:underline"
-        href="https://github.com/devenrgy"
+        class="text-rose underline-offset-5 hover:underline"
+        href="https://rs.school/courses/reactjs"
         rel="noopener noreferrer"
         target="_blank"
       >
-        My Github
+        RS School React course
       </a>
-    </section>
-  </main>
-</div>
+    </p>
+    <a
+      class="text-iris underline-offset-5 hover:underline"
+      href="https://github.com/devenrgy"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      My Github
+    </a>
+  </section>
+</main>
 `;

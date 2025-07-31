@@ -1,81 +1,40 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PhotoCard > should render image and caption with mockPhoto 1`] = `
-<div>
-  <figure
-    class="border-highlight-low shadow-iris/30 group relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border duration-200 hover:shadow-lg"
+<figure
+  class="border-highlight-low shadow-iris/30 group relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border duration-200 hover:shadow-lg"
+>
+  <p
+    class="overflow-clip"
+  >
+    <img
+      alt="mountain landscape at sunset"
+      class="group-hover:scale-101 h-full w-full object-cover duration-200"
+      fetchpriority="high"
+      height="1080"
+      src="https://example.com/photos/photo_789/regular"
+      width="1920"
+    />
+  </p>
+  <figcaption
+    class="bg-overlay flex flex-col gap-5 px-4 py-6 text-center"
   >
     <p
-      class="overflow-clip"
+      class="text-balance text-sm first-letter:capitalize"
     >
-      <img
-        alt="mountain landscape at sunset"
-        class="group-hover:scale-101 h-full w-full object-cover duration-200"
-        fetchpriority="high"
-        height="1080"
-        src="https://example.com/photos/photo_789/regular"
-        width="1920"
-      />
+      mountain landscape at sunset
     </p>
-    <figcaption
-      class="bg-overlay flex flex-col gap-5 px-4 py-6 text-center"
+    <button
+      class="group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200"
+      type="button"
     >
-      <p
-        class="text-balance text-sm first-letter:capitalize"
-      >
-        mountain landscape at sunset
-      </p>
-      <button
-        class="group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200"
-      >
-        More details
-      </button>
-    </figcaption>
-    <a
-      class="before:absolute before:inset-0"
-      data-testid="link"
-      href="/photo_789?query=test"
-    />
-  </figure>
-</div>
-`;
-
-exports[`PhotoCard > should render image and caption with mockPhoto2 1`] = `
-<div>
-  <figure
-    class="border-highlight-low shadow-iris/30 group relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border duration-200 hover:shadow-lg"
-  >
-    <p
-      class="overflow-clip"
-    >
-      <img
-        alt="ocean waves on rocky shore"
-        class="group-hover:scale-101 h-full w-full object-cover duration-200"
-        fetchpriority="high"
-        height="1440"
-        src="https://example.com/photos/photo_456/regular"
-        width="2560"
-      />
-    </p>
-    <figcaption
-      class="bg-overlay flex flex-col gap-5 px-4 py-6 text-center"
-    >
-      <p
-        class="text-balance text-sm first-letter:capitalize"
-      >
-        ocean waves on rocky shore
-      </p>
-      <button
-        class="group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200"
-      >
-        More details
-      </button>
-    </figcaption>
-    <a
-      class="before:absolute before:inset-0"
-      data-testid="link"
-      href="/photo_456?query=test"
-    />
-  </figure>
-</div>
+      More details
+    </button>
+  </figcaption>
+  <a
+    class="before:absolute before:inset-0"
+    data-discover="true"
+    href="/photo_789?query=test"
+  />
+</figure>
 `;
