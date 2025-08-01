@@ -1,4 +1,4 @@
-export interface Collection {
+export type Collection = {
 	id: string
 	title: string
 	description: string | null
@@ -11,14 +11,14 @@ export interface Collection {
 	share_key: string
 }
 
-export interface Breadcrumb {
+export type Breadcrumb = {
 	slug: string
 	title: string
 	index: number
 	type: string
 }
 
-export interface User {
+export type User = {
 	id: string
 	username: string
 	name: string
@@ -55,28 +55,28 @@ export interface User {
 	}
 }
 
-export interface PhotoLinks {
+export type PhotoLinks = {
 	self: string
 	html: string
 	download: string
 	download_location: string
 }
 
-export interface Sponsorship {
+export type Sponsorship = {
 	impression_urls: string[]
 	tagline: string
 	tagline_url: string
 	sponsor: User
 }
 
-export interface TopicSubmissions {
+export type TopicSubmissions = {
 	travel?: {
 		status: string
 		approved_on: string
 	}
 }
 
-export interface Photo {
+export type Photo = {
 	id: string
 	slug: string
 	created_at: string
@@ -118,8 +118,18 @@ export interface Photo {
 	}
 }
 
-export interface SearchPhotosResponse {
+export type SearchPhotosResponse = {
 	total: number
 	total_pages: number
 	results: Photo[]
 }
+
+export type PhotoResponse = {
+	data: Photo
+}
+
+export type PhotoErrorResponse = {
+	errors: string[]
+}
+
+export type PhotoApiResponse = PhotoResponse | PhotoErrorResponse
