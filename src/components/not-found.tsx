@@ -2,14 +2,14 @@ import { Link } from 'react-router'
 
 export const NotFound = () => {
 	return (
-		<div className='to-overlay flex min-h-dvh flex-col items-center justify-center bg-gradient-to-br from-neutral-950 px-4'>
-			<div className='bg-highlight-low w-full max-w-md space-y-6 rounded-2xl p-8 shadow-xl'>
+		<div className='to-overlay flex min-h-dvh flex-col items-center justify-center px-4 dark:bg-gradient-to-br dark:from-neutral-950'>
+			<div className='bg-pine dark:bg-highlight-low w-full max-w-md space-y-6 rounded-2xl p-8 shadow-xl'>
 				<div className='space-y-3 text-center'>
-					<div className='inline-flex rounded-full bg-rose-100 p-4'>
-						<div className='rounded-full bg-rose-200 p-4'>
+					<div className='inline-flex rounded-full bg-black/20 p-4 dark:bg-rose-100'>
+						<div className='rounded-full bg-black/40 p-4 dark:bg-rose-200'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-12 w-12 text-rose-600'
+								className='h-12 w-12 text-rose-500 dark:text-rose-600'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -23,15 +23,15 @@ export const NotFound = () => {
 							</svg>
 						</div>
 					</div>
-					<h1 className='text-love text-5xl font-semibold'>404</h1>
-					<h2 className='text-rose text-2xl font-semibold'>Page Not Found</h2>
-					<p className='text-muted text-balance'>
+					<h1 className='dark:text-love text-5xl font-semibold text-black/50'>404</h1>
+					<h2 className='dark:text-rose text-rose text-2xl font-semibold'>Page Not Found</h2>
+					<p className='dark:text-muted text-balance text-white'>
 						Oops! The page you&apos;re looking for doesn&apos;t exist or has been moved.
 					</p>
 				</div>
 				<Link
 					to='/'
-					className='bg-iris hover:bg-iris/90 focus:ring-iris/50 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-center text-base text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2'
+					className='dark:bg-iris dark:hover:bg-iris/90 dark:focus-visible:ring-iris/50 inline-flex w-full items-center justify-center rounded-full bg-black/20 px-6 py-3 text-center text-lg font-medium text-white transition-colors hover:bg-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 dark:text-base'
 				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

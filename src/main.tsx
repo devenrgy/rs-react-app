@@ -6,12 +6,16 @@ import { RouterProvider } from 'react-router'
 
 import { router } from '@/configs/router'
 
+import { ThemeProvider } from './providers/theme-provider'
+
 const rootElement = document.getElementById('root')
 
 if (!rootElement) throw new Error('Root element not found')
 
 createRoot(rootElement).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<ThemeProvider>
+			<RouterProvider router={router} />
+		</ThemeProvider>
 	</StrictMode>
 )

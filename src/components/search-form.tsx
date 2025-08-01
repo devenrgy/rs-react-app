@@ -23,7 +23,10 @@ export const SearchForm = ({
 			aria-label='Search Form'
 			onReset={handleFormReset}
 			onSubmit={handleFormSubmit}
-			className={cn('ring-iris group flex h-full rounded-full has-[input:focus-visible]:ring-2', className)}
+			className={cn(
+				'dark:ring-iris group flex h-full rounded-full ring-black/40 has-[input:focus-visible]:ring-2',
+				className
+			)}
 		>
 			<p className='relative w-full'>
 				<label htmlFor='search' className='sr-only'>
@@ -31,7 +34,7 @@ export const SearchForm = ({
 				</label>
 
 				<input
-					className='pr-18 bg-iris/15 peer h-full w-full rounded-l-full py-3 pl-5 text-lg outline-none transition-colors duration-200'
+					className='pr-18 dark:bg-iris/15 peer h-full w-full rounded-l-full bg-white/15 py-3 pl-5 text-lg text-white outline-none transition-colors duration-200 placeholder:text-white/50'
 					name='search'
 					id='search'
 					type='text'
@@ -53,7 +56,7 @@ export const SearchForm = ({
 			<p>
 				<button
 					aria-label='Search'
-					className='bg-iris text-highlight-low hover:bg-iris/80 h-full cursor-pointer rounded-r-full px-4 py-2 transition-colors duration-200 lg:px-10'
+					className='dark:bg-iris dark:text-highlight-low dark:hover:bg-iris/80 h-full cursor-pointer rounded-r-full bg-black/20 px-4 py-2 text-white transition-colors duration-200 hover:bg-black/30 lg:px-10'
 					type='submit'
 				>
 					<Search />

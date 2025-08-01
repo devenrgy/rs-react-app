@@ -23,8 +23,10 @@
 	--color-highlight-high: hsl(248deg, 13%, 36%);
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-	color-scheme: dark;
+	color-scheme: light dark;
 }
 
 html {
@@ -33,7 +35,7 @@ html {
 }
 
 ::selection {
-	@apply bg-iris text-highlight-low;
+	@apply dark:bg-iris dark:text-highlight-low bg-rose text-base;
 }
 
 *,
@@ -48,7 +50,7 @@ body {
 }
 
 body {
-	@apply text-text bg-neutral-950 font-sans font-medium;
+	@apply dark:text-text font-sans text-base font-medium dark:bg-neutral-950;
 }
 
 @utility container {

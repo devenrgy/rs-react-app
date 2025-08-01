@@ -1,29 +1,44 @@
-import { createContext, type ReactNode, use, useState } from 'react'
+import { createContext, type ReactNode, use } from 'react'
 
-type Theme = 'light' | 'dark'
-type ThemeContextType = {
+import { useLS } from '@/lib/hooks/use-ls'
+import { cn } from '@/lib/utils/helpers'
+
+type Theme = 'dark' | 'light'
+
+type ThemeProviderProps = {
+	children: ReactNode
+	storageKey?: string
+}
+
+type ThemeProviderState = {
 	theme: Theme
-	toggleTheme: () => void
+	setTheme: (theme: Theme) => void
 }
 
-const ThemeContext = createContext<ThemeContextType | null>(null)
-
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	const [theme, setTheme] = useState<Theme>('light')
-
-	const toggleTheme = () => {
-		setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
-	}
-
-	return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>
+const initialState: ThemeProviderState = {
+	theme: 'dark',
+	setTheme: () => null
 }
 
-export const useThemeContext = () => {
+const ThemeContext = createContext<ThemeProviderState>(initialState)
+
+export const ThemeProvider = ({ children, storageKey = 'rs-gallery-theme', ...props }: ThemeProviderProps) => {
+	const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+	const [theme, setTheme] = useLS<Theme>(storageKey, systemTheme)
+
+	return (
+		<ThemeContext {...props} value={{ theme, setTheme }}>
+			<div className={cn('dark:text-text bg-white font-sans text-base font-medium dark:bg-neutral-950', theme)}>
+				{children}
+			</div>
+		</ThemeContext>
+	)
+}
+
+export const useTheme = () => {
 	const context = use(ThemeContext)
 
-	if (!context) {
-		throw new Error('useThemeContext must be used within a ThemeProvider')
-	}
+	if (!context) throw new Error('useTheme must be used within a ThemeProvider')
 
 	return context
 }

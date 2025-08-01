@@ -16,7 +16,7 @@ export const ErrorFallback = ({ message, handleResetError, showRetryButton = fal
 					<button
 						type='button'
 						onClick={handleResetError}
-						className='bg-pine hover:bg-pine/80 w-full max-w-[200px] cursor-pointer rounded-3xl px-5 py-3 text-xl capitalize transition-colors duration-200'
+						className='bg-pine hover:bg-pine/80 w-full max-w-[200px] cursor-pointer rounded-3xl px-5 py-3 text-xl capitalize text-white transition-colors duration-200'
 					>
 						Try again
 					</button>

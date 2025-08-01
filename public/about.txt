@@ -1,6 +1,0 @@
-This favicon was generated using the following font:
-
-- Font Title: Playwrite US Modern
-- Font Author: undefined
-- Font Source: https://fonts.gstatic.com/s/playwriteusmodern/v10/H4cMBWmRlMXPhla3hmMaveiYz8nSDkIFLNIYl2TXUwK62YohNg2Da0LCgUPK.ttf
-- Font License: undefined)
