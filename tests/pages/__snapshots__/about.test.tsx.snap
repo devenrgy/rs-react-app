@@ -17,7 +17,7 @@ exports[`About > should render About page content correctly 1`] = `
     >
       Hi! My name is Alex and I went crazy at 
       <span
-        class="text-gold"
+        class="dark:text-gold"
       >
         Rolling Scopes School
       </span>
@@ -28,7 +28,7 @@ exports[`About > should render About page content correctly 1`] = `
       This project is part of the
        
       <a
-        class="text-rose underline-offset-5 hover:underline"
+        class="dark:text-rose text-love underline-offset-5 hover:underline"
         href="https://rs.school/courses/reactjs"
         rel="noopener noreferrer"
         target="_blank"
@@ -37,7 +37,7 @@ exports[`About > should render About page content correctly 1`] = `
       </a>
     </p>
     <a
-      class="text-iris underline-offset-5 hover:underline"
+      class="dark:text-iris text-pine underline-offset-5 hover:underline"
       href="https://github.com/devenrgy"
       rel="noopener noreferrer"
       target="_blank"

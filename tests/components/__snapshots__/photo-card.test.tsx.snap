@@ -2,7 +2,7 @@
 
 exports[`PhotoCard > should render image and caption with mockPhoto 1`] = `
 <figure
-  class="border-highlight-low shadow-iris/30 group relative flex break-inside-avoid flex-col overflow-clip rounded-3xl border duration-200 hover:shadow-lg"
+  class="relative flex break-inside-avoid flex-col overflow-clip rounded-3xl shadow-md"
 >
   <p
     class="overflow-clip"
@@ -17,24 +17,42 @@ exports[`PhotoCard > should render image and caption with mockPhoto 1`] = `
     />
   </p>
   <figcaption
-    class="bg-overlay flex flex-col gap-5 px-4 py-6 text-center"
+    class="dark:bg-highlight-low bg-pine flex flex-col gap-5 rounded-b-3xl px-4 py-6 text-center"
   >
     <p
-      class="text-balance text-sm first-letter:capitalize"
+      class="dark:text-text z-20 text-balance text-sm text-white first-letter:capitalize"
     >
       mountain landscape at sunset
     </p>
-    <button
-      class="group-hover:bg-pine/80 bg-pine inline-flex self-end rounded-full px-4 py-2 text-sm duration-200"
-      type="button"
+    <a
+      class="hover:bg-rose dark:bg-pine dark:text-text z-10 inline-flex cursor-pointer self-end rounded-full bg-black/20 px-4 py-2 text-sm text-white duration-200 before:absolute before:inset-0 hover:text-base"
+      data-discover="true"
+      href="/photo_789?query=test"
     >
       More details
-    </button>
+    </a>
   </figcaption>
-  <a
-    class="before:absolute before:inset-0"
-    data-discover="true"
-    href="/photo_789?query=test"
-  />
+  <button
+    aria-label="Like"
+    class="bg-foam hover:bg-love shadow-pine/50 hover:shadow-love/50 absolute right-5 top-2 z-20 cursor-pointer rounded-full p-2 text-white shadow-sm duration-200"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-heart fill-white"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+      />
+    </svg>
+  </button>
 </figure>
 `;

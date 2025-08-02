@@ -8,12 +8,27 @@ import * as ErrorFallback from '@/components/error-fallback'
 import * as NotFound from '@/components/not-found'
 import * as Pagination from '@/components/pagination'
 import * as PhotoList from '@/components/photo-list'
+import * as useDownloadFile from '@/lib/hooks/use-download-file'
 import * as useFetch from '@/lib/hooks/use-fetch'
+import * as favoritesStore from '@/lib/stores/favorites-store'
 import { Home } from '@/pages/home'
 import type { RootContext } from '@/pages/root'
 import * as Root from '@/pages/root'
 
 import { mockSearchPhotosResponse } from '../mocks/api/data.ts'
+
+vi.spyOn(useDownloadFile, 'useDownloadFile').mockImplementation(() => ({
+	downloadFile: vi.fn(),
+	downloadLinkProps: {
+		download: '',
+		href: ''
+	}
+}))
+vi.spyOn(favoritesStore, 'useFavoritePhotos').mockImplementation(() => [])
+vi.spyOn(favoritesStore, 'useFavoritesActions').mockImplementation(() => ({
+	clearAll: vi.fn(),
+	toggleFavorite: vi.fn()
+}))
 
 describe('Home', () => {
 	const mockedUseSearchParams: Mocked<ReturnType<typeof useSearchParams>> = [

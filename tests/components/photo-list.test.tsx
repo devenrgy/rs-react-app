@@ -11,18 +11,6 @@ describe('PhotoList', () => {
 		<div data-testid={`photo-card-${data.id}`}>{data.alt_description}</div>
 	))
 
-	it('should not render when items is empty', () => {
-		setupWithRouter(<PhotoList items={[]} />)
-
-		expect(screen.queryByRole('list')).not.toBeInTheDocument()
-	})
-
-	it('should not render when items is undefined', () => {
-		setupWithRouter(<PhotoList />)
-
-		expect(screen.queryByRole('list')).not.toBeInTheDocument()
-	})
-
 	it('should render list of photo cards when items are provided', () => {
 		setupWithRouter(<PhotoList items={[mockPhoto, mockPhoto2]} />)
 

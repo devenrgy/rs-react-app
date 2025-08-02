@@ -2,7 +2,7 @@
 
 exports[`PhotoDetails > should render photo image and details correctly 1`] = `
 <div
-  class="fixed inset-0 z-20 grid grid-cols-[1fr_400px] bg-black/70"
+  class="fixed inset-0 z-40 grid grid-cols-[1fr_400px] bg-black/50 backdrop-blur-md"
 >
   <div
     class="relative grid place-content-center"
@@ -22,15 +22,15 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
     />
   </div>
   <aside
-    class="pt-30 z-30 col-span-1 h-full overflow-y-auto bg-neutral-950 px-5 text-white"
+    class="pt-30 z-30 col-span-1 h-full overflow-y-auto bg-white px-5 text-black/90 dark:bg-neutral-950 dark:text-gray-300"
   >
     <h2
-      class="text-rose mb-4 text-balance text-2xl font-bold first-letter:uppercase"
+      class="text-love dark:text-rose mb-4 text-balance text-2xl font-bold first-letter:uppercase"
     >
       mountain landscape at sunset
     </h2>
     <p
-      class="mb-4 text-gray-300"
+      class="mb-4"
     >
       A stunning mountain landscape at sunset
     </p>
@@ -39,7 +39,7 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
     >
       <div>
         <h3
-          class="text-foam text-lg font-semibold"
+          class="text-pine dark:text-foam text-lg font-semibold"
         >
           Photographer
         </h3>
@@ -60,7 +60,7 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
       </div>
       <div>
         <h3
-          class="text-foam text-lg font-semibold"
+          class="text-pine dark:text-foam text-lg font-semibold"
         >
           Details
         </h3>
@@ -85,7 +85,7 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
       </div>
       <div>
         <h3
-          class="text-foam text-lg font-semibold"
+          class="text-pine dark:text-foam text-lg font-semibold"
         >
           Links
         </h3>
@@ -113,7 +113,7 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
     </div>
   </aside>
   <a
-    class="bg-iris hover:bg-iris/80 absolute right-5 top-5 z-30 rounded-full p-2 text-base duration-200"
+    class="bg-pine dark:bg-iris hover:bg-rose absolute right-5 top-5 z-30 rounded-full p-2 text-white duration-200 dark:text-base"
     data-discover="true"
     href="/?page=1"
   >

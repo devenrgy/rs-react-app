@@ -15,7 +15,7 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 				if (!response.ok) {
 					throw new Error(`Error: ${response.statusText}`)
 				}
-				const result = await response.json()
+				const result = (await response.json()) as T
 				if (isMounted) {
 					setData(result)
 				}

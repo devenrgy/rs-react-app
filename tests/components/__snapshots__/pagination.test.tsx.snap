@@ -9,7 +9,7 @@ exports[`Pagination > should render pagination component correctly 1`] = `
   >
     <a
       aria-label="mobile-previous"
-      class="bg-iris disabled:bg-iris/70 hover:bg-iris/80 relative inline-flex items-center rounded-md border px-5 py-3 text-base text-lg font-medium"
+      class="bg-pine dark:bg-iris disabled:bg-iris/70 hover:bg-iris/80 relative inline-flex items-center rounded-md border px-5 py-3 text-lg font-medium text-white dark:text-base"
       data-discover="true"
       href="/?page=1"
     >
@@ -17,7 +17,7 @@ exports[`Pagination > should render pagination component correctly 1`] = `
     </a>
     <a
       aria-label="mobile-next"
-      class="bg-iris disabled:bg-iris/70 hover:bg-iris/80 relative grid place-content-center rounded-md px-5 py-3 text-base text-lg font-medium"
+      class="bg-pine dark:bg-iris disabled:bg-iris/70 hover:bg-iris/80 relative grid place-content-center rounded-md px-5 py-3 text-lg font-medium text-white dark:text-base"
       data-discover="true"
       href="/?page=3"
     >
@@ -34,7 +34,7 @@ exports[`Pagination > should render pagination component correctly 1`] = `
       >
         <a
           aria-label="desktop-previous"
-          class="ring-iris hover:bg-iris/80 relative inline-flex items-center rounded-l-full px-5 py-3 text-white ring-2 ring-inset hover:text-base focus:z-20 focus:outline-offset-0"
+          class="ring-pine dark:ring-iris hover:bg-pine dark:hover:bg-iris/80 text-pine relative inline-flex items-center rounded-l-full px-5 py-3 ring-2 ring-inset hover:text-white focus:z-20 focus:outline-offset-0 dark:text-white dark:hover:text-base"
           data-discover="true"
           href="/?page=1"
         >
@@ -58,21 +58,21 @@ exports[`Pagination > should render pagination component correctly 1`] = `
           </svg>
         </a>
         <a
-          class="ring-iris relative inline-flex items-center px-5 py-3 text-sm font-medium ring-2 ring-inset focus:z-20 hover:bg-iris/80 text-white hover:text-base"
+          class="ring-pine dark:ring-iris text-pine relative inline-flex items-center px-5 py-3 text-sm font-medium ring-2 ring-inset focus:z-20 hover:bg-pine dark:hover:bg-iris/80 hover:text-white dark:text-white dark:hover:text-base"
           data-discover="true"
           href="/?page=1"
         >
           1
         </a>
         <a
-          class="ring-iris relative inline-flex items-center px-5 py-3 font-medium ring-2 ring-inset focus:z-20 bg-iris focus-visible:outline-pine text-base focus:outline-offset-2 focus-visible:outline-2"
+          class="ring-pine dark:ring-iris relative inline-flex items-center px-5 py-3 text-sm font-medium ring-2 ring-inset focus:z-20 bg-pine dark:bg-iris focus-visible:outline-pine text-white focus:outline-offset-2 focus-visible:outline-2 dark:text-base"
           data-discover="true"
           href="/?page=2"
         >
           2
         </a>
         <a
-          class="ring-iris relative inline-flex items-center px-5 py-3 text-sm font-medium ring-2 ring-inset focus:z-20 hover:bg-iris/80 text-white hover:text-base"
+          class="ring-pine dark:ring-iris text-pine relative inline-flex items-center px-5 py-3 text-sm font-medium ring-2 ring-inset focus:z-20 hover:bg-pine dark:hover:bg-iris/80 hover:text-white dark:text-white dark:hover:text-base"
           data-discover="true"
           href="/?page=3"
         >
@@ -80,7 +80,7 @@ exports[`Pagination > should render pagination component correctly 1`] = `
         </a>
         <a
           aria-label="desktop-next"
-          class="ring-iris hover:bg-iris/80 relative inline-flex items-center rounded-r-full px-5 py-3 text-white ring-2 ring-inset hover:text-base focus:z-20 focus:outline-offset-0"
+          class="ring-pine dark:ring-iris text-pine hover:bg-pine dark:hover:bg-iris/80 relative inline-flex items-center rounded-r-full px-5 py-3 ring-2 ring-inset hover:text-white focus:z-20 focus:outline-offset-0 dark:text-white dark:hover:text-base"
           data-discover="true"
           href="/?page=3"
         >

@@ -1,6 +1,9 @@
 @import './fonts.css';
 
 @import 'tailwindcss';
+@plugin 'tailwind-scrollbar' {
+	preferredstrategy: 'pseudoelements';
+}
 
 @theme inline {
 	--font-sans: 'Jost', sans-serif;
@@ -24,6 +27,36 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+::view-transition-group(root) {
+	animation-duration: 1s;
+}
+
+::view-transition-old(root) {
+	animation-delay: 1000ms;
+}
+
+::view-transition-new(root) {
+	animation: circle-in 1000ms ease-out;
+}
+
+@keyframes circle-in {
+	from {
+		clip-path: circle(0% at 50% 0%);
+	}
+	to {
+		clip-path: circle(130% at 50% 0%);
+	}
+}
+
+@keyframes move-in {
+	from {
+		translate: 100% 0;
+	}
+	to {
+		translate: 0 0;
+	}
+}
 
 :root {
 	color-scheme: light dark;

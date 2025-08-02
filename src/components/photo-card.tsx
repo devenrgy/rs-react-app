@@ -1,15 +1,18 @@
 import { Heart } from 'lucide-react'
 import { Link, useLocation } from 'react-router'
 
+import { cn } from '@/lib/utils/helpers'
 import type { Photo } from '@/types'
 
 interface Props {
 	data: Photo
+	isFavorite: boolean
+	toggleFavorite: (photo: Pick<Photo, 'id' | 'alt_description'>) => void
 }
 
-export const PhotoCard = ({ data }: Props) => {
+export const PhotoCard = ({ data, isFavorite, toggleFavorite }: Props) => {
 	const { search } = useLocation()
-	const { urls, width, height, alt_description } = data
+	const { urls, width, height, alt_description, id } = data
 
 	return (
 		<figure className='relative flex break-inside-avoid flex-col overflow-clip rounded-3xl shadow-md'>
@@ -37,7 +40,11 @@ export const PhotoCard = ({ data }: Props) => {
 
 			<button
 				aria-label='Like'
-				className='bg-foam hover:bg-love shadow-pine/50 hover:shadow-love/50 absolute right-5 top-2 z-20 cursor-pointer rounded-full p-2 text-white shadow-sm duration-200'
+				onClick={() => toggleFavorite({ id, alt_description })}
+				className={cn(
+					'bg-foam hover:bg-love shadow-pine/50 hover:shadow-love/50 absolute right-5 top-2 z-20 cursor-pointer rounded-full p-2 text-white shadow-sm duration-200',
+					{ 'bg-love shadow-love/50': isFavorite }
+				)}
 			>
 				<Heart className='fill-white' />
 			</button>

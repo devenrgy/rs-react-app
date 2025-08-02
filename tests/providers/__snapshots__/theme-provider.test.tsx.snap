@@ -2,8 +2,12 @@
 
 exports[`ThemeContext > should match snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    Test Children
+  <div
+    class="dark:text-text bg-white font-sans text-base font-medium dark:bg-neutral-950 light"
+  >
+    <div>
+      Test Children
+    </div>
   </div>
 </DocumentFragment>
 `;

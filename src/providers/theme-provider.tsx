@@ -12,12 +12,12 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
 	theme: Theme
-	setTheme: (theme: Theme) => void
+	handleUpdateTheme: () => void
 }
 
 const initialState: ThemeProviderState = {
 	theme: 'dark',
-	setTheme: () => null
+	handleUpdateTheme: () => null
 }
 
 const ThemeContext = createContext<ThemeProviderState>(initialState)
@@ -26,8 +26,14 @@ export const ThemeProvider = ({ children, storageKey = 'rs-gallery-theme', ...pr
 	const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 	const [theme, setTheme] = useLS<Theme>(storageKey, systemTheme)
 
+	const handleUpdateTheme = () => {
+		document.startViewTransition(() => {
+			setTheme(theme === 'light' ? 'dark' : 'light')
+		})
+	}
+
 	return (
-		<ThemeContext {...props} value={{ theme, setTheme }}>
+		<ThemeContext {...props} value={{ theme, handleUpdateTheme }}>
 			<div className={cn('dark:text-text bg-white font-sans text-base font-medium dark:bg-neutral-950', theme)}>
 				{children}
 			</div>

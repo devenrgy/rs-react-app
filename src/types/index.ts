@@ -133,3 +133,9 @@ export type PhotoErrorResponse = {
 }
 
 export type PhotoApiResponse = PhotoResponse | PhotoErrorResponse
+
+export type FavoritePhoto = Pick<Photo, 'id' | 'alt_description'> & {
+	isFavorite: boolean
+}
+
+export type DownloadData<T> = T[] | string | BlobPart

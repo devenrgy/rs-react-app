@@ -2,18 +2,18 @@
 
 exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
 <header
-  class="fixed inset-x-0 z-10 bg-neutral-950/80 backdrop-blur-3xl"
+  class="bg-pine/95 fixed inset-x-0 z-30 backdrop-blur-3xl dark:bg-neutral-950/80"
 >
   <div
-    class="container flex min-h-[80px] flex-col items-center gap-10 py-5 sm:flex-row lg:py-0"
+    class="container flex min-h-[80px] flex-col items-center gap-5 py-5 sm:flex-row lg:py-0"
   >
     <a
-      class="font-brand text-3xl"
+      class="font-brand dark:text-text text-3xl text-white"
       data-discover="true"
       href="/"
     >
       <span
-        class="text-iris"
+        class="dark:text-iris text-rose"
       >
         RS
       </span>
@@ -24,7 +24,7 @@ exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
     >
       <form
         aria-label="Search Form"
-        class="ring-iris group flex h-full rounded-full has-[input:focus-visible]:ring-2 w-full max-w-lg"
+        class="dark:ring-iris group flex h-full rounded-full ring-black/40 has-[input:focus-visible]:ring-2 w-full max-w-lg"
       >
         <p
           class="relative w-full"
@@ -37,7 +37,7 @@ exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
              
           </label>
           <input
-            class="pr-18 bg-iris/15 peer h-full w-full rounded-l-full py-3 pl-5 text-lg outline-none transition-colors duration-200"
+            class="pr-18 dark:bg-iris/15 peer h-full w-full rounded-l-full bg-white/15 py-3 pl-5 text-lg text-white outline-none transition-colors duration-200 placeholder:text-white/50"
             id="search"
             inputmode="search"
             name="search"
@@ -75,7 +75,7 @@ exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
         <p>
           <button
             aria-label="Search"
-            class="bg-iris text-highlight-low hover:bg-iris/80 h-full cursor-pointer rounded-r-full px-4 py-2 transition-colors duration-200 lg:px-10"
+            class="dark:bg-iris dark:text-highlight-low dark:hover:bg-iris/80 h-full cursor-pointer rounded-r-full bg-black/20 px-4 py-2 text-white transition-colors duration-200 hover:bg-black/30 lg:px-10"
             type="submit"
           >
             <svg
@@ -104,16 +104,16 @@ exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
         </p>
       </form>
       <p
-        class="hidden justify-center lg:flex"
+        class="hidden justify-center"
       >
         <button
           aria-label="Trigger error"
-          class="flex aspect-square h-full cursor-pointer items-center justify-center rounded-full"
+          class="dark:text-love flex aspect-square h-full cursor-pointer items-center justify-center rounded-full text-rose-500"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="lucide lucide-triangle-alert text-love"
+            class="lucide lucide-triangle-alert"
             fill="none"
             height="32"
             stroke="currentColor"
@@ -137,29 +137,103 @@ exports[`Root > should render ThemeProvider, ErrorBoundary, and Header 1`] = `
         </button>
       </p>
     </div>
-    <ul
-      class="flex gap-5 justify-self-end text-xl lg:ml-auto"
+    <div
+      class="flex w-full items-center justify-between gap-5 md:ml-auto md:w-auto"
     >
-      <li>
-        <a
-          aria-current="page"
-          class="text-rose pointer-events-none duration-200"
-          data-discover="true"
-          href="/"
+      <button
+        class="bg-rose dark:bg-iris flex cursor-pointer rounded-full p-2 duration-200 dark:text-base"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-sun h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          class=""
-          data-discover="true"
-          href="/about"
+          <circle
+            cx="12"
+            cy="12"
+            r="4"
+          />
+          <path
+            d="M12 2v2"
+          />
+          <path
+            d="M12 20v2"
+          />
+          <path
+            d="m4.93 4.93 1.41 1.41"
+          />
+          <path
+            d="m17.66 17.66 1.41 1.41"
+          />
+          <path
+            d="M2 12h2"
+          />
+          <path
+            d="M20 12h2"
+          />
+          <path
+            d="m6.34 17.66-1.41 1.41"
+          />
+          <path
+            d="m19.07 4.93-1.41 1.41"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-moon absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          About
-        </a>
-      </li>
-    </ul>
+          <path
+            d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"
+          />
+        </svg>
+        <span
+          class="sr-only"
+        >
+          Toggle theme
+        </span>
+      </button>
+      <ul
+        class="dark:text-text flex gap-5 justify-self-end text-xl text-white lg:ml-auto"
+      >
+        <li>
+          <a
+            aria-current="page"
+            class="text-rose pointer-events-none duration-200"
+            data-discover="true"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/about"
+          >
+            About
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </header>
 `;

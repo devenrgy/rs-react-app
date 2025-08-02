@@ -5,6 +5,7 @@ import { Link, NavLink, useLocation, useSearchParams } from 'react-router'
 import { SearchForm } from '@/components/search-form'
 import { SEARCH_PARAM_KEY } from '@/configs/constants'
 import { navigation } from '@/configs/navigation'
+import { routes } from '@/configs/routes'
 import { cn } from '@/lib/utils/helpers'
 
 import { ModeToggle } from './mode-toggle'
@@ -16,7 +17,7 @@ interface Props {
 
 export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 	const { pathname } = useLocation()
-	const isAboutRoute = pathname === '/about'
+	const isAboutRoute = pathname === routes.about.path
 
 	const [, setSearchParams] = useSearchParams()
 	const [searchQuery, setSearchQuery] = useState(searchQueryLS)
@@ -50,7 +51,7 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 	return (
 		<header className='bg-pine/95 fixed inset-x-0 z-30 backdrop-blur-3xl dark:bg-neutral-950/80'>
 			<div className='container flex min-h-[80px] flex-col items-center gap-5 py-5 sm:flex-row lg:py-0'>
-				<Link className='font-brand dark:text-text text-3xl text-white' to='/'>
+				<Link className='font-brand dark:text-text text-3xl text-white' to={routes.home.path}>
 					<span className='dark:text-iris text-rose'>RS</span> Gallery
 				</Link>
 
@@ -76,7 +77,7 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 					</div>
 				)}
 
-				<div className='ml-auto flex items-center gap-5'>
+				<div className='flex w-full items-center justify-between gap-5 md:ml-auto md:w-auto'>
 					<ModeToggle />
 
 					<ul className='dark:text-text flex gap-5 justify-self-end text-xl text-white lg:ml-auto'>
