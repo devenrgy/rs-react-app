@@ -1,65 +1,97 @@
 import { render, screen } from '@testing-library/react'
 import { setup } from 'tests/vitest.setup'
+import { describe, expect, it, vi } from 'vitest'
 
-import { ThemeProvider } from '@/providers/theme-provider'
+import * as useLS from '@/lib/hooks/use-ls'
+import { ThemeProvider, useTheme } from '@/providers/theme-provider'
 
-// const TestComponent = () => {
-// 	const { theme, toggleTheme } = useThemeContext()
-// 	return (
-// 		<div>
-// 			<span data-testid='theme-value'>{theme}</span>
-// 			<button type='button' onClick={toggleTheme}>
-// 				Toggle Theme
-// 			</button>
-// 		</div>
-// 	)
-// }
+const mockMatchMedia = vi.fn().mockImplementation(query => ({
+	matches: query === '(prefers-color-scheme: dark)',
+	addEventListener: vi.fn(),
+	removeEventListener: vi.fn()
+}))
 
-describe.skip('ThemeContext', () => {
-	it('should provide default light theme', () => {
+vi.stubGlobal('matchMedia', mockMatchMedia)
+
+describe('ThemeProvider', () => {
+	const matchMedia = {
+		onchange: vi.fn(),
+		addListener: vi.fn(),
+		removeListener: vi.fn(),
+		media: '',
+		dispatchEvent: vi.fn(),
+		addEventListener: vi.fn(),
+		removeEventListener: vi.fn()
+	}
+
+	beforeAll(() => {
+		Object.defineProperty(global.document, 'startViewTransition', {
+			value: vi.fn().mockImplementation(callback => callback())
+		})
+	})
+
+	vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
+		...matchMedia,
+		matches: query === '(prefers-color-scheme: light)'
+	}))
+
+	const useLSMock = vi.spyOn(useLS, 'useLS').mockImplementation(() => ['dark', vi.fn(), vi.fn()])
+
+	const TestComponent = () => {
+		const { theme, handleUpdateTheme } = useTheme()
+
+		return (
+			<div>
+				<span data-testid='theme'>{theme}</span>
+				<button onClick={handleUpdateTheme}>Toggle Theme</button>
+			</div>
+		)
+	}
+
+	it('renders children with default dark theme', () => {
+		render(
+			<ThemeProvider>
+				<div>Test Content</div>
+			</ThemeProvider>
+		)
+		expect(screen.getByText('Test Content')).toBeInTheDocument()
+		expect(screen.getByText('Test Content').parentElement).toHaveClass('dark')
+	})
+
+	it('provides theme context via useTheme', () => {
 		render(
 			<ThemeProvider>
 				<TestComponent />
 			</ThemeProvider>
 		)
-
-		expect(screen.getByTestId('theme-value')).toHaveTextContent('light')
+		expect(screen.getByTestId('theme')).toHaveTextContent('dark')
 	})
 
-	it('should toggle theme between light and dark', async () => {
+	it('toggles theme when handleUpdateTheme is called', async () => {
+		const mockSetTheme = vi.fn()
+		useLSMock.mockReturnValueOnce(['dark', mockSetTheme, vi.fn()])
+
 		const { user } = setup(
 			<ThemeProvider>
 				<TestComponent />
 			</ThemeProvider>
 		)
 
-		const button = screen.getByText('Toggle Theme')
-		const themeDisplay = screen.getByTestId('theme-value')
+		const toggleButton = screen.getByText('Toggle Theme')
+		await user.click(toggleButton)
 
-		expect(themeDisplay).toHaveTextContent('light')
-
-		await user.click(button)
-		expect(themeDisplay).toHaveTextContent('dark')
-
-		await user.click(button)
-		expect(themeDisplay).toHaveTextContent('light')
+		expect(mockSetTheme).toHaveBeenCalledWith('light')
 	})
 
-	it('should throw error when used outside provider', () => {
-		const originalError = console.error
-		console.error = vi.fn()
+	it('applies custom storage key', () => {
+		const customStorageKey = 'custom-theme-key'
 
-		expect(() => render(<TestComponent />)).toThrow('useThemeContext must be used within a ThemeProvider')
-
-		console.error = originalError
-	})
-
-	it('should match snapshot', () => {
-		const { asFragment } = render(
-			<ThemeProvider>
-				<div>Test Children</div>
+		render(
+			<ThemeProvider storageKey={customStorageKey}>
+				<TestComponent />
 			</ThemeProvider>
 		)
-		expect(asFragment()).toMatchSnapshot()
+
+		expect(useLSMock).toHaveBeenCalledWith(customStorageKey, 'light')
 	})
 })

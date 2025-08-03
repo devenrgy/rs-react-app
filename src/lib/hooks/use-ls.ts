@@ -12,7 +12,7 @@ export const useLS = <T>(key: string, initialValue: T): [T, (value: T) => void, 
 		try {
 			const item = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null
 			if (item) {
-				setStoredValue(JSON.parse(item))
+				setStoredValue(JSON.parse(item) as T)
 			} else {
 				setStoredValue(initialValueRef.current)
 				if (typeof window !== 'undefined') {

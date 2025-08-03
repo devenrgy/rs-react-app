@@ -5,6 +5,7 @@ import { setupWithRouter } from 'tests/vitest.setup'
 import type { Mocked } from 'vitest'
 
 import * as ErrorFallback from '@/components/error-fallback'
+import * as FavoritesPopup from '@/components/favorites-popup.tsx'
 import * as NotFound from '@/components/not-found'
 import * as Pagination from '@/components/pagination'
 import * as PhotoList from '@/components/photo-list'
@@ -17,20 +18,25 @@ import * as Root from '@/pages/root'
 
 import { mockSearchPhotosResponse } from '../mocks/api/data.ts'
 
-vi.spyOn(useDownloadFile, 'useDownloadFile').mockImplementation(() => ({
-	downloadFile: vi.fn(),
-	downloadLinkProps: {
-		download: '',
-		href: ''
-	}
-}))
-vi.spyOn(favoritesStore, 'useFavoritePhotos').mockImplementation(() => [])
-vi.spyOn(favoritesStore, 'useFavoritesActions').mockImplementation(() => ({
-	clearAll: vi.fn(),
-	toggleFavorite: vi.fn()
-}))
-
 describe('Home', () => {
+	const mockFavorites = [
+		{
+			id: '1',
+			alt_description: 'Test photo',
+			isFavorite: true
+		}
+	]
+
+	vi.spyOn(favoritesStore, 'useFavoritePhotos').mockImplementation(() => [])
+	vi.spyOn(favoritesStore, 'useFavoritesActions').mockImplementation(() => ({
+		clearAll: vi.fn(),
+		toggleFavorite: vi.fn()
+	}))
+	vi.spyOn(useDownloadFile, 'useDownloadFile').mockImplementation(() => ({
+		downloadFile: vi.fn(),
+		downloadLinkProps: { download: '', href: '' }
+	}))
+
 	const mockedUseSearchParams: Mocked<ReturnType<typeof useSearchParams>> = [
 		{
 			...new URLSearchParams(),
@@ -51,6 +57,7 @@ describe('Home', () => {
 	vi.spyOn(PhotoList, 'PhotoList').mockReturnValue(<div data-testid='photo-list'>Photo List</div>)
 	vi.spyOn(Pagination, 'Pagination').mockReturnValue(<div data-testid='pagination'>Pagination</div>)
 	vi.spyOn(NotFound, 'NotFound').mockReturnValue(<div data-testid='not-found'>Not Found</div>)
+	vi.spyOn(FavoritesPopup, 'FavoritesPopup').mockReturnValue(<div data-testid='favorites-popup'>Favorites Popup</div>)
 
 	it('should render title with query from context', () => {
 		setupWithRouter(<Home />, { route: '/?query=Mountain' })
@@ -101,5 +108,21 @@ describe('Home', () => {
 		setupWithRouter(<Home />)
 
 		expect(screen.getByTestId('not-found')).toBeInTheDocument()
+	})
+
+	it('should not render FavoritesPopup when no favorites', () => {
+		vi.spyOn(favoritesStore, 'useFavoritePhotos').mockImplementation(() => [])
+
+		setupWithRouter(<Home />)
+
+		expect(screen.queryByTestId('favorites-popup')).not.toBeInTheDocument()
+	})
+
+	it('should render FavoritesPopup when favorites exist', () => {
+		vi.spyOn(favoritesStore, 'useFavoritePhotos').mockImplementation(() => mockFavorites)
+
+		setupWithRouter(<Home />)
+
+		expect(screen.getByTestId('favorites-popup')).toBeInTheDocument()
 	})
 })
