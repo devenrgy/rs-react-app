@@ -47,7 +47,7 @@ export const PhotoCard = ({ data, isFavorite, toggleFavorite }: Props) => {
 			>
 				<Heart className='z-100 relative fill-white' />
 				<input
-					checked={isFavorite}
+					defaultChecked={isFavorite}
 					onClick={() => toggleFavorite({ id, alt_description })}
 					className='absolute left-0 top-0 appearance-none'
 					type='checkbox'
