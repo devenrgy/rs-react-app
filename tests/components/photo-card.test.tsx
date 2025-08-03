@@ -15,13 +15,13 @@ describe('PhotoCard', () => {
 	}))
 
 	it('should render image and caption with mockPhoto', () => {
-		const { container } = setupWithRouter(<PhotoCard data={mockPhoto} />)
+		const { container } = setupWithRouter(<PhotoCard data={mockPhoto} isFavorite={false} toggleFavorite={vi.fn()} />)
 
 		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('should navigate to photo detail on link click', async () => {
-		const { user } = setupWithRouter(<PhotoCard data={mockPhoto} />)
+		const { user } = setupWithRouter(<PhotoCard data={mockPhoto} isFavorite={false} toggleFavorite={vi.fn()} />)
 
 		await user.click(screen.getByRole('link'))
 
