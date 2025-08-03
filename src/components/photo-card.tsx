@@ -38,16 +38,21 @@ export const PhotoCard = ({ data, isFavorite, toggleFavorite }: Props) => {
 				</Link>
 			</figcaption>
 
-			<button
+			<label
 				aria-label='Like'
-				onClick={() => toggleFavorite({ id, alt_description })}
 				className={cn(
 					'bg-foam hover:bg-love shadow-pine/50 hover:shadow-love/50 absolute right-5 top-2 z-20 cursor-pointer rounded-full p-2 text-white shadow-sm duration-200',
 					{ 'bg-love shadow-love/50': isFavorite }
 				)}
 			>
-				<Heart className='fill-white' />
-			</button>
+				<Heart className='z-100 relative fill-white' />
+				<input
+					checked={isFavorite}
+					onClick={() => toggleFavorite({ id, alt_description })}
+					className='absolute left-0 top-0 appearance-none'
+					type='checkbox'
+				/>
+			</label>
 		</figure>
 	)
 }
