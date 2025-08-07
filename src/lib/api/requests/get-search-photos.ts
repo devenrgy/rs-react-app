@@ -25,10 +25,6 @@ export const getSearchPhotos = async (
 ) => {
 	const params = { query, page, per_page, client_id: import.meta.env.VITE_CLIENT_ID }
 
-	if (!query) {
-		throw new Error('Incorrect query')
-	}
-
 	const url = addUrlParams(API_SEARCH_URL, params)
 
 	return fetch(url, { signal }).then(res => res.json() as Promise<PaginatedResults<Photo[]>>)
