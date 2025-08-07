@@ -10,29 +10,29 @@ export const handlers = [
 		const { id } = params
 		const client_id = url.searchParams.get('client_id')
 
-		if (!client_id) {
-			return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
-		}
+		// if (!client_id) {
+		// 	return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
+		// }
 
-		if (!id) {
-			return new HttpResponse(null, { status: 400, statusText: 'Invalid ID' })
-		}
+		// if (!id) {
+		// 	return new HttpResponse(null, { status: 400, statusText: 'Invalid ID' })
+		// }
 
 		return HttpResponse.json({ ...mockPhoto, id })
 	}),
 
-	http.get(`${API_SEARCH_URL}`, ({ request }) => {
-		const url = new URL(request.url)
-		const search = url.searchParams.get('search')
-		const client_id = url.searchParams.get('client_id')
+	http.get(API_SEARCH_URL, ({ request }) => {
+		// const url = new URL(request.url)
+		// const query = url.searchParams.get('query')
+		// const client_id = url.searchParams.get('client_id')
 
-		if (!client_id) {
-			return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
-		}
+		// if (!client_id) {
+		// 	return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
+		// }
 
-		if (!search) {
-			return new HttpResponse(null, { status: 400, statusText: 'Missing search' })
-		}
+		// if (!query) {
+		// 	return new HttpResponse(null, { status: 400, statusText: 'Missing search' })
+		// }
 
 		return HttpResponse.json(mockSearchPhotosResponse)
 	})

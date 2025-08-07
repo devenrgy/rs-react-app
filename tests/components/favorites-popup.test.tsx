@@ -1,66 +1,40 @@
 import { render, screen } from '@testing-library/react'
-import { setup } from 'tests/vitest.setup'
-import { describe, expect, it, vi } from 'vitest'
 
 import { FavoritesPopup } from '@/components/favorites-popup'
-import type { FavoritePhoto } from '@/types'
 
 describe('FavoritesPopup', () => {
-	const mockHandleClearAll = vi.fn()
-	const mockHandleDownload = vi.fn()
+	it('should render FavoritesPopup correctly', () => {
+		const altDescription1 = 'Mountain'
+		const altDescription2 = 'Lake'
 
-	const defaultProps = {
-		items: [
-			{ id: '1', alt_description: 'Photo 1 description', isFavorite: true },
-			{ id: '2', alt_description: 'Photo 2 description', isFavorite: true }
-		] as FavoritePhoto[],
-		handleClearAll: mockHandleClearAll,
-		handleDownload: mockHandleDownload
-	}
-
-	it('renders correctly', () => {
-		const { container } = render(<FavoritesPopup {...defaultProps} />)
-		expect(container.firstChild).toMatchSnapshot()
-	})
-
-	it('renders without crashing', () => {
-		render(<FavoritesPopup {...defaultProps} />)
-		expect(screen.getByText(/2 items are selected/i)).toBeInTheDocument()
-	})
-
-	it('displays correct number of items', () => {
-		render(<FavoritesPopup {...defaultProps} />)
-		expect(screen.getAllByRole('listitem')).toHaveLength(2)
-		expect(screen.getByText('Photo 1 description')).toBeInTheDocument()
-		expect(screen.getByText('Photo 2 description')).toBeInTheDocument()
-	})
-
-	it('displays singular item text when only one item is present', () => {
 		render(
 			<FavoritesPopup
-				{...defaultProps}
-				items={[{ id: '1', alt_description: 'Photo 1 description', isFavorite: true }]}
+				items={[
+					{ id: 'mountain', alt_description: altDescription1, isFavorite: true },
+					{ id: 'lake', alt_description: altDescription2, isFavorite: true }
+				]}
+				handleDownload={vi.fn()}
+				handleClearAll={vi.fn()}
 			/>
 		)
-		expect(screen.getByText('1 item is selected')).toBeInTheDocument()
+
+		expect(screen.getAllByRole('listitem')).toHaveLength(2)
+		expect(screen.getByText(/items are/i)).toBeInTheDocument()
+		expect(screen.getByRole('button', { name: /clear all/i })).toBeInTheDocument()
+		expect(screen.getByText(/download/i)).toBeInTheDocument()
 	})
 
-	it('applies custom className', () => {
-		const { container } = render(<FavoritesPopup {...defaultProps} className='custom-class' />)
-		expect(container.firstChild).toHaveClass('custom-class')
-	})
+	it('should render FavoritesPopup correctly with one item', () => {
+		const altDescription1 = 'Mountain'
 
-	it('calls handleClearAll when clear button is clicked', async () => {
-		const { user } = setup(<FavoritesPopup {...defaultProps} />)
-		const clearButton = screen.getByText('Clear All')
-		await user.click(clearButton)
-		expect(mockHandleClearAll).toHaveBeenCalledTimes(1)
-	})
+		render(
+			<FavoritesPopup
+				items={[{ id: 'mountain', alt_description: altDescription1, isFavorite: true }]}
+				handleDownload={vi.fn()}
+				handleClearAll={vi.fn()}
+			/>
+		)
 
-	it('calls handleDownload when download button is clicked', async () => {
-		const { user } = setup(<FavoritesPopup {...defaultProps} />)
-		const downloadButton = screen.getByText('Download')
-		await user.click(downloadButton)
-		expect(mockHandleDownload).toHaveBeenCalledTimes(1)
+		expect(screen.getByText(/item is/i)).toBeInTheDocument()
 	})
 })

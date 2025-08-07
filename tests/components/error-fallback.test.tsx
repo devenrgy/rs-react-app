@@ -1,37 +1,87 @@
-import { render, screen } from '@testing-library/react'
-import { setup } from 'tests/vitest.setup'
+import { screen } from '@testing-library/react'
+import { createRoutesStub } from 'react-router'
+import { render } from 'tests/mocks/providers'
 
 import { ErrorFallback } from '@/components/error-fallback'
 
 describe('ErrorFallback', () => {
-	it('should render default error message', () => {
-		const { container } = render(<ErrorFallback />)
+	const TestComponent = () => {
+		return <div data-testid='test'>Test</div>
+	}
 
-		expect(container.firstChild).toMatchSnapshot()
+	it('should render ErrorFallback correctly with Error', async () => {
+		const ErrorFallbackStub = createRoutesStub([
+			{
+				path: '/',
+				Component: TestComponent,
+				ErrorBoundary: ErrorFallback,
+				loader: () => {
+					throw new Error('Test error')
+				}
+			}
+		])
+
+		render(<ErrorFallbackStub initialEntries={['/']} />)
+
+		const errorMessage = await screen.findByText(/test error/i)
+
+		expect(errorMessage).toBeInTheDocument()
 	})
 
-	it('should render custom message when provided', () => {
-		const customMessage = 'Custom error message'
+	it('should render ErrorFallback correctly with string error', async () => {
+		const ErrorFallbackStub = createRoutesStub([
+			{
+				path: '/',
+				Component: TestComponent,
+				ErrorBoundary: ErrorFallback,
+				loader: () => {
+					throw 'test error'
+				}
+			}
+		])
 
-		render(<ErrorFallback message={customMessage} />)
+		render(<ErrorFallbackStub initialEntries={['/']} />)
 
-		expect(screen.getByRole('paragraph')).toHaveTextContent(customMessage)
+		const errorMessage = await screen.findByText(/test error/i)
+
+		expect(errorMessage).toBeInTheDocument()
 	})
 
-	it('should render button when showRetryButton is true', () => {
-		render(<ErrorFallback showRetryButton />)
+	it('should render ErrorFallback correctly with Response error', async () => {
+		const ErrorFallbackStub = createRoutesStub([
+			{
+				path: '/',
+				Component: TestComponent,
+				ErrorBoundary: ErrorFallback,
+				loader: () => {
+					throw new Response(null, { status: 500, statusText: 'test error' })
+				}
+			}
+		])
 
-		expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
+		render(<ErrorFallbackStub initialEntries={['/']} />)
+
+		const errorMessage = await screen.findByText(/test error/i)
+
+		expect(errorMessage).toBeInTheDocument()
 	})
 
-	it('should call handleResetError when button is clicked', async () => {
-		const handleResetError = vi.fn()
+	it('should render ErrorFallback correctly with unknown error', async () => {
+		const ErrorFallbackStub = createRoutesStub([
+			{
+				path: '/',
+				Component: TestComponent,
+				ErrorBoundary: ErrorFallback,
+				loader: () => {
+					throw {}
+				}
+			}
+		])
 
-		const { user } = setup(<ErrorFallback showRetryButton handleResetError={handleResetError} />)
+		render(<ErrorFallbackStub initialEntries={['/']} />)
 
-		const button = screen.getByRole('button', { name: /try again/i })
-		await user.click(button)
+		const errorMessage = await screen.findByText(/unknown error/i)
 
-		expect(handleResetError).toHaveBeenCalledTimes(1)
+		expect(errorMessage).toBeInTheDocument()
 	})
 })
