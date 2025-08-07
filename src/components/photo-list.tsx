@@ -15,7 +15,7 @@ export const PhotoList = () => {
 		<>
 			<ul className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 lg:gap-x-10 lg:space-y-10'>
 				{data.results.map(item => (
-					<li key={item.id}>
+					<li aria-label='photo-card' key={item.id}>
 						<PhotoCard
 							data={item}
 							isFavorite={favoritePhotos.some(favoritePhoto => favoritePhoto.id === item.id)}
