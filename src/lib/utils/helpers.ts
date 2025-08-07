@@ -11,7 +11,9 @@ export const toNumber = (value: string | number, radix = 10) => {
 	return Number.parseInt(value, radix)
 }
 
-export const safeJsonParse = <T>(value: string) => {
+export const safeJsonParse = <T>(value: string | null) => {
+	if (!value) return null
+
 	try {
 		return JSON.parse(value) as T
 	} catch (error) {
