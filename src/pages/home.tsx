@@ -6,14 +6,14 @@ import { PhotoList } from '@/components/photo-list'
 import { DEFAULT_PAGE, DEFAULT_QUERY, STORAGE_SEARCH_KEY } from '@/configs/constants'
 import { searchPhotosQuery } from '@/lib/api/requests/get-search-photos'
 import { useFavorites } from '@/lib/hooks/use-favorites'
-import { hasItems, safeJsonParseThrow, toNumber } from '@/utils/helpers'
+import { hasItems, safeJsonParse, toNumber } from '@/utils/helpers'
 
 export const loader =
 	(queryClient: QueryClient) =>
 	async ({ request }: LoaderFunctionArgs) => {
 		const url = new URL(request.url)
 		const query =
-			url.searchParams.get('query') || safeJsonParseThrow(localStorage.getItem(STORAGE_SEARCH_KEY)) || DEFAULT_QUERY
+			url.searchParams.get('query') ?? safeJsonParse(localStorage.getItem(STORAGE_SEARCH_KEY)) ?? DEFAULT_QUERY
 		const page = toNumber(url.searchParams.get('page') ?? DEFAULT_PAGE)
 		await queryClient.ensureQueryData(searchPhotosQuery(query, page))
 		return { query, page }
