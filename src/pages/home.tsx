@@ -13,7 +13,7 @@ export const loader =
 	async ({ request }: LoaderFunctionArgs) => {
 		const url = new URL(request.url)
 		const query =
-			url.searchParams.get('query') ?? safeJsonParse(localStorage.getItem(STORAGE_SEARCH_KEY)) ?? DEFAULT_QUERY
+			(url.searchParams.get('query') || safeJsonParse(localStorage.getItem(STORAGE_SEARCH_KEY))) ?? DEFAULT_QUERY
 		const page = toNumber(url.searchParams.get('page') ?? DEFAULT_PAGE)
 		await queryClient.ensureQueryData(searchPhotosQuery(query, page))
 		return { query, page }
