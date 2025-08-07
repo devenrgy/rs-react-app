@@ -5,33 +5,33 @@ import { Pagination } from '@/components/pagination'
 
 describe('Pagination', () => {
 	it('should render pagination component correctly', () => {
-		const { container } = setupWithRouter(<Pagination currentPage={2} totalCount={[1, 2, 3]} />)
+		const { container } = setupWithRouter(<Pagination currentPage={2} totalPages={[1, 2, 3]} />)
 
 		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('should disable Previous button on first page', () => {
-		setupWithRouter(<Pagination currentPage={1} totalCount={[1, 2, 3]} />)
+		setupWithRouter(<Pagination currentPage={1} totalPages={[1, 2, 3]} />)
 
-		const desktopPreviousButton = screen.getByRole('button', { name: /desktop-previous/i })
-		const mobilePreviousButton = screen.getByRole('button', { name: /mobile-previous/i })
+		const previousButtons = screen.getAllByRole('button', { name: /previous-page/i })
 
-		expect(desktopPreviousButton).toBeDisabled()
-		expect(mobilePreviousButton).toBeDisabled()
+		for (const button of previousButtons) {
+			expect(button).toBeDisabled()
+		}
 	})
 
 	it('should disable Next button on last page', () => {
-		setupWithRouter(<Pagination currentPage={3} totalCount={[1, 2, 3]} />)
+		setupWithRouter(<Pagination currentPage={3} totalPages={[1, 2, 3]} />)
 
-		const desktopNextButton = screen.getByRole('button', { name: /desktop-next/i })
-		const mobileNextButton = screen.getByRole('button', { name: /mobile-next/i })
+		const nextButtons = screen.getAllByRole('button', { name: /next-page/i })
 
-		expect(desktopNextButton).toBeDisabled()
-		expect(mobileNextButton).toBeDisabled()
+		for (const button of nextButtons) {
+			expect(button).toBeDisabled()
+		}
 	})
 
 	it('should generate correct URL params with existing query', () => {
-		setupWithRouter(<Pagination currentPage={1} totalCount={[1, 2, 3]} />, { route: '/?sort=asc' })
+		setupWithRouter(<Pagination currentPage={1} totalPages={[1, 2, 3]} />, { route: '/?sort=asc' })
 
 		const page2Link = screen.getByRole('link', { name: '2' })
 

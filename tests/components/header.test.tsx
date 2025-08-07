@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react'
 import * as reactRouter from 'react-router'
 import { setupWithRouter } from 'tests/vitest.setup'
 
-import { ErrorBoundary } from '@/components/error-boundary'
 import { Header } from '@/components/header'
 
 describe('Header', () => {
@@ -11,7 +10,7 @@ describe('Header', () => {
 
 	const mockSetSearchQueryLS = vi.fn()
 	const defaultProps = {
-		searchQueryLS: '',
+		initialQuery: '',
 		setSearchQueryLS: mockSetSearchQueryLS
 	}
 
@@ -56,20 +55,6 @@ describe('Header', () => {
 
 		expect(setSearchParams).toHaveBeenCalledWith({ search: 'test query' })
 		expect(mockSetSearchQueryLS).toHaveBeenCalledWith('test query')
-	})
-
-	it('should throw error on button click', async () => {
-		const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-		const { user } = setupWithRouter(
-			<ErrorBoundary>
-				<Header {...defaultProps} />,
-			</ErrorBoundary>
-		)
-
-		await user.click(screen.getByRole('button', { name: /trigger error/i }))
-
-		expect(consoleErrorSpy).toHaveBeenCalled()
-		consoleErrorSpy.mockRestore()
 	})
 
 	it('should not call setSearchParams when searchQuery is empty on form submission', async () => {

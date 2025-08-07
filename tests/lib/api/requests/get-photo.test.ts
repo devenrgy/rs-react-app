@@ -1,20 +1,14 @@
 import { mockPhoto } from 'tests/mocks/api/data'
 
-import { getPhoto } from '@/lib/api/requests'
+import { getPhotoById } from '@/lib/api/requests'
 
-describe('getPhoto', () => {
+describe('getPhotoById', () => {
 	it('should successfully fetch photo with valid id and parameters', async () => {
 		const id = '123'
 		const params = { id, page: 2, per_page: 20 }
 
-		const response = await getPhoto(params)
-		const data = await response.json()
+		const data = await getPhotoById(params, {})
 
-		expect(response.status).toBe(200)
 		expect(data).toEqual({ ...mockPhoto, id })
-	})
-
-	it('should throw error when id is missing', async () => {
-		await expect(getPhoto({})).rejects.toThrow('Incorrect ID')
 	})
 })

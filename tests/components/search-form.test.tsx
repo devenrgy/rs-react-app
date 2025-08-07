@@ -9,8 +9,8 @@ describe('SearchForm', () => {
 	const mockHandleFormSubmit = vi.fn(e => e.preventDefault())
 
 	const defaultProps = {
-		searchQuery: '',
-		handleSearchQueryChange: mockHandleSearchQueryChange,
+		query: '',
+		handleQueryChange: mockHandleSearchQueryChange,
 		handleFormReset: mockHandleFormReset,
 		handleFormSubmit: mockHandleFormSubmit
 	}
@@ -32,7 +32,7 @@ describe('SearchForm', () => {
 	})
 
 	it('should call handleFormReset when reset button is clicked', async () => {
-		const { user } = setupWithRouter(<SearchForm {...defaultProps} searchQuery='test' />)
+		const { user } = setupWithRouter(<SearchForm {...defaultProps} query='test' />)
 
 		const resetButton = screen.getByRole('button', { name: /reset/i })
 
@@ -42,7 +42,7 @@ describe('SearchForm', () => {
 	})
 
 	it('should call handleFormSubmit when form is submitted', async () => {
-		const { user } = setupWithRouter(<SearchForm {...defaultProps} searchQuery='test' />)
+		const { user } = setupWithRouter(<SearchForm {...defaultProps} query='test' />)
 
 		await user.click(screen.getByRole('button', { name: /search/i }))
 

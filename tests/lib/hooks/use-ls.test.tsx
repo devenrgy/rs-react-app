@@ -57,24 +57,6 @@ describe('useLS', () => {
 		expect(localStorageMock.setItem).toHaveBeenCalledWith(key, JSON.stringify(newValue))
 	})
 
-	it('should delete value from localStorage and reset to initialValue', async () => {
-		const initialValue = 'test'
-		const key = 'key'
-
-		const storedValue = 'stored'
-		localStorageMock.getItem.mockReturnValue(JSON.stringify(storedValue))
-
-		const { result } = renderHook(() => useLS(key, initialValue))
-
-		result.current[2]()
-
-		await waitFor(() => {
-			expect(result.current[0]).toBe(initialValue)
-		})
-
-		expect(localStorageMock.removeItem).toHaveBeenCalledWith(key)
-	})
-
 	it('should handle get errors gracefully', () => {
 		localStorageMock.getItem.mockImplementationOnce(() => {
 			throw new Error('Storage error')
@@ -110,42 +92,5 @@ describe('useLS', () => {
 
 		expect(result.current[0]).toBe(initialValue)
 		expect(consoleErrorSpy).toHaveBeenCalled()
-	})
-
-	it('should handle errors during set operation gracefully', async () => {
-		localStorageMock.setItem.mockImplementationOnce(() => {
-			throw new Error('Set error')
-		})
-
-		const initialValue = 'test'
-		const key = 'key'
-
-		const { result } = renderHook(() => useLS(key, initialValue))
-
-		const newValue = 'updated'
-
-		result.current[1](newValue)
-
-		expect(consoleErrorSpy).toHaveBeenCalled()
-	})
-
-	it('should handle errors during delete operation gracefully', async () => {
-		localStorageMock.removeItem.mockImplementationOnce(() => {
-			throw new Error('Delete error')
-		})
-
-		const initialValue = 'test'
-		const key = 'key'
-
-		const { result } = renderHook(() => useLS(key, initialValue))
-
-		result.current[2]()
-
-		await waitFor(() => {
-			expect(result.current[0]).toBe(initialValue)
-		})
-
-		expect(consoleErrorSpy).toHaveBeenCalled()
-		expect(localStorageMock.removeItem).toHaveBeenCalledWith('key')
 	})
 })

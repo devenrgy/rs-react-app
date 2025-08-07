@@ -9,6 +9,7 @@ import * as FavoritesPopup from '@/components/favorites-popup.tsx'
 import * as NotFound from '@/components/not-found'
 import * as Pagination from '@/components/pagination'
 import * as PhotoList from '@/components/photo-list'
+import { DEFAULT_QUERY } from '@/configs/constants.ts'
 import * as useDownloadFile from '@/lib/hooks/use-download-file'
 import * as useFetch from '@/lib/hooks/use-fetch'
 import * as favoritesStore from '@/lib/stores/favorites-store'
@@ -46,9 +47,7 @@ describe('Home', () => {
 	]
 
 	const mockedUseRootContext: Mocked<RootContext> = {
-		searchQueryLS: 'Mountain',
-		pageLS: '1',
-		setSearchQueryLS: vi.fn()
+		initialQuery: DEFAULT_QUERY
 	}
 
 	vi.spyOn(reactRouter, 'useSearchParams').mockReturnValue(mockedUseSearchParams)

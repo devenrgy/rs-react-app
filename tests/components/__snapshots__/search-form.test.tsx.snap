@@ -3,26 +3,25 @@
 exports[`SearchForm > should render the search form with all required elements 1`] = `
 <form
   aria-label="Search Form"
-  class="dark:ring-iris group flex h-full rounded-full ring-black/40 has-[input:focus-visible]:ring-2"
+  class="dark:ring-iris dark:has-[button[aria-label="Search"]:hover]:ring-rose group flex h-full rounded-full ring-black/40 duration-200 has-[input:focus-visible]:ring-2"
 >
   <p
     class="relative w-full"
   >
     <label
       class="sr-only"
-      for="search"
+      for="query"
     >
       Search:
        
     </label>
     <input
       class="pr-18 dark:bg-iris/15 peer h-full w-full rounded-l-full bg-white/15 py-3 pl-5 text-lg text-white outline-none transition-colors duration-200 placeholder:text-white/50"
-      id="search"
+      id="query"
       inputmode="search"
-      name="search"
+      name="query"
       placeholder="Find awesome images..."
       type="text"
-      value=""
     />
     <button
       aria-label="Reset"
@@ -54,7 +53,7 @@ exports[`SearchForm > should render the search form with all required elements 1
   <p>
     <button
       aria-label="Search"
-      class="dark:bg-iris dark:text-highlight-low dark:hover:bg-iris/80 h-full cursor-pointer rounded-r-full bg-black/20 px-4 py-2 text-white transition-colors duration-200 hover:bg-black/30 lg:px-10"
+      class="dark:bg-iris dark:text-highlight-low dark:hover:bg-rose h-full cursor-pointer rounded-r-full bg-black/20 px-4 py-2 text-white transition-colors duration-200 hover:bg-black/30 lg:px-10"
       type="submit"
     >
       <svg

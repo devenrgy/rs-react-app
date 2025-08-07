@@ -75,12 +75,14 @@ exports[`PhotoDetails > should render photo image and details correctly 1`] = `
           1080
         </p>
         <p>
-          Created: 
-          2/1/2025
+          Created:
+           
+          02/01/2025
         </p>
         <p>
-          Updated: 
-          7/1/2025
+          Updated:
+           
+          07/01/2025
         </p>
       </div>
       <div>
