@@ -1,9 +1,9 @@
 import type {
 	Breadcrumb,
 	Collection,
+	PaginatedResults,
 	Photo,
 	PhotoLinks,
-	SearchPhotosResponse,
 	Sponsorship,
 	TopicSubmissions,
 	User
@@ -186,7 +186,7 @@ export const mockPhoto2: Photo = {
 	}
 }
 
-export const mockSearchPhotosResponse: SearchPhotosResponse = {
+export const mockSearchPhotosResponse: PaginatedResults<Photo[]> = {
 	total: 100,
 	total_pages: 10,
 	results: [mockPhoto, mockPhoto2]

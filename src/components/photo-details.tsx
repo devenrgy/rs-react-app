@@ -1,15 +1,35 @@
+import { type QueryClient } from '@tanstack/react-query'
 import { X } from 'lucide-react'
-import { Link, useLoaderData, useLocation } from 'react-router'
+import { Link, type LoaderFunctionArgs, useLoaderData, useLocation } from 'react-router'
 
-import type { Photo } from '@/types'
+import { queryClient } from '@/lib/api/query-client'
+import { getPhotoByIdQuery } from '@/lib/api/requests/get-photo-by-id'
+import { usePhotoDetails } from '@/lib/hooks/use-photo-details'
+
+import { RefreshQueryButton } from './refresh-query-button'
+
+export const loader =
+	(queryClient: QueryClient) =>
+	async ({ params }: LoaderFunctionArgs) => {
+		if (!params.id) {
+			throw new Error('No contact ID provided')
+		}
+
+		await queryClient.ensureQueryData(getPhotoByIdQuery(params.id))
+
+		return { id: params.id }
+	}
 
 export const PhotoDetails = () => {
 	const { search } = useLocation()
-	const data = useLoaderData<Photo>()
+	const { id } = useLoaderData() as Awaited<ReturnType<ReturnType<typeof loader>>>
+	const data = usePhotoDetails(id)
+
+	const handleQueryRefresh = () => queryClient.resetQueries({ queryKey: ['photo', 'detail'] })
 
 	return (
-		<div className='fixed inset-0 z-40 grid grid-cols-[1fr_400px] bg-black/50 backdrop-blur-md'>
-			<div className='relative grid place-content-center'>
+		<div className='fixed inset-0 z-40 grid grid-cols-[1fr_400px] overflow-clip bg-black/50 backdrop-blur-md'>
+			<div className='starting:scale-0 relative grid place-content-center delay-200 duration-500'>
 				<Link className='fixed inset-0 cursor-auto' to={{ pathname: '..', search }} aria-label='close details' />
 				<img
 					src={data.urls.regular}
@@ -19,7 +39,7 @@ export const PhotoDetails = () => {
 					className='z-30 h-[80dvh] w-full rounded-3xl object-cover'
 				/>
 			</div>
-			<aside className='pt-30 z-30 col-span-1 h-full overflow-y-auto bg-white px-5 text-black/90 dark:bg-neutral-950 dark:text-gray-300'>
+			<aside className='pt-30 starting:translate-x-full relative z-30 col-span-1 h-full overflow-y-auto bg-white px-5 text-black/90 duration-500 dark:bg-neutral-950 dark:text-gray-300'>
 				<h2 className='text-love dark:text-rose mb-4 text-balance text-2xl font-bold first-letter:uppercase'>
 					{data.alt_description}
 				</h2>
@@ -37,8 +57,22 @@ export const PhotoDetails = () => {
 						<p>
 							Dimensions: {data.width} x {data.height}
 						</p>
-						<p>Created: {new Date(data.created_at).toLocaleDateString()}</p>
-						<p>Updated: {new Date(data.updated_at).toLocaleDateString()}</p>
+						<p>
+							Created:{' '}
+							{new Date(data.created_at).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: '2-digit',
+								day: '2-digit'
+							})}
+						</p>
+						<p>
+							Updated:{' '}
+							{new Date(data.updated_at).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: '2-digit',
+								day: '2-digit'
+							})}
+						</p>
 					</div>
 					<div>
 						<h3 className='text-pine dark:text-foam text-lg font-semibold'>Links</h3>
@@ -64,14 +98,16 @@ export const PhotoDetails = () => {
 						</p>
 					</div>
 				</div>
-			</aside>
 
-			<Link
-				className='bg-pine dark:bg-iris hover:bg-rose absolute right-5 top-5 z-30 rounded-full p-2 text-white duration-200 dark:text-base'
-				to={{ pathname: '..', search }}
-			>
-				<X />
-			</Link>
+				<RefreshQueryButton className='absolute right-20 top-5' size={24} handleQueryRefresh={handleQueryRefresh} />
+
+				<Link
+					className='bg-pine dark:bg-iris hover:bg-rose absolute right-5 top-5 z-30 rounded-full p-2 text-white duration-200 dark:text-base'
+					to={{ pathname: '..', search }}
+				>
+					<X />
+				</Link>
+			</aside>
 		</div>
 	)
 }

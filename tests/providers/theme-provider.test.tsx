@@ -35,7 +35,7 @@ describe('ThemeProvider', () => {
 		matches: query === '(prefers-color-scheme: light)'
 	}))
 
-	const useLSMock = vi.spyOn(useLS, 'useLS').mockImplementation(() => ['dark', vi.fn(), vi.fn()])
+	const useLSMock = vi.spyOn(useLS, 'useLS').mockImplementation(() => ['dark', vi.fn()])
 
 	const TestComponent = () => {
 		const { theme, handleUpdateTheme } = useTheme()
@@ -43,7 +43,9 @@ describe('ThemeProvider', () => {
 		return (
 			<div>
 				<span data-testid='theme'>{theme}</span>
-				<button onClick={handleUpdateTheme}>Toggle Theme</button>
+				<button type='button' onClick={handleUpdateTheme}>
+					Toggle Theme
+				</button>
 			</div>
 		)
 	}
@@ -69,7 +71,7 @@ describe('ThemeProvider', () => {
 
 	it('toggles theme when handleUpdateTheme is called', async () => {
 		const mockSetTheme = vi.fn()
-		useLSMock.mockReturnValueOnce(['dark', mockSetTheme, vi.fn()])
+		useLSMock.mockReturnValueOnce(['dark', mockSetTheme])
 
 		const { user } = setup(
 			<ThemeProvider>

@@ -1,26 +1,26 @@
-interface Props {
-	message?: string
-	handleResetError?: () => void
-	showRetryButton?: boolean
-}
+import { isRouteErrorResponse, useRouteError } from 'react-router'
 
-export const ErrorFallback = ({ message, handleResetError, showRetryButton = false }: Props) => {
+export const ErrorFallback = () => {
+	const error = useRouteError()
+	let errorMessage: string
+
+	if (isRouteErrorResponse(error)) {
+		errorMessage = error.statusText
+	} else if (error instanceof Error) {
+		errorMessage = error.message
+	} else if (typeof error === 'string') {
+		errorMessage = error
+	} else {
+		console.error(error)
+		errorMessage = 'Unknown error'
+	}
+
 	return (
-		<main className='container grid h-dvh place-items-center'>
-			<section className='flex flex-col items-center gap-10'>
-				<h1 className='text-balance text-center text-4xl font-bold first-letter:capitalize'>Something went wrong!</h1>
-
-				{message && <p>{message}</p>}
-
-				{showRetryButton && (
-					<button
-						type='button'
-						onClick={handleResetError}
-						className='bg-pine hover:bg-pine/80 w-full max-w-[200px] cursor-pointer rounded-3xl px-5 py-3 text-xl capitalize text-white transition-colors duration-200'
-					>
-						Try again
-					</button>
-				)}
+		<main id='error-page' className='container grid h-dvh place-items-center'>
+			<section className='flex flex-col items-center gap-8 text-lg'>
+				<h1 className='text-balance text-center text-6xl font-bold'>Oops!</h1>
+				<p>Sorry, an unexpected error has occurred.</p>
+				<p>{errorMessage}</p>
 			</section>
 		</main>
 	)

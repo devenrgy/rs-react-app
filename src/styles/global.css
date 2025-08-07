@@ -5,6 +5,12 @@
 	preferredstrategy: 'pseudoelements';
 }
 
+@property --border-angle {
+	inherits: false;
+	initial-value: 0deg;
+	syntax: '<angle>';
+}
+
 @theme inline {
 	--font-sans: 'Jost', sans-serif;
 	--font-brand: 'Playwrite US Modern', serif;
@@ -24,6 +30,14 @@
 	--color-highlight-low: hsl(244deg, 18%, 15%);
 	--color-highlight-med: hsl(249deg, 15%, 28%);
 	--color-highlight-high: hsl(248deg, 13%, 36%);
+
+	--animate-border: border 3s linear infinite;
+
+	@keyframes border {
+		to {
+			--border-angle: 360deg;
+		}
+	}
 }
 
 @custom-variant dark (&:where(.dark, .dark *));

@@ -118,21 +118,19 @@ export type Photo = {
 	}
 }
 
-export type SearchPhotosResponse = {
+export type PaginatedResults<T> = {
 	total: number
 	total_pages: number
-	results: Photo[]
+	results: T
 }
 
-export type PhotoResponse = {
-	data: Photo
+export type SuccessResponse<T> = {
+	data: T
 }
 
-export type PhotoErrorResponse = {
+export type FailedResponse = {
 	errors: string[]
 }
-
-export type PhotoApiResponse = PhotoResponse | PhotoErrorResponse
 
 export type FavoritePhoto = Pick<Photo, 'id' | 'alt_description'> & {
 	isFavorite: boolean

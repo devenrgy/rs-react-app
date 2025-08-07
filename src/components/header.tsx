@@ -1,56 +1,50 @@
-import { TriangleAlert } from 'lucide-react'
+import { useIsFetching } from '@tanstack/react-query'
 import { type FormEvent, useState } from 'react'
 import { Link, NavLink, useLocation, useSearchParams } from 'react-router'
 
 import { SearchForm } from '@/components/search-form'
-import { SEARCH_PARAM_KEY } from '@/configs/constants'
+import { QUERY_PARAM_KEY, STORAGE_SEARCH_KEY } from '@/configs/constants'
 import { navigation } from '@/configs/navigation'
 import { routes } from '@/configs/routes'
+import { queryClient } from '@/lib/api/query-client'
+import { useLS } from '@/lib/hooks/use-ls'
 import { cn } from '@/lib/utils/helpers'
 
 import { ModeToggle } from './mode-toggle'
+import { RefreshQueryButton } from './refresh-query-button'
 
-interface Props {
-	searchQueryLS: string
-	setSearchQueryLS: (value: string) => void
-}
-
-export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
+export const Header = () => {
+	const [searchParams] = useSearchParams()
+	const [searchQueryLS, setSearchQueryLS] = useLS(STORAGE_SEARCH_KEY, searchParams.get(QUERY_PARAM_KEY) || '')
 	const { pathname } = useLocation()
+	const isLoadingSearchPhotos = useIsFetching({ queryKey: ['search', 'photos'] }) > 0
 	const isAboutRoute = pathname === routes.about.path
 
+	const [query, setQuery] = useState(searchQueryLS)
+
 	const [, setSearchParams] = useSearchParams()
-	const [searchQuery, setSearchQuery] = useState(searchQueryLS)
-	const [hasError, setHasError] = useState<boolean>(false)
 
-	const handleTriggerError = () => setHasError(true)
-
+	const handleQueryChange = (value: string) => setQuery(value)
 	const handleFormReset = () => {
-		setSearchQuery('')
+		setQuery('')
+		setSearchQueryLS('')
 	}
-
-	const handleSearchQueryChange = (value: string) => {
-		setSearchQuery(value)
-	}
-
 	const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
-		if (!searchQuery) {
-			return
-		}
+		if (!query) return
 
-		setSearchParams({ [SEARCH_PARAM_KEY]: searchQuery.trim() })
-		setSearchQueryLS(searchQuery.trim())
+		const trimmedSearchQuery = query.trim()
+
+		setSearchParams({ [QUERY_PARAM_KEY]: trimmedSearchQuery })
+		setSearchQueryLS(trimmedSearchQuery)
 	}
 
-	if (hasError) {
-		throw new Error('Something went wrong!')
-	}
+	const handleQueryRefresh = () => queryClient.resetQueries({ queryKey: ['search', 'photos'] })
 
 	return (
 		<header className='bg-pine/95 fixed inset-x-0 z-30 backdrop-blur-3xl dark:bg-neutral-950/80'>
-			<div className='container flex min-h-[80px] flex-col items-center gap-5 py-5 sm:flex-row lg:py-0'>
+			<div className='container flex min-h-[90px] flex-col items-center gap-5 py-5 sm:flex-row lg:py-0'>
 				<Link className='font-brand dark:text-text text-3xl text-white' to={routes.home.path}>
 					<span className='dark:text-iris text-rose'>RS</span> Gallery
 				</Link>
@@ -59,21 +53,13 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 					<div className='flex grow items-center justify-center gap-5'>
 						<SearchForm
 							className='w-full max-w-lg'
-							searchQuery={searchQuery}
-							handleFormReset={handleFormReset}
-							handleSearchQueryChange={handleSearchQueryChange}
 							handleFormSubmit={handleFormSubmit}
+							handleFormReset={handleFormReset}
+							handleQueryChange={handleQueryChange}
+							query={query}
 						/>
-						<p className='hidden justify-center'>
-							<button
-								className='dark:text-love flex aspect-square h-full cursor-pointer items-center justify-center rounded-full text-rose-500'
-								onClick={handleTriggerError}
-								aria-label='Trigger error'
-								type='button'
-							>
-								<TriangleAlert size='32' />
-							</button>
-						</p>
+
+						<RefreshQueryButton handleQueryRefresh={handleQueryRefresh} isLoading={isLoadingSearchPhotos} />
 					</div>
 				)}
 
@@ -84,7 +70,11 @@ export const Header = ({ searchQueryLS, setSearchQueryLS }: Props) => {
 						{navigation.map(({ label, href }) => (
 							<li key={href}>
 								<NavLink
-									className={({ isActive }) => cn({ 'text-rose pointer-events-none duration-200': isActive })}
+									className={({ isActive }) =>
+										cn('hover:underline-offset-5 hover:text-rose duration-200 hover:underline', {
+											'text-rose pointer-events-none': isActive
+										})
+									}
 									to={{ pathname: href }}
 								>
 									{label}

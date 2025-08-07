@@ -1,50 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export const useLS = <T>(key: string, initialValue: T): [T, (value: T) => void, () => void] => {
-	const [storedValue, setStoredValue] = useState<T>(initialValue)
-	const initialValueRef = useRef<T>(initialValue)
+import { safeJsonParseThrow } from '../utils/helpers'
+
+export const useLS = <T>(key: string, defaultValue: T) => {
+	const [value, setValue] = useState<T>(() => {
+		try {
+			const storedValue = localStorage.getItem(key)
+
+			return storedValue ? safeJsonParseThrow(storedValue) : defaultValue
+		} catch (error) {
+			console.error('Error parsing localStorage value:', error)
+			return defaultValue
+		}
+	})
 
 	useEffect(() => {
-		initialValueRef.current = initialValue
-	}, [initialValue])
+		localStorage.setItem(key, JSON.stringify(value))
+	}, [key, value])
 
-	useEffect(() => {
-		try {
-			const item = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null
-			if (item) {
-				setStoredValue(JSON.parse(item) as T)
-			} else {
-				setStoredValue(initialValueRef.current)
-				if (typeof window !== 'undefined') {
-					window.localStorage.setItem(key, JSON.stringify(initialValueRef.current))
-				}
-			}
-		} catch (error) {
-			console.error(error)
-		}
-	}, [key])
-
-	const setValue = (value: T) => {
-		try {
-			setStoredValue(value)
-			if (typeof window !== 'undefined') {
-				window.localStorage.setItem(key, JSON.stringify(value))
-			}
-		} catch (error) {
-			console.error(error)
-		}
-	}
-
-	const deleteValue = () => {
-		try {
-			if (typeof window !== 'undefined') {
-				window.localStorage.removeItem(key)
-			}
-			setStoredValue(initialValueRef.current)
-		} catch (error) {
-			console.error(error)
-		}
-	}
-
-	return [storedValue, setValue, deleteValue]
+	return [value, setValue] as const
 }
