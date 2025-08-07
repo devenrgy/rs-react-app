@@ -3,7 +3,7 @@ import { type FormEvent, useState } from 'react'
 import { Link, NavLink, useLocation, useSearchParams } from 'react-router'
 
 import { SearchForm } from '@/components/search-form'
-import { QUERY_PARAM_KEY, STORAGE_SEARCH_KEY } from '@/configs/constants'
+import { DEFAULT_QUERY, QUERY_PARAM_KEY, STORAGE_SEARCH_KEY } from '@/configs/constants'
 import { navigation } from '@/configs/navigation'
 import { routes } from '@/configs/routes'
 import { queryClient } from '@/lib/api/query-client'
@@ -15,7 +15,10 @@ import { RefreshQueryButton } from './refresh-query-button'
 
 export const Header = () => {
 	const [searchParams] = useSearchParams()
-	const [searchQueryLS, setSearchQueryLS] = useLS(STORAGE_SEARCH_KEY, searchParams.get(QUERY_PARAM_KEY) || '')
+	const [searchQueryLS, setSearchQueryLS] = useLS(
+		STORAGE_SEARCH_KEY,
+		searchParams.get(QUERY_PARAM_KEY) || DEFAULT_QUERY
+	)
 	const { pathname } = useLocation()
 	const isLoadingSearchPhotos = useIsFetching({ queryKey: ['search', 'photos'] }) > 0
 	const isAboutRoute = pathname === routes.about.path
