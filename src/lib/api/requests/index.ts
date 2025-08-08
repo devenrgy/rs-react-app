@@ -1,1 +1,1 @@
-export { getPhoto } from './get-photo'
+export { getPhotoById } from './get-photo-by-id'

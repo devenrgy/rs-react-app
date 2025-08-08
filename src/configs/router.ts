@@ -1,59 +1,40 @@
-import { createBrowserRouter, redirect } from 'react-router'
+import { createElement } from 'react'
+import { createBrowserRouter } from 'react-router'
 
-import { NotFound } from '@/components/not-found'
-import { PhotoDetails } from '@/components/photo-details'
+import { ErrorFallback } from '@/components/error-fallback'
+import { loader as photoDetailsLoader, PhotoDetails } from '@/components/photo-details'
+import { Spinner } from '@/components/spinner'
 import { HomeLayout } from '@/layouts/home-layout'
-import { getPhoto } from '@/lib/api/requests/get-photo'
+import { queryClient } from '@/lib/api/query-client'
 import { About } from '@/pages/about'
+import { loader as homeLoader } from '@/pages/home'
 import { Root } from '@/pages/root'
-import type { PhotoApiResponse } from '@/types'
 
 export const router = createBrowserRouter([
 	{
 		Component: Root,
+		errorElement: createElement(ErrorFallback),
 		children: [
 			{
 				path: '/',
 				Component: HomeLayout,
+				loader: homeLoader(queryClient),
+				id: 'home',
+				errorElement: createElement(ErrorFallback),
+				hydrateFallbackElement: createElement(Spinner),
 				children: [
 					{
 						path: '/:id',
-						loader: async ({ params }) => {
-							try {
-								const res = await getPhoto({ id: params?.id })
-
-								if (!res.ok) {
-									throw new Error('Failed to fetch photo')
-								}
-
-								const data = (await res.json()) as PhotoApiResponse
-
-								if ('errors' in data) {
-									throw new Error('Photo not found')
-								}
-
-								return data
-							} catch (error) {
-								console.error(error)
-								return redirect('/404')
-							}
-						},
+						loader: photoDetailsLoader(queryClient),
 						Component: PhotoDetails
 					}
 				]
 			},
 			{
 				path: '/about',
-				Component: About
+				Component: About,
+				errorElement: createElement(ErrorFallback)
 			}
 		]
-	},
-	{
-		path: '*',
-		Component: NotFound
-	},
-	{
-		path: '404',
-		Component: NotFound
 	}
 ])

@@ -5,35 +5,13 @@ import { API_PHOTO_URL, API_SEARCH_URL } from '@/configs/constants'
 import { mockPhoto, mockSearchPhotosResponse } from './data'
 
 export const handlers = [
-	http.get(`${API_PHOTO_URL}/:id`, ({ request, params }) => {
-		const url = new URL(request.url)
+	http.get(`${API_PHOTO_URL}/:id`, ({ params }) => {
 		const { id } = params
-		const client_id = url.searchParams.get('client_id')
-
-		if (!client_id) {
-			return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
-		}
-
-		if (!id) {
-			return new HttpResponse(null, { status: 400, statusText: 'Invalid ID' })
-		}
 
 		return HttpResponse.json({ ...mockPhoto, id })
 	}),
 
-	http.get(`${API_SEARCH_URL}`, ({ request }) => {
-		const url = new URL(request.url)
-		const search = url.searchParams.get('search')
-		const client_id = url.searchParams.get('client_id')
-
-		if (!client_id) {
-			return new HttpResponse(null, { status: 401, statusText: 'Missing client_id' })
-		}
-
-		if (!search) {
-			return new HttpResponse(null, { status: 400, statusText: 'Missing search' })
-		}
-
+	http.get(API_SEARCH_URL, () => {
 		return HttpResponse.json(mockSearchPhotosResponse)
 	})
 ]

@@ -17,11 +17,11 @@ const store: StateCreator<FavoritesState> = (set, get) => ({
 		clearAll: () => set(() => ({ favoritePhotos: [] })),
 		toggleFavorite: photo =>
 			set(state => {
-				const exist = get().favoritePhotos.find(favoritePhoto => favoritePhoto.id === photo.id)
+				const isExist = get().favoritePhotos.some(favoritePhoto => favoritePhoto.id === photo.id)
 
-				if (exist) {
+				if (isExist) {
 					return {
-						favoritePhotos: state.favoritePhotos.filter(favoritePhoto => favoritePhoto.id !== exist.id)
+						favoritePhotos: state.favoritePhotos.filter(favoritePhoto => favoritePhoto.id !== photo.id)
 					}
 				}
 

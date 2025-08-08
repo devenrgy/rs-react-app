@@ -11,6 +11,8 @@ import vitest from '@vitest/eslint-plugin'
 import testingLibrary from 'eslint-plugin-testing-library'
 import jestDom from 'eslint-plugin-jest-dom'
 import unusedImports from 'eslint-plugin-unused-imports'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import eslintPluginQuery from '@tanstack/eslint-plugin-query'
 
 export default tseslint.config(
 	{ ignores: ['dist', 'coverage'] },
@@ -25,7 +27,9 @@ export default tseslint.config(
 			reactCompiler.configs['recommended'],
 			vitest.configs['recommended'],
 			testingLibrary.configs['flat/react'],
-			jestDom.configs['flat/recommended']
+			jestDom.configs['flat/recommended'],
+			jsxA11y.flatConfigs.recommended,
+			eslintPluginQuery.configs['flat/recommended']
 		],
 		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
@@ -57,6 +61,7 @@ export default tseslint.config(
 			'@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
 			'@eslint-react/no-array-index-key': 'off',
 			'@eslint-react/hooks-extra/no-unnecessary-use-prefix': 'off',
+			'jsx-a11y/anchor-is-valid': 'off',
 			'unused-imports/no-unused-vars': [
 				'warn',
 				{

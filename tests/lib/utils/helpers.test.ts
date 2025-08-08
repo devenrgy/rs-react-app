@@ -1,6 +1,19 @@
-import { addUrlParams, cn, hasItems, range } from '@/lib/utils/helpers'
+import {
+	addUrlParams,
+	cn,
+	delay,
+	hasItems,
+	range,
+	safeJsonParse,
+	safeJsonParseThrow,
+	toNumber
+} from '@/lib/utils/helpers'
 
 describe('helpers', () => {
+	beforeEach(() => {
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+	})
+
 	describe('cn', () => {
 		it('should merge class names correctly', () => {
 			expect(cn('text-red', 'font-bold')).toBe('text-red font-bold')
@@ -52,6 +65,58 @@ describe('helpers', () => {
 			const url = 'https://example.com?existing=1'
 			const params = { page: 2 }
 			expect(addUrlParams(url, params)).toBe('https://example.com/?existing=1&page=2')
+		})
+	})
+
+	describe('toNumber', () => {
+		it('should convert string to number', () => {
+			expect(toNumber('123')).toBe(123)
+			expect(toNumber('456')).toBe(456)
+		})
+
+		it('should not convert non-string values', () => {
+			const parseIntMock = vi.spyOn(Number, 'parseInt')
+
+			toNumber(223)
+
+			expect(parseIntMock).not.toBeCalled()
+		})
+	})
+
+	describe('safeJsonParse', () => {
+		it('should parse valid JSON', () => {
+			const validJson = '{"name": "John", "age": 30}'
+			expect(safeJsonParse(validJson)).toEqual({ name: 'John', age: 30 })
+		})
+
+		it('should return null for invalid JSON', () => {
+			const invalidJson = 'invalid json'
+			expect(safeJsonParse(invalidJson)).toBe(null)
+		})
+	})
+
+	describe('safeJsonParseThrow', () => {
+		it('should return error for null value', () => {
+			expect(() => safeJsonParseThrow(null)).toThrow('JSON value is null or undefined')
+		})
+
+		it('should parse valid JSON', () => {
+			const validJson = '{"name": "John", "age": 30}'
+			expect(safeJsonParseThrow(validJson)).toEqual({ name: 'John', age: 30 })
+		})
+
+		it('should throw error for invalid JSON', () => {
+			const invalidJson = 'invalid json'
+			expect(() => safeJsonParseThrow(invalidJson)).toThrow('Error parsing JSON')
+		})
+	})
+
+	describe('delay', () => {
+		it('should resolve after the specified delay', async () => {
+			const start = Date.now()
+			await delay(100)
+			const end = Date.now()
+			expect(end - start).toBeGreaterThanOrEqual(100)
 		})
 	})
 
