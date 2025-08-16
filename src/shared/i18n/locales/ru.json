@@ -1,0 +1,33 @@
+{
+	"Error": {
+		"description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+		"title": "Something went wrong!"
+	},
+	"Search": {
+		"label": "Поиск",
+		"input": "Найти красивые изображения..."
+	},
+	"Home": {
+		"title": "Главная",
+		"description": "Коллекция"
+	},
+	"About": {
+		"title": "Обо мне",
+		"description": "<p>Йо, как дела? Я Алекс!</p><p>Фронтенд-разработчик с 5 годами кодингового хаоса.</p><p>Мой вайб: Next.js, TypeScript, Tailwind.</p><p>В моём toolbox ещё больше, но у кого есть время перечислять всё?</p><p>Хочешь погикать или просто поздороваться?</p><p>Пиши мне в <telegram>Telegram</telegram> или <discord>Discord!</discord></p><p>Давай сохраним любовь к фронтенду — счастливого кодинга!</p> "
+	},
+	"LocaleSwitcher": {
+		"label": "Сменить язык",
+		"locale": "{locale, select, ru {ru} en {en} other {Unknown}}"
+	},
+	"Navigation": {
+		"logo": "Пульс",
+		"home": "Главная",
+		"about": "Обо мне"
+	},
+	"LocaleLayout": {
+		"title": "Пульс"
+	},
+	"ModeToggle": {
+		"label": "Переключить тему"
+	}
+}

@@ -1,0 +1,17 @@
+:root {
+	--color-primary: var(--color-neutral-900);
+	--color-secondary: var(--color-neutral-200);
+	--color-brand: var(--color-teal-400);
+	--color-muted: var(--color-neutral-500);
+	--color-muted-hover: var(--color-neutral-900);
+	--color-white: var(--color-neutral-100);
+}
+
+.dark {
+	--color-primary: var(--color-neutral-100);
+	--color-secondary: var(--color-neutral-800);
+	--color-brand: var(--color-teal-200);
+	--color-muted: var(--color-neutral-400);
+	--color-muted-hover: var(--color-neutral-100);
+	--color-white: var(--color-neutral-100);
+}
