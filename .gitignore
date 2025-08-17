@@ -13,7 +13,6 @@ dist-ssr
 *.local
 
 coverage
-bun.lock
 pnpm-lock.yaml
 
 # Editor directories and files
