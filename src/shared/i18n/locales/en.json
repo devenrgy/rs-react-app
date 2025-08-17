@@ -1,0 +1,48 @@
+{
+	"Error": {
+		"description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+		"title": "Something went wrong!"
+	},
+	"Search": {
+		"label": "Search",
+		"input": "Find awesome images..."
+	},
+	"About": {
+		"title": "About",
+		"description": "<p>Hi! My name is Alex and I went crazy at <span>Rolling Scopes School</span></p><p>This project is part of the <a>RS School React course</a></p><github>My Github</github>"
+	},
+	"LocaleSwitcher": {
+		"label": "Change language",
+		"locale": "{locale, select, ru {ru} en {en} other {Unknown}}"
+	},
+	"Navigation": {
+		"logo": "Pulse",
+		"home": "Home",
+		"about": "About"
+	},
+	"NotFoundPage": {
+		"title": "Page not found"
+	},
+	"Manifest": {
+		"name": "Pulse"
+	},
+	"LocaleLayout": {
+		"title": "Pulse"
+	},
+	"ModeToggle": {
+		"label": "Toggle theme"
+	},
+	"PhotoDetails": {
+		"photographer": "Photographer",
+		"location": "Location",
+		"details": "Details",
+		"likes": "Likes",
+		"dimensions": "Dimensions",
+		"created": "Created",
+		"updated": "Updated",
+		"links": "Links"
+	},
+	"FeedPhoto": {
+		"author": "Author"
+	}
+}

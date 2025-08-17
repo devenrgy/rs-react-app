@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+@import '@toolwind/anchors';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--font-sans: var(--font-sans);
+	--font-brand: var(--font-brand);
+
+	--color-primary: var(--color-primary);
+	--color-secondary: var(--color-secondary);
+	--color-brand: var(--color-brand);
+	--color-muted: var(--color-muted);
+	--color-muted-hover: var(--color-muted-hover);
+	--color-white: var(--color-white);
+
+	--color-bg: var(--color-bg);
+}
+
+@utility container {
+	@apply mx-auto px-4;
+}

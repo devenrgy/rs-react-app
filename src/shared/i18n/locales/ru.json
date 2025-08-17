@@ -1,0 +1,48 @@
+{
+	"Error": {
+		"description": "<p>Кажется, что-то пошло не так.</p><p>Можете попробовать <retry>перезагрузить страницу</retry>, которую вы посетили.</p>",
+		"title": "Что-то пошло не так!"
+	},
+	"Search": {
+		"label": "Поиск",
+		"input": "Найти красивые изображения..."
+	},
+	"About": {
+		"title": "Обо мне",
+		"description": "<p>Привет! Меня зовут Алекс, и я сошел с ума в <span>Rolling Scopes School</span>.</p> <p>Этот проект — часть <a>курса по React от RS School</a>.</p> <github>Мой Github</github>"
+	},
+	"LocaleSwitcher": {
+		"label": "Сменить язык",
+		"locale": "{locale, select, ru {ru} en {en} other {Unknown}}"
+	},
+	"Navigation": {
+		"logo": "Пульс",
+		"home": "Главная",
+		"about": "Обо мне"
+	},
+	"NotFoundPage": {
+		"title": "Страница не найдена"
+	},
+	"Manifest": {
+		"name": "Пульс"
+	},
+	"LocaleLayout": {
+		"title": "Пульс"
+	},
+	"ModeToggle": {
+		"label": "Переключить тему"
+	},
+	"PhotoDetails": {
+		"photographer": "Фотограф",
+		"location": "Местоположение",
+		"details": "Детали",
+		"likes": "Лайки",
+		"dimensions": "Размеры",
+		"created": "Создан",
+		"updated": "Обновлен",
+		"links": "Ссылки"
+	},
+	"FeedPhoto": {
+		"author": "Автор"
+	}
+}
