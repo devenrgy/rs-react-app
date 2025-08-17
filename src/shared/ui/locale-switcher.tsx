@@ -37,7 +37,7 @@ export const LocaleSwitcher = () => {
 			<button type='button' title={t('label')} popoverTarget='languages' className='anchor/languages hover:bg-secondary p-3 cursor-pointer rounded-md'>
 				<Languages size={20} />
 			</button>
-			<ul id='languages' popover='auto' className='anchored-bottom/languages top-2 starting:opacity-0 text-sm duration-300 bg-secondary rounded-md'>
+			<ul id='languages' popover='auto' className='anchored-bottom/languages fixed top-2 starting:opacity-0 text-sm duration-300 bg-secondary rounded-md'>
 				{routing.locales.map(cur => (
 					<li className='flex' key={cur}>
 						<button
