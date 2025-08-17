@@ -20,7 +20,7 @@ export default async function PhotoDetailsPage(props: { params: Promise<{ id: st
 	}
 
 	return (
-	<BaseLayout>
+		<BaseLayout>
 			<section className='grid grid-cols-2 gap-20 grid-rows-[600px] items-center container h-full'>
 				<Image
 					src={data.urls.regular}
