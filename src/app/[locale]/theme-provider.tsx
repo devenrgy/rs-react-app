@@ -33,7 +33,7 @@ export const ThemeProvider = ({ children, storageKey = 'rs-gallery-theme', ...pr
 
 	return (
 		<ThemeContext {...props} value={{ theme, handleUpdateTheme }}>
-			<div suppressHydrationWarning className={cn('font-sans antialiased bg-bg text-primary', theme)}>
+			<div suppressHydrationWarning className={cn('font-sans antialiased min-h-full bg-bg text-primary', theme)}>
 				{children}
 			</div>
 		</ThemeContext>
