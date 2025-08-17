@@ -20,6 +20,7 @@ export default antfu({
 
 	ignores: [
 		'migrations/**/*',
+		'**/*.d.json.ts',
 		'next-env.d.ts',
 	],
 }, jsxA11y.flatConfigs.recommended, {

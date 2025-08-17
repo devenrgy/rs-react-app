@@ -1,7 +1,6 @@
-import type { MouseEvent } from 'react'
+'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { getBlobData } from './get-blob-data'
+import { useCallback } from 'react'
 
 export type DownloadData<T> = T[] | string | BlobPart
 
@@ -12,38 +11,24 @@ type Props<T> = {
 	onCreateBlob?: (data: DownloadData<T>, format: string) => Blob
 }
 
-export function useDownloadFile<T extends Record<string, unknown>>({ fileName, format, data, onCreateBlob }: Props<T>) {
-	const [blobUrl, setBlobUrl] = useState<string>('')
-
-	useEffect(() => {
-		if (!data) {
-			return
-		}
-
-		const blob = getBlobData(data, format, onCreateBlob)
-		const url = URL.createObjectURL(blob)
-		setBlobUrl(url)
-
-		return () => URL.revokeObjectURL(url)
-	}, [data, format, onCreateBlob])
-
+export function useDownloadFile<T extends Record<string, unknown>>({ fileName, format, data }: Props<T>) {
 	const downloadFile = useCallback(
-		(event: MouseEvent<HTMLAnchorElement>) => {
-			if (!blobUrl) {
-				event.preventDefault()
-				return
-			}
+		async () => {
+			const blob = await fetch('/api/download-csv', { body: JSON.stringify({ data, format }), method: 'POST' }).then(res => res.blob())
+			const blobUrl = URL.createObjectURL(blob)
 
-			const anchor = event.currentTarget
+			const anchor = document.createElement('a')
 			anchor.href = blobUrl
 			anchor.download = fileName
+			anchor.click()
+
+			return () => URL.revokeObjectURL(blobUrl)
 		},
-		[blobUrl, fileName],
+		[format, data],
 	)
 
 	const downloadLinkProps = {
 		download: fileName,
-		href: blobUrl,
 	}
 
 	return {

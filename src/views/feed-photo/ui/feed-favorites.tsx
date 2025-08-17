@@ -1,14 +1,12 @@
-import type { MouseEvent } from 'react'
 import type { FavoritePhoto } from '../model/favorite-photo-store'
 import { Download, Trash } from 'lucide-react'
-import { Link } from '@/shared/i18n/navigation'
 import { cn } from '@/shared/lib/cn'
 
 type Props = {
 	items: FavoritePhoto[]
 	className?: string
 	handleClearAll: () => void
-	handleDownload: (event: MouseEvent<HTMLAnchorElement>) => void
+	handleDownload: () => void
 }
 
 export const FeedFavorites = ({ items, className, handleClearAll, handleDownload }: Props) => {
@@ -43,15 +41,14 @@ export const FeedFavorites = ({ items, className, handleClearAll, handleDownload
 						<Trash size='20' />
 						Clear All
 					</button>
-					<Link
-						href='/'
-						role='none'
+					<button
+						type='button'
 						onClick={handleDownload}
 						className='dark:hover:bg-pine hover:bg-pine dark:hover:text-text flex cursor-pointer items-center justify-center gap-x-2.5 p-3 font-semibold duration-200 hover:text-white'
 					>
 						<Download size='20' />
 						Download
-					</Link>
+					</button>
 				</div>
 			</div>
 		</div>
