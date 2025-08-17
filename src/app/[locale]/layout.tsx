@@ -1,12 +1,13 @@
 import type { Locale } from 'next-intl'
+import type { ReactNode } from 'react'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { notFound } from 'next/navigation'
 
+import { notFound } from 'next/navigation'
 import { fontBrand, fontSans } from '@/shared/config/fonts'
 import { routing } from '@/shared/i18n/routing'
 import { cn } from '@/shared/lib/cn'
-import { ThemeProvider } from './theme-provider'
+import { ThemeProvider } from '@/shared/ui/theme-provider'
 
 export function generateStaticParams() {
 	return routing.locales.map(locale => ({ locale }))
@@ -26,7 +27,7 @@ export default async function LocaleLayout({
 	children,
 	params,
 }: Readonly<{
-	children: React.ReactNode
+	children: ReactNode
 	params: Promise<{ locale: Locale }>
 }>) {
 	const { locale } = await params

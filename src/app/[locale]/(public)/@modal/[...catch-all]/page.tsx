@@ -1,3 +1,3 @@
-const CatchAll = () => null
-
-export default CatchAll
+export default function CatchAll() {
+	return null
+}

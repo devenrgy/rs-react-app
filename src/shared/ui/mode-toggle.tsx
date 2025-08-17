@@ -2,8 +2,8 @@
 
 import { Moon, Sun } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useTheme } from '@/app/[locale]/theme-provider'
 import { cn } from '@/shared/lib/cn'
+import { useTheme } from '@/shared/ui/theme-provider'
 
 export const ModeToggle = ({ className }: { className?: string }) => {
 	const { handleUpdateTheme } = useTheme()
