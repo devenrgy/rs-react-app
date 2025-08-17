@@ -6,17 +6,13 @@ declare const messages: {
 		"description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
 		"title": "Something went wrong!"
 	},
-	"Home": {
-		"title": "Home",
-		"description": "A collection of stunning nature photos"
-	},
 	"Search": {
 		"label": "Search",
 		"input": "Find awesome images..."
 	},
 	"About": {
 		"title": "About",
-		"description": "<p>Yo, what's up? I'm Alex!</p><p>Frontend dev with 5 years of coding chaos.</p><p>My vibe: Next.js, TypeScript, Tailwind.</p><p>Got more in my toolbox, but who’s got time to list ‘em all?</p><p>Wanna geek out or just say hi?</p><p> Hit me up on <telegram>Telegram</telegram> or <discord>Discord!</discord></p><p>Let’s keep the frontend love alive—happy coding!</p> "
+		"description": "<p>Hi! My name is Alex and I went crazy at <span>Rolling Scopes School</span></p><p>This project is part of the <a>RS School React course</a></p><github>My Github</github>"
 	},
 	"LocaleSwitcher": {
 		"label": "Change language",
@@ -28,32 +24,29 @@ declare const messages: {
 		"about": "About"
 	},
 	"NotFoundPage": {
-		"description": "Please double-check the browser address bar or use the navigation to go to a known page.",
 		"title": "Page not found"
 	},
-	"PageLayout": {
-		"links": {
-			"docs": {
-				"description": "Learn more about next-intl in the official docs.",
-				"href": "https://next-intl.dev",
-				"title": "Docs"
-			},
-			"source": {
-				"description": "Browse the source code of this example on GitHub.",
-				"href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
-				"title": "Source code"
-			}
-		}
-	},
 	"Manifest": {
-		"name": "next-intl example"
+		"name": "Pulse"
 	},
 	"LocaleLayout": {
-		"title": "Pulse",
-		"name": "test"
+		"title": "Pulse"
 	},
 	"ModeToggle": {
 		"label": "Toggle theme"
+	},
+	"PhotoDetails": {
+		"photographer": "Photographer",
+		"location": "Location",
+		"details": "Details",
+		"likes": "Likes",
+		"dimensions": "Dimensions",
+		"created": "Created",
+		"updated": "Updated",
+		"links": "Links"
+	},
+	"FeedPhoto": {
+		"author": "Author"
 	}
 };
 export default messages;

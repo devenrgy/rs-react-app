@@ -24,7 +24,7 @@ export const LocaleSwitcher = () => {
 
 		startTransition(() => {
 			router.replace(
-				{ pathname, params: { id: Number(params.id) }, query: { ...currentParams } },
+				{ pathname, query: { ...currentParams } },
 				{ locale: nextLocale },
 			)
 		})

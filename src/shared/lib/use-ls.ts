@@ -1,17 +1,16 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { safeJsonParseThrow } from './helpers'
+import { safeJsonParse } from './helpers'
 
 export const useLS = <T>(key: string, defaultValue: T) => {
-	const [value, setValue] = useState<T>(() => {
-		try {
-			const storedValue = localStorage.getItem(key)
+	const [value, setValue] = useState<T>(defaultValue)
 
-			return storedValue ? safeJsonParseThrow(storedValue) : defaultValue
-		} catch (error) {
-			console.error('Error parsing localStorage value:', error)
-			return defaultValue
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setValue(safeJsonParse(window.localStorage.getItem(key)) || defaultValue)
 		}
-	})
+	}, [])
 
 	useEffect(() => {
 		localStorage.setItem(key, JSON.stringify(value))

@@ -5,6 +5,7 @@
 	--color-muted: var(--color-neutral-500);
 	--color-muted-hover: var(--color-neutral-900);
 	--color-white: var(--color-neutral-100);
+	--color-bg: white;
 }
 
 .dark {
@@ -14,4 +15,5 @@
 	--color-muted: var(--color-neutral-400);
 	--color-muted-hover: var(--color-neutral-100);
 	--color-white: var(--color-neutral-100);
+	--color-bg: black;
 }

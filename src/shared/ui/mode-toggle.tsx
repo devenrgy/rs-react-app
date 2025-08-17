@@ -2,11 +2,11 @@
 
 import { Moon, Sun } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useTheme } from 'next-themes'
+import { useTheme } from '@/app/[locale]/theme-provider'
 import { cn } from '@/shared/lib/cn'
 
 export const ModeToggle = ({ className }: { className?: string }) => {
-	const { setTheme } = useTheme()
+	const { handleUpdateTheme } = useTheme()
 	const t = useTranslations('ModeToggle')
 
 	return (
@@ -16,7 +16,7 @@ export const ModeToggle = ({ className }: { className?: string }) => {
 				className,
 			)}
 			title={t('label')}
-			onClick={() => setTheme(theme => (theme === 'light' ? 'dark' : 'light'))}
+			onClick={handleUpdateTheme}
 			type='button'
 		>
 			<Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 dark:scale-0' />

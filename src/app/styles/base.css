@@ -13,12 +13,8 @@
 	--color-muted: var(--color-muted);
 	--color-muted-hover: var(--color-muted-hover);
 	--color-white: var(--color-white);
-}
 
-@layer base {
-	body {
-		@apply font-sans antialiased text-primary;
-	}
+	--color-bg: var(--color-bg);
 }
 
 @utility container {

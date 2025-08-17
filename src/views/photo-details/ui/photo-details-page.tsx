@@ -1,10 +1,16 @@
+import type { Locale } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { getPhotoById } from '@/shared/api'
+import { Link } from '@/shared/i18n/navigation'
 import { BaseLayout } from '@/shared/ui/base-layout'
-import { ExternalLink } from '@/shared/ui/external-link'
 
-export default async function PhotoDetailsPage(props: { params: Promise<{ id: string }> }) {
-	const { id } = await props.params
+export default async function PhotoDetailsPage(props: { params: Promise<{ id: string, locale: Locale }> }) {
+	const { id, locale } = await props.params
+
+	const t = await getTranslations('PhotoDetails')
+
+	setRequestLocale(locale)
 
 	const { data, error } = await getPhotoById({ id })
 
@@ -31,22 +37,27 @@ export default async function PhotoDetailsPage(props: { params: Promise<{ id: st
 					<p className='mb-4'>{data.description}</p>
 					<div className='space-y-4'>
 						<div>
-							<h3 className='text-lg font-semibold'>Photographer</h3>
+							<h3 className='text-lg font-semibold'>{t('photographer')}</h3>
 							<p>{data.user.name}</p>
 							<p className='text-sm'>{data.user.bio}</p>
 							<p className='text-sm'>
-								Location:
+								{t('location')}
+								:
+								{' '}
 								{data.user.location}
 							</p>
 						</div>
 						<div>
-							<h3 className='text-lg font-semibold'>Details</h3>
+							<h3 className='text-lg font-semibold'>{t('details')}</h3>
 							<p>
-								Likes:
+								{t('likes')}
+								:
+								{' '}
 								{data.likes}
 							</p>
 							<p>
-								Dimensions:
+								{t('dimensions')}
+								:
 								{' '}
 								{data.width}
 								{' '}
@@ -55,7 +66,8 @@ export default async function PhotoDetailsPage(props: { params: Promise<{ id: st
 								{data.height}
 							</p>
 							<p>
-								Created:
+								{t('created')}
+								:
 								{' '}
 								{new Date(data.created_at).toLocaleDateString('en-US', {
 									year: 'numeric',
@@ -64,7 +76,8 @@ export default async function PhotoDetailsPage(props: { params: Promise<{ id: st
 								})}
 							</p>
 							<p>
-								Updated:
+								{t('updated')}
+								:
 								{' '}
 								{new Date(data.updated_at).toLocaleDateString('en-US', {
 									year: 'numeric',
@@ -74,18 +87,30 @@ export default async function PhotoDetailsPage(props: { params: Promise<{ id: st
 							</p>
 						</div>
 						<div>
-							<h3 className='text-lg font-semibold'>Links</h3>
+							<h3 className='text-lg font-semibold'>{t('links')}</h3>
 
-							<ExternalLink
-								href={data.links.html}
-								title='View on Unsplash'
-							/>
+							<p>
+								<Link
+									href={data.links.html}
+									className='underline-offset-4 hover:underline'
+									rel='noreferrer'
+									target='_blank'
+								>
+									View on Unsplash
+								</Link>
+							</p>
 
 							{data.links.download && (
-								<ExternalLink
-									href={data.links.download}
-									title='Download'
-								/>
+								<p>
+									<Link
+										href={data.links.download}
+										className='underline-offset-4 hover:underline'
+										rel='noreferrer'
+										target='_blank'
+									>
+										Download
+									</Link>
+								</p>
 							)}
 
 						</div>

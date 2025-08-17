@@ -1,12 +1,12 @@
 import type { Locale } from 'next-intl'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { notFound } from 'next/navigation'
 
 import { fontBrand, fontSans } from '@/shared/config/fonts'
 import { routing } from '@/shared/i18n/routing'
 import { cn } from '@/shared/lib/cn'
+import { ThemeProvider } from './theme-provider'
 
 export function generateStaticParams() {
 	return routing.locales.map(locale => ({ locale }))
@@ -46,11 +46,11 @@ export default async function LocaleLayout({
 				<link rel='manifest' href='/site.webmanifest' />
 			</head>
 			<body className={cn('h-full', fontSans.variable, fontBrand.variable)}>
-				<NextThemesProvider attribute='class' defaultTheme='dark'>
+				<ThemeProvider>
 					<NextIntlClientProvider>
 						{children}
 					</NextIntlClientProvider>
-				</NextThemesProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	)

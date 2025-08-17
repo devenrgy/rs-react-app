@@ -1,19 +1,15 @@
 {
 	"Error": {
-		"description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
-		"title": "Something went wrong!"
+		"description": "<p>Кажется, что-то пошло не так.</p><p>Можете попробовать <retry>перезагрузить страницу</retry>, которую вы посетили.</p>",
+		"title": "Что-то пошло не так!"
 	},
 	"Search": {
 		"label": "Поиск",
 		"input": "Найти красивые изображения..."
 	},
-	"Home": {
-		"title": "Главная",
-		"description": "Коллекция"
-	},
 	"About": {
 		"title": "Обо мне",
-		"description": "<p>Йо, как дела? Я Алекс!</p><p>Фронтенд-разработчик с 5 годами кодингового хаоса.</p><p>Мой вайб: Next.js, TypeScript, Tailwind.</p><p>В моём toolbox ещё больше, но у кого есть время перечислять всё?</p><p>Хочешь погикать или просто поздороваться?</p><p>Пиши мне в <telegram>Telegram</telegram> или <discord>Discord!</discord></p><p>Давай сохраним любовь к фронтенду — счастливого кодинга!</p> "
+		"description": "<p>Привет! Меня зовут Алекс, и я сошел с ума в <span>Rolling Scopes School</span>.</p> <p>Этот проект — часть <a>курса по React от RS School</a>.</p> <github>Мой Github</github>"
 	},
 	"LocaleSwitcher": {
 		"label": "Сменить язык",
@@ -24,10 +20,29 @@
 		"home": "Главная",
 		"about": "Обо мне"
 	},
+	"NotFoundPage": {
+		"title": "Страница не найдена"
+	},
+	"Manifest": {
+		"name": "Пульс"
+	},
 	"LocaleLayout": {
 		"title": "Пульс"
 	},
 	"ModeToggle": {
 		"label": "Переключить тему"
+	},
+	"PhotoDetails": {
+		"photographer": "Фотограф",
+		"location": "Местоположение",
+		"details": "Детали",
+		"likes": "Лайки",
+		"dimensions": "Размеры",
+		"created": "Создан",
+		"updated": "Обновлен",
+		"links": "Ссылки"
+	},
+	"FeedPhoto": {
+		"author": "Автор"
 	}
 }

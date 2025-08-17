@@ -1,9 +1,9 @@
 'use client'
 
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useRouter } from '@/shared/i18n/navigation'
-import { ExternalLink } from '@/shared/ui/external-link'
+import { Link, useRouter } from '@/shared/i18n/navigation'
 
 type Props = {
 	data: {
@@ -32,6 +32,7 @@ type Props = {
 export const PhotoDetailsModal = ({
 	data,
 }: Props) => {
+	const t = useTranslations('PhotoDetails')
 	const router = useRouter()
 	const closeModal = () => {
 		router.back()
@@ -57,22 +58,27 @@ export const PhotoDetailsModal = ({
 				<p className='mb-4'>{data.description}</p>
 				<div className='space-y-4'>
 					<div>
-						<h3 className='text-pine dark:text-foam text-lg font-semibold'>Photographer</h3>
+						<h3 className='text-pine dark:text-foam text-lg font-semibold'>{t('photographer')}</h3>
 						<p>{data.user.name}</p>
 						<p className='text-sm'>{data.user.bio}</p>
 						<p className='text-sm'>
-							Location:
+							{t('location')}
+							:
+							{' '}
 							{data.user.location}
 						</p>
 					</div>
 					<div>
-						<h3 className='text-pine dark:text-foam text-lg font-semibold'>Details</h3>
+						<h3 className='text-pine dark:text-foam text-lg font-semibold'>{t('details')}</h3>
 						<p>
-							Likes:
+							{t('likes')}
+							:
+							{' '}
 							{data.likes}
 						</p>
 						<p>
-							Dimensions:
+							{t('dimensions')}
+							:
 							{' '}
 							{data.width}
 							{' '}
@@ -81,7 +87,8 @@ export const PhotoDetailsModal = ({
 							{data.height}
 						</p>
 						<p>
-							Created:
+							{t('created')}
+							:
 							{' '}
 							{new Date(data.created_at).toLocaleDateString('en-US', {
 								year: 'numeric',
@@ -90,7 +97,8 @@ export const PhotoDetailsModal = ({
 							})}
 						</p>
 						<p>
-							Updated:
+							{t('updated')}
+							:
 							{' '}
 							{new Date(data.updated_at).toLocaleDateString('en-US', {
 								year: 'numeric',
@@ -100,18 +108,30 @@ export const PhotoDetailsModal = ({
 						</p>
 					</div>
 					<div>
-						<h3 className='text-pine dark:text-foam text-lg font-semibold'>Links</h3>
+						<h3 className='text-pine dark:text-foam text-lg font-semibold'>{t('links')}</h3>
 
-						<ExternalLink
-							href={data.links.html}
-							title='View on Unsplash'
-						/>
+						<p>
+							<Link
+								className='underline-offset-4 hover:underline'
+								href={data.links.html}
+								rel='noreferrer'
+								target='_blank'
+							>
+								View on Unsplash
+							</Link>
+						</p>
 
 						{data.links.download && (
-							<ExternalLink
-								href={data.links.download}
-								title='Download'
-							/>
+							<p>
+								<Link
+									className='underline-offset-4 hover:underline'
+									href={data.links.download}
+									rel='noreferrer'
+									target='_blank'
+								>
+									Download
+								</Link>
+							</p>
 						)}
 
 					</div>

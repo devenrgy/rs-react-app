@@ -1,6 +1,7 @@
 'use client'
 
 import { Heart } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Link } from '@/shared/i18n/navigation'
@@ -14,6 +15,7 @@ type Props = {
 
 export const FeedPhotoItem = ({ data, isFavorite, toggleFavorite }: Props) => {
 	const searchParams = useSearchParams()
+	const t = useTranslations('FeedPhoto')
 	const query = Object.fromEntries(searchParams.entries())
 	const { urls, width, height, alt_description, id, user } = data
 
@@ -27,10 +29,10 @@ export const FeedPhotoItem = ({ data, isFavorite, toggleFavorite }: Props) => {
 				fetchPriority='high'
 				alt={alt_description}
 			/>
-
 			<figcaption className='absolute bottom-0 text-balance text-sm capitalize justify-between inset-x-0 gap-5 flex items-center px-4 py-6'>
 				<p className='z-20 text-white'>
-					Author:
+					{t('author')}
+					:
 					{' '}
 					{user.name}
 				</p>
@@ -51,9 +53,8 @@ export const FeedPhotoItem = ({ data, isFavorite, toggleFavorite }: Props) => {
 					/>
 				</label>
 			</figcaption>
-
 			<Link
-				href={{ pathname: '/photo-details/[id]', params: { id: data.id }, query }}
+				href={{ pathname: `/photo-details/${data.id}`, query }}
 				className='absolute z-10 inset-0'
 				aria-label='More details'
 			/>
