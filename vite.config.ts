@@ -11,7 +11,7 @@ export default defineConfig({
 		coverage: {
 			enabled: true,
 			include: ['src/**/*.{ts,tsx}'],
-			exclude: ['src/index.{ts,tsx}', 'src/**/*.d.ts', 'src/main.tsx', 'src/configs/**'],
+			exclude: ['src/index.{ts,tsx}', 'src/**/*.d.ts'],
 			thresholds: {
 				statements: 80,
 				branches: 50,
@@ -21,7 +21,7 @@ export default defineConfig({
 		},
 		clearMocks: true,
 		globals: true,
-		setupFiles: ['tests/vitest.setup.ts'],
+		setupFiles: ['src/shared/config/vitest.setup.ts'],
 		environment: 'happy-dom',
 		css: true
 	}

@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+html,
+body {
+	height: 100%;
+}
+
+:root {
+	color-scheme: dark;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.no-spinner {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+	margin: 0;
+	-webkit-appearance: none;
+}
+
+@utility container {
+	@apply mx-auto px-4;
+}
