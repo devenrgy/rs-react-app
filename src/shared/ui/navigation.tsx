@@ -4,7 +4,11 @@ interface NavigationProps<T extends string> {
 }
 
 export const Navigation = <T extends string>({ children, items }: NavigationProps<T>) => {
-	return <nav>{items.map(children)}</nav>
+	return (
+		<nav>
+			<ul className='flex gap-4'>{items.map(children)}</ul>
+		</nav>
+	)
 }
 
 interface NavigationItemProps {

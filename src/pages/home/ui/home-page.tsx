@@ -1,7 +1,9 @@
-import { Button, ControlledForm, Header, Modal, Navigation, NavigationItem, UncontrolledForm } from '@/shared'
+import { Button, Header, Modal, Navigation, NavigationItem } from '@/shared'
 import { WithState } from '@/shared/lib'
 
 import { FORM_USE_CASES, type FormUseCase } from '..'
+import { ControlledForm } from './controlled-form'
+import { UncontrolledForm } from './uncontrolled-form'
 
 export const HomePage = () => (
 	<WithState<FormUseCase> initialState={'uncontrolled'}>
@@ -10,7 +12,9 @@ export const HomePage = () => (
 				<Navigation items={FORM_USE_CASES}>
 					{item => (
 						<NavigationItem key={item}>
-							<Button data={item} popoverTarget={item} onClick={setFormUseCase} />
+							<Button popoverTarget={item} onClick={() => setFormUseCase(item)}>
+								{item}
+							</Button>
 						</NavigationItem>
 					)}
 				</Navigation>
