@@ -57,6 +57,14 @@ export default tseslint.config(
 			'@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
 			'@eslint-react/no-array-index-key': 'off',
 			'@eslint-react/hooks-extra/no-unnecessary-use-prefix': 'off',
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					caughtErrorsIgnorePattern: '^_'
+				}
+			],
 			'unused-imports/no-unused-vars': [
 				'warn',
 				{

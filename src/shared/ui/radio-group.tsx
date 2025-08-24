@@ -12,11 +12,15 @@ export const RadioGroup = ({
 	return <p className={cn('grid gap-3', className)}>{children(name)}</p>
 }
 
-export const RadioGroupItem = ({ name, value, className }: React.InputHTMLAttributes<HTMLInputElement>) => {
+interface RadioGroupItemProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	label?: string | React.ReactNode
+}
+
+export const RadioGroupItem = ({ name, value, className, label, ...props }: RadioGroupItemProps) => {
 	return (
 		<label className='flex items-center gap-2 text-sm capitalize'>
-			<input className={cn('h-4 w-4', className)} type='radio' name={name} value={value} />
-			{value}
+			{label}
+			<input className={cn('h-4 w-4', className)} type='radio' name={name} value={value} {...props} />
 		</label>
 	)
 }
