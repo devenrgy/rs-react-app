@@ -34,7 +34,6 @@ export const UncontrolledForm = ({ onSubmit, sendFormAction, onClose }: Uncontro
 
 		if (error) {
 			setErrors(z.flattenError(error).fieldErrors)
-			console.log(z.flattenError(error).fieldErrors)
 			return rawDataWithoutAvatar
 		}
 

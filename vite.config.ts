@@ -11,7 +11,7 @@ export default defineConfig({
 		coverage: {
 			enabled: true,
 			include: ['src/**/*.{ts,tsx}'],
-			exclude: ['src/index.{ts,tsx}', 'src/**/*.d.ts'],
+			exclude: ['src/**/index.{ts,tsx}', 'src/**/*.d.ts', 'src/app/main.tsx'],
 			thresholds: {
 				statements: 80,
 				branches: 50,

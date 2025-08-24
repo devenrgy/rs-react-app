@@ -7,7 +7,7 @@ import { Button, Checkbox, cn, Input, RadioGroup, RadioGroupItem } from '@/share
 
 import { convertToBase64, type CustomFormData, formSchema, getPasswordStrength, strengthText, useCountries } from '..'
 
-interface UncontrolledFormProps {
+interface ControlledFormProps {
 	onClose: () => void
 	onSubmit: (action: CustomFormData & { isSending: boolean }) => void
 	sendFormAction: (form: Omit<CustomFormData, 'isSending'>) => Promise<void>
@@ -15,7 +15,7 @@ interface UncontrolledFormProps {
 
 type Data = z.infer<typeof formSchema>
 
-export const ControlledForm = ({ onSubmit, sendFormAction, onClose }: UncontrolledFormProps) => {
+export const ControlledForm = ({ onSubmit, sendFormAction, onClose }: ControlledFormProps) => {
 	const countries = useCountries()
 	const { register, handleSubmit, formState, watch } = useForm({
 		mode: 'onChange',

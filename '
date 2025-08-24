@@ -44,6 +44,10 @@ export const formSchema = z
 		message: 'Passwords do not match',
 		path: ['confirmPassword'],
 		when(payload) {
+return payload.issues.every((iss) => { 
+        const firstPathEl = iss.path?.[0]; 
+        return firstPathEl !== "password" && firstPathEl !== "confirmPassword"; 
+      }); 
 			return formSchema.pick({ password: true, confirmPassword: true }).safeParse(payload.value).success
 		}
 	})

@@ -1,4 +1,3 @@
-export { Avatar, AvatarImage } from './avatar'
 export { Button } from './button'
 export { Checkbox } from './checkbox'
 export { Header } from './header'

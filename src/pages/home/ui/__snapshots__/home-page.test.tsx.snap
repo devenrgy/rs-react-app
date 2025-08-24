@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HomePage > should render successfully 1`] = `
+<header
+  class="container flex justify-between py-10 text-sm"
+>
+  <nav>
+    <ul
+      class="flex gap-4"
+    >
+      <li>
+        <button
+          class="cursor-pointer text-sm rounded-md capitalize transition-colors duration-200 bg-neutral-800 hover:bg-neutral-700 px-5 py-3"
+          popovertarget="uncontrolled"
+          type="button"
+        >
+          uncontrolled
+        </button>
+      </li>
+      <li>
+        <button
+          class="cursor-pointer text-sm rounded-md capitalize transition-colors duration-200 bg-neutral-800 hover:bg-neutral-700 px-5 py-3"
+          popovertarget="controlled"
+          type="button"
+        >
+          controlled
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;
