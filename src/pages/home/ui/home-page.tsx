@@ -20,7 +20,7 @@ export const HomePage = () => {
 		addForm(form)
 		const sentForm = await deliverForm(form)
 		startTransition(() => {
-			setForms(forms => [sentForm, ...forms])
+			setForms(forms => [{ ...sentForm, isSending: false }, ...forms])
 		})
 	}
 
