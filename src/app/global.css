@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@layer base {
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+
+html,
+body {
+	height: 100%;
+}
+
+:root {
+	color-scheme: dark;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+@utility container {
+	@apply mx-auto px-4;
+}

@@ -12,7 +12,8 @@ dist
 dist-ssr
 *.local
 
-bun.lock
+coverage
+pnpm-lock.yaml
 
 # Editor directories and files
 .vscode/*

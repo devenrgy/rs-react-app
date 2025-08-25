@@ -1,0 +1,419 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UncontrolledForm > should render successfully 1`] = `
+<form
+  action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+>
+  <fieldset
+    class="flex flex-col gap-1"
+  >
+    <legend
+      class="mb-2"
+    >
+      Uncontrolled Form
+    </legend>
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Avatar
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="avatar"
+          placeholder="Avatar"
+          type="file"
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Name
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="name"
+          placeholder="Name"
+          type="text"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Age
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          inputmode="numeric"
+          name="age"
+          placeholder="Age"
+          type="number"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Email
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="email"
+          placeholder="Email"
+          type="email"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Password
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="mt-1 h-5 text-sm text-red-400"
+    >
+      Password Strength: 
+      Weak
+    </p>
+    <div
+      class="mt-1 h-2 rounded-full bg-gray-200"
+      style="width: 0%;"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Confirm Password
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Country
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          list="countries"
+          name="country"
+          placeholder="Country"
+          type="text"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <datalist
+      id="countries"
+    >
+      <option
+        value="Russia"
+      />
+      <option
+        value="USA"
+      />
+      <option
+        value="Japan"
+      />
+    </datalist>
+    <p
+      class="flex gap-2"
+    >
+      <label
+        class="flex items-center gap-2 text-sm capitalize"
+      >
+        Male
+        <input
+          class="size-4"
+          name="gender"
+          type="radio"
+          value="male"
+        />
+      </label>
+      <label
+        class="flex items-center gap-2 text-sm capitalize"
+      >
+        Female
+        <input
+          class="size-4"
+          name="gender"
+          type="radio"
+          value="female"
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p>
+      <label
+        class="flex items-center gap-2 text-sm"
+      >
+        <input
+          class="size-4"
+          name="terms"
+          type="checkbox"
+        />
+        Agree to terms
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <button
+      class="cursor-pointer text-sm rounded-md capitalize transition-colors duration-200 bg-neutral-800 hover:bg-neutral-700 px-5 py-3"
+      type="submit"
+    >
+      Submit
+    </button>
+  </fieldset>
+</form>
+`;
+
+exports[`UontrolledForm > should render successfully 1`] = `
+<form
+  action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+>
+  <fieldset
+    class="flex flex-col gap-1"
+  >
+    <legend
+      class="mb-2"
+    >
+      Uncontrolled Form
+    </legend>
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Avatar
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="avatar"
+          placeholder="Avatar"
+          type="file"
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Name
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="name"
+          placeholder="Name"
+          type="text"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Age
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          inputmode="numeric"
+          name="age"
+          placeholder="Age"
+          type="number"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Email
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="email"
+          placeholder="Email"
+          type="email"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Password
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="mt-1 h-5 text-sm text-red-400"
+    >
+      Password Strength: 
+      Weak
+    </p>
+    <div
+      class="mt-1 h-2 rounded-full bg-gray-200"
+      style="width: 0%;"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Confirm Password
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p
+      class="w-full text-sm"
+    >
+      <label>
+        Country
+        <input
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 shadow-xs flex h-9 w-full min-w-0 rounded-md bg-neutral-800 px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[2px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+          list="countries"
+          name="country"
+          placeholder="Country"
+          type="text"
+          value=""
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <datalist
+      id="countries"
+    >
+      <option
+        value="Russia"
+      />
+      <option
+        value="USA"
+      />
+      <option
+        value="Japan"
+      />
+    </datalist>
+    <p
+      class="flex gap-2"
+    >
+      <label
+        class="flex items-center gap-2 text-sm capitalize"
+      >
+        Male
+        <input
+          class="size-4"
+          name="gender"
+          type="radio"
+          value="male"
+        />
+      </label>
+      <label
+        class="flex items-center gap-2 text-sm capitalize"
+      >
+        Female
+        <input
+          class="size-4"
+          name="gender"
+          type="radio"
+          value="female"
+        />
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <p>
+      <label
+        class="flex items-center gap-2 text-sm"
+      >
+        <input
+          class="size-4"
+          name="terms"
+          type="checkbox"
+        />
+        Agree to terms
+      </label>
+    </p>
+    <p
+      class="h-5 text-sm text-red-400"
+    />
+    <button
+      class="cursor-pointer text-sm rounded-md capitalize transition-colors duration-200 bg-neutral-800 hover:bg-neutral-700 px-5 py-3"
+      type="submit"
+    >
+      Submit
+    </button>
+  </fieldset>
+</form>
+`;
