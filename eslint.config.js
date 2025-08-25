@@ -7,13 +7,10 @@ import tseslint from 'typescript-eslint'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import reactCompiler from 'eslint-plugin-react-compiler'
-import vitest from '@vitest/eslint-plugin'
-import testingLibrary from 'eslint-plugin-testing-library'
-import jestDom from 'eslint-plugin-jest-dom'
 import unusedImports from 'eslint-plugin-unused-imports'
 
 export default tseslint.config(
-	{ ignores: ['dist', 'coverage'] },
+	{ ignores: ['dist'] },
 	{
 		extends: [
 			js.configs.recommended,
@@ -22,10 +19,7 @@ export default tseslint.config(
 			eslintPluginPrettier,
 			reactHooks.configs['recommended-latest'],
 			reactRefresh.configs['recommended'],
-			reactCompiler.configs['recommended'],
-			vitest.configs['recommended'],
-			testingLibrary.configs['flat/react'],
-			jestDom.configs['flat/recommended']
+			reactCompiler.configs['recommended']
 		],
 		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
@@ -49,8 +43,6 @@ export default tseslint.config(
 			'react-hooks/exhaustive-deps': 'warn',
 			'simple-import-sort/imports': 'error',
 			'simple-import-sort/exports': 'error',
-			'testing-library/no-node-access': 'off',
-			'testing-library/no-container': 'off',
 			'no-unused-vars': 'off',
 			'unused-imports/no-unused-imports': 'error',
 			'@eslint-react/no-unstable-context-value': 'off',

@@ -1,1 +1,0 @@
-export { deliverForm } from './actions'
