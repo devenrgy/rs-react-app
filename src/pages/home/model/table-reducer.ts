@@ -6,8 +6,8 @@ const tableColumns = {
 	methane: { name: 'Methane', isVisible: false, className: 'w-20' },
 	oil_co2: { name: 'Oil CO2', isVisible: false, className: 'w-20' },
 	temperature_change_from_co2: { name: 'Temperature change from CO2', isVisible: false, className: 'w-20' },
-	co2: { name: 'CO2', isVisible: true, className: 'w-20' },
-	co2_per_capita: { name: 'CO2 per capita', isVisible: true, className: 'w-20 text-right' }
+	co2: { name: 'CO2', isVisible: false, className: 'w-20' },
+	co2_per_capita: { name: 'CO2 per capita', isVisible: false, className: 'w-20 text-right' }
 }
 
 export type ColumnName = keyof typeof tableColumns

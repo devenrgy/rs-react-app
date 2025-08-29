@@ -1,7 +1,7 @@
 import { cn } from '..'
 
 interface SelectProps extends React.ComponentProps<'select'> {
-	options: string[]
+	options: string[] | number[]
 }
 
 export const Select = ({ className, options, ...props }: SelectProps) => {

@@ -3,6 +3,7 @@ import { Settings } from 'lucide-react'
 import { Button, cn, Input, Label, Select } from '@/shared'
 
 interface DataTableControlsProps {
+	currentYear: number
 	className?: string
 	handleSearch: (value: string) => void
 	handleSort: (value: string) => void
@@ -10,7 +11,12 @@ interface DataTableControlsProps {
 	handleYear: (value: number) => void
 }
 
+const DEFAULT_SORT_OPTIONS = ['country', 'population']
+const DEFAULT_ORDER_OPTIONS = ['asc', 'desc']
+const DEFAULT_YEAR_OPTIONS = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
+
 export const DataTableControls = ({
+	currentYear,
 	className,
 	handleSearch,
 	handleSort,
@@ -31,9 +37,9 @@ export const DataTableControls = ({
 					onChange={e => handleSort(e.currentTarget.value)}
 					id='sort'
 					name='sort'
-					options={['country', 'population']}
+					options={DEFAULT_SORT_OPTIONS}
 				/>
-				<Select onChange={e => handleOrder(e.currentTarget.value)} name='order' options={['asc', 'desc']} />
+				<Select onChange={e => handleOrder(e.currentTarget.value)} name='order' options={DEFAULT_ORDER_OPTIONS} />
 			</p>
 
 			<p className='flex items-center gap-2'>
@@ -42,7 +48,8 @@ export const DataTableControls = ({
 					onChange={e => handleYear(Number(e.currentTarget.value))}
 					id='year'
 					name='year'
-					options={['2023', '2022', '2021']}
+					defaultValue={currentYear}
+					options={DEFAULT_YEAR_OPTIONS}
 				/>
 			</p>
 
