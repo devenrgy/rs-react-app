@@ -5,13 +5,15 @@ interface HighlightProps {
 	children: (value: string, isHighlight: boolean) => React.ReactNode
 }
 
+const initialValue = undefined
+
 export const Highlight = ({ value, children }: HighlightProps) => {
-	const prevValueRef = useRef<string>(undefined)
+	const previousValueRef = useRef<string>(initialValue)
 	const [isHighlight, setIsHighlight] = useState(false)
 	const timeoutRef = useRef<number>(undefined)
 
 	useEffect(() => {
-		if (prevValueRef.current !== undefined && prevValueRef.current !== value) {
+		if (previousValueRef.current !== initialValue && previousValueRef.current !== value) {
 			if (timeoutRef.current) {
 				clearTimeout(timeoutRef.current)
 			}
@@ -24,7 +26,7 @@ export const Highlight = ({ value, children }: HighlightProps) => {
 			}, 1000)
 		}
 
-		prevValueRef.current = value
+		previousValueRef.current = value
 	}, [value])
 
 	return children(value, isHighlight)

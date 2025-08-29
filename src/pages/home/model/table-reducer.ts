@@ -1,23 +1,10 @@
-export type ColumnName =
-	| 'iso_code'
-	| 'country'
-	| 'year'
-	| 'population'
-	| 'co2'
-	| 'co2_per_capita'
-	| 'methane'
-	| 'oil_co2'
-	| 'temperature_change_from_co2'
-
 export type ColumnValues = {
 	name: string
 	isVisible: boolean
 	className: string
 }
 
-export type TableColumns = Record<ColumnName, ColumnValues>
-
-const tableColumns: TableColumns = {
+const tableColumns = {
 	iso_code: { name: 'ISO', isVisible: true, className: 'w-15' },
 	country: { name: 'Country', isVisible: true, className: 'text-center' },
 	year: { name: 'Year', isVisible: true, className: 'w-15' },
@@ -28,6 +15,9 @@ const tableColumns: TableColumns = {
 	co2: { name: 'CO2', isVisible: true, className: 'w-20' },
 	co2_per_capita: { name: 'CO2 per capita', isVisible: true, className: 'w-20 text-right' }
 }
+
+export type ColumnName = keyof typeof tableColumns
+export type TableColumns = Record<ColumnName, ColumnValues>
 
 export const tableState = {
 	searchCountry: '',
