@@ -10,7 +10,7 @@ const initialValue = undefined
 export const Highlight = ({ value, children }: HighlightProps) => {
 	const previousValueRef = useRef<string | number | undefined>(initialValue)
 	const [isHighlight, setIsHighlight] = useState(false)
-	const timeoutRef = useRef<number>(undefined)
+	const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
 	useEffect(() => {
 		if (previousValueRef.current !== initialValue && previousValueRef.current !== value) {
