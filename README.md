@@ -12,7 +12,7 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 - ✅ "Hide commits below 0.1ms" - Enabled
 - 🔄 Multiple iterations per test case for accurate results
 
-## Test Scenarios
+## Test Scenarios (BEFORE OPTIMIZATION)
 
 ### 1. Column Sorting Interaction
 
@@ -63,4 +63,56 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 #### Ranked Chart
 
 <img width="833" height="225" alt="image" src="https://github.com/user-attachments/assets/d0451c41-723d-4e61-b493-73f8f6d9a778" />
+
+## Test Scenarios (AFTER OPTIMIZATION)
+
+### 1. Column Sorting Interaction
+
+**User Action**: Sort data by population
+
+#### Flame Graph
+
+<img width="753" height="196" alt="image" src="https://github.com/user-attachments/assets/1cd13c53-9ccd-48f6-9967-1b131e6c9979" />
+
+#### Ranked Chart
+
+<img width="754" height="152" alt="image" src="https://github.com/user-attachments/assets/cd3880fe-e43a-4052-8c66-27dccf0914d6" />
+
+### 2. Country Search Operation
+
+**User Action**: Type "United" in search field
+
+#### Flame Graph
+
+<img width="753" height="257" alt="image" src="https://github.com/user-attachments/assets/7d3cea6c-fdc7-413d-87af-5c58c4ccff24" />
+
+#### Ranked Chart
+
+<img width="752" height="225" alt="image" src="https://github.com/user-attachments/assets/9555c3a5-2461-4dc6-9982-70adddb9d311" />
+
+---
+
+### 3. Year Selection Change
+
+**User Action**: Select different year from dropdown
+
+#### Flame Graph
+
+<img width="751" height="208" alt="image" src="https://github.com/user-attachments/assets/3c000879-1764-4a75-b4cc-3cba1aa07024" />
+
+#### Ranked Chart
+
+<img width="755" height="231" alt="image" src="https://github.com/user-attachments/assets/789a8128-bf7c-4f0f-97e9-7af57e80165b" />
+
+### 4. Column Management
+
+**User Action**: Open modal and toggle additional columns
+
+#### Flame Graph
+
+<img width="752" height="217" alt="image" src="https://github.com/user-attachments/assets/bbf99434-dcd3-40c7-9a7d-ddfd0b487d93" />
+
+#### Ranked Chart
+
+<img width="753" height="212" alt="image" src="https://github.com/user-attachments/assets/85e417da-3d1a-4a74-ab12-0475384bcf8f" />
 
