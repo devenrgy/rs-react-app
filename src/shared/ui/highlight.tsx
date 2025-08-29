@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
 interface HighlightProps {
-	value: string
-	children: (value: string, isHighlight: boolean) => React.ReactNode
+	value: string | number | undefined
+	children: (value: string | number | undefined, isHighlight: boolean) => React.ReactNode
 }
 
 const initialValue = undefined
 
 export const Highlight = ({ value, children }: HighlightProps) => {
-	const previousValueRef = useRef<string>(initialValue)
+	const previousValueRef = useRef<string | number | undefined>(initialValue)
 	const [isHighlight, setIsHighlight] = useState(false)
 	const timeoutRef = useRef<number>(undefined)
 

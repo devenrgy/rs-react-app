@@ -1,6 +1,6 @@
 import type { CountryData } from '..'
 
-const comparePopulation = (popA: number | undefined, popB: number | undefined, order: string): number => {
+const comparePopulation = (popA: number | undefined, popB: number | undefined, order: string) => {
 	if (popA == null && popB == null) return 0
 	if (popA == null) return 1
 	if (popB == null) return -1
@@ -8,7 +8,7 @@ const comparePopulation = (popA: number | undefined, popB: number | undefined, o
 	return order === 'asc' ? popA - popB : popB - popA
 }
 
-export const sortByPopulation = (countryAData: CountryData, countryBData: CountryData, order: string): number => {
+export const sortByPopulation = (countryAData: CountryData, countryBData: CountryData, order: string) => {
 	const popA = countryAData.data[0]?.population
 	const popB = countryBData.data[0]?.population
 

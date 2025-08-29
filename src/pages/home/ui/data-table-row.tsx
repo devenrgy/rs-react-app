@@ -1,5 +1,7 @@
 import { cn, Highlight, TableCell, TableRow } from '@/shared'
 
+import type { CountryData, TableColumns } from '..'
+
 export const DataTableRow = ({
 	country,
 	countryData,
@@ -7,12 +9,12 @@ export const DataTableRow = ({
 }: {
 	country: string
 	countryData: CountryData
-	columns: DataTableProps['columns']
+	columns: TableColumns
 }) => {
 	const getCellValue = (columnName: string) => {
 		if (columnName === 'country') return country
 		if (columnName === 'iso_code') return countryData.iso_code
-		return countryData.data[0]?.[columnName]
+		return countryData.data[0]?.[columnName as keyof CountryData['data'][0]]
 	}
 
 	return (

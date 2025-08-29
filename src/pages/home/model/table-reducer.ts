@@ -1,9 +1,3 @@
-export type ColumnValues = {
-	name: string
-	isVisible: boolean
-	className: string
-}
-
 const tableColumns = {
 	iso_code: { name: 'ISO', isVisible: true, className: 'w-15' },
 	country: { name: 'Country', isVisible: true, className: 'text-center' },
@@ -17,6 +11,7 @@ const tableColumns = {
 }
 
 export type ColumnName = keyof typeof tableColumns
+export type ColumnValues = (typeof tableColumns)[ColumnName]
 export type TableColumns = Record<ColumnName, ColumnValues>
 
 export const tableState = {
