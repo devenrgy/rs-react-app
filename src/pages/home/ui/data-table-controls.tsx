@@ -1,9 +1,13 @@
 import { Settings } from 'lucide-react'
+import { Suspense } from 'react'
 
-import { Button, cn, Input, Label, Select } from '@/shared'
+import { Button, cn, Input, Label, Select, Skeleton } from '@/shared'
+
+import type { CountryData } from '..'
+import { DataTableYear } from './data-table-year'
 
 interface DataTableControlsProps {
-	currentYear: number
+	dataPromise: Promise<Record<string, CountryData>>
 	className?: string
 	handleSearch: (value: string) => void
 	handleSort: (value: string) => void
@@ -13,10 +17,9 @@ interface DataTableControlsProps {
 
 const DEFAULT_SORT_OPTIONS = ['country', 'population']
 const DEFAULT_ORDER_OPTIONS = ['asc', 'desc']
-const DEFAULT_YEAR_OPTIONS = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
 
 export const DataTableControls = ({
-	currentYear,
+	dataPromise,
 	className,
 	handleSearch,
 	handleSort,
@@ -43,14 +46,9 @@ export const DataTableControls = ({
 			</p>
 
 			<p className='flex items-center gap-2'>
-				<Label htmlFor='year'>Filter by year:</Label>
-				<Select
-					onChange={e => handleYear(Number(e.currentTarget.value))}
-					id='year'
-					name='year'
-					defaultValue={currentYear}
-					options={DEFAULT_YEAR_OPTIONS}
-				/>
+				<Suspense fallback={<Skeleton className='h-8 w-40' />}>
+					<DataTableYear dataPromise={dataPromise} handleYear={handleYear} />
+				</Suspense>
 			</p>
 
 			<Button popoverTarget='settings' size='icon' aria-label='Settings'>

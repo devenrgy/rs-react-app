@@ -1,10 +1,18 @@
+import { use } from 'react'
+
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/shared'
 
-import { createFilterBySearchCountry, createSortData, createTransformCountryData, type TableColumns } from '..'
-import data from '../config/data.json'
+import {
+	type CountryData,
+	createFilterBySearchCountry,
+	createSortData,
+	createTransformCountryData,
+	type TableColumns
+} from '..'
 import { DataTableRow } from './data-table-row'
 
 interface DataTableProps {
+	dataPromise: Promise<Record<string, CountryData>>
 	columns: TableColumns
 	sort: string
 	order: string
@@ -12,7 +20,11 @@ interface DataTableProps {
 	searchCountry: string
 }
 
-export const DataTable = ({ columns, sort, order, year, searchCountry }: DataTableProps) => {
+export const DataTable = ({ dataPromise, columns, sort, order, year, searchCountry }: DataTableProps) => {
+	const data = use(dataPromise)
+
+	console.log(data)
+
 	const sortedData = Object.entries(data)
 		.filter(createFilterBySearchCountry(searchCountry))
 		.map(createTransformCountryData(year))

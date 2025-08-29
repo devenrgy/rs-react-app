@@ -2,10 +2,12 @@ import { Suspense, useReducer } from 'react'
 
 import { Skeleton } from '@/shared'
 
-import { type ColumnName, type TableColumns, tableReducer, tableState } from '..'
+import { type ColumnName, getDataTable, type TableColumns, tableReducer, tableState } from '..'
 import { DataTable } from './data-table'
 import { DataTableControls } from './data-table-controls'
 import { DataTableModalSettings } from './data-table-modal-settings'
+
+const initialDataPromise = getDataTable()
 
 export const HomePage = () => {
 	const [state, dispatch] = useReducer(tableReducer, tableState)
@@ -34,15 +36,16 @@ export const HomePage = () => {
 			<section className='relative'>
 				<DataTableControls
 					className='sticky top-0 z-10'
+					dataPromise={initialDataPromise}
 					handleSearch={handleChangeSearchCountry}
 					handleSort={handleChangeSort}
 					handleOrder={handleChangeOrder}
 					handleYear={handleChangeYear}
-					currentYear={state.year}
 				/>
 
-				<Suspense fallback={<Skeleton className='h-12' />}>
+				<Suspense fallback={<Skeleton className='h-210' />}>
 					<DataTable
+						dataPromise={initialDataPromise}
 						columns={state.columns}
 						sort={state.sort}
 						order={state.order}
