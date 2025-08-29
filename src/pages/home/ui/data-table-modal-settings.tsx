@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import { useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 
 import { Button, Checkbox, Label } from '@/shared'
 
@@ -10,24 +10,27 @@ interface DataTableModalSettingsProps {
 	onSubmit: (data: string[]) => void
 }
 
-export const DataTableModalSettings = ({ data, onSubmit }: DataTableModalSettingsProps) => {
+export const DataTableModalSettings = memo(({ data, onSubmit }: DataTableModalSettingsProps) => {
 	const formRef = useRef<HTMLFormElement>(null)
 	const dialogRef = useRef<HTMLDialogElement>(null)
 
-	const handleClose = () => {
+	const handleClose = useCallback(() => {
 		formRef.current?.reset()
 		dialogRef.current?.hidePopover()
-	}
+	}, [])
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
+	const handleSubmit = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault()
 
-		const formData = new FormData(e.currentTarget)
-		const data = Array.from(formData.keys())
+			const formData = new FormData(e.currentTarget)
+			const data = Array.from(formData.keys())
 
-		onSubmit(data)
-		handleClose()
-	}
+			onSubmit(data)
+			handleClose()
+		},
+		[handleClose, onSubmit]
+	)
 
 	return (
 		<dialog
@@ -71,4 +74,4 @@ export const DataTableModalSettings = ({ data, onSubmit }: DataTableModalSetting
 			</Button>
 		</dialog>
 	)
-}
+})

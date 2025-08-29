@@ -1,4 +1,4 @@
-import { use } from 'react'
+import { memo, use, useMemo } from 'react'
 
 import { Label, Select } from '@/shared'
 
@@ -9,10 +9,10 @@ interface DataTableYearProps {
 	handleYear: (value: number) => void
 }
 
-export const DataTableYear = ({ dataPromise, handleYear }: DataTableYearProps) => {
+export const DataTableYear = memo(({ dataPromise, handleYear }: DataTableYearProps) => {
 	const data = use(dataPromise)
-	const allYearsByDesc = getAllYearsByDesc(data)
-	const lastYear = allYearsByDesc[0]
+	const allYearsByDesc = useMemo(() => getAllYearsByDesc(data), [data])
+	const lastYear = useMemo(() => allYearsByDesc[0], [allYearsByDesc])
 
 	return (
 		<>
@@ -26,4 +26,4 @@ export const DataTableYear = ({ dataPromise, handleYear }: DataTableYearProps) =
 			/>
 		</>
 	)
-}
+})

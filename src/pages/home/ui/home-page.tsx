@@ -1,4 +1,4 @@
-import { Suspense, useReducer } from 'react'
+import { Suspense, useCallback, useReducer } from 'react'
 
 import { Skeleton } from '@/shared'
 
@@ -12,24 +12,30 @@ const initialDataPromise = getDataTable()
 export const HomePage = () => {
 	const [state, dispatch] = useReducer(tableReducer, tableState)
 
-	const handleChangeOrder = (value: string) => dispatch({ type: 'order', payload: value })
-	const handleChangeSort = (value: string) => dispatch({ type: 'sort', payload: value })
-	const handleChangeYear = (value: number) => dispatch({ type: 'year', payload: value })
-	const handleChangeSearchCountry = (value: string) => dispatch({ type: 'searchCountry', payload: value })
-	const handleChangeColumnVisibility = (data: string[]) =>
-		dispatch({
-			type: 'columns',
-			payload: Object.keys(state.columns).reduce<TableColumns>(
-				(acc, key) => ({
-					...acc,
-					[key]: {
-						...state.columns[key as ColumnName],
-						isVisible: data.includes(key as ColumnName)
-					}
-				}),
-				{} as TableColumns
-			)
-		})
+	const handleChangeOrder = useCallback((value: string) => dispatch({ type: 'order', payload: value }), [])
+	const handleChangeSort = useCallback((value: string) => dispatch({ type: 'sort', payload: value }), [])
+	const handleChangeYear = useCallback((value: number) => dispatch({ type: 'year', payload: value }), [])
+	const handleChangeSearchCountry = useCallback(
+		(value: string) => dispatch({ type: 'searchCountry', payload: value }),
+		[]
+	)
+	const handleChangeColumnVisibility = useCallback(
+		(data: string[]) =>
+			dispatch({
+				type: 'columns',
+				payload: Object.keys(state.columns).reduce<TableColumns>(
+					(acc, key) => ({
+						...acc,
+						[key]: {
+							...state.columns[key as ColumnName],
+							isVisible: data.includes(key as ColumnName)
+						}
+					}),
+					{} as TableColumns
+				)
+			}),
+		[]
+	)
 
 	return (
 		<main className='container'>

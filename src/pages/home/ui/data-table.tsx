@@ -1,4 +1,4 @@
-import { use } from 'react'
+import { memo, use, useMemo } from 'react'
 
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/shared'
 
@@ -20,15 +20,17 @@ interface DataTableProps {
 	searchCountry: string
 }
 
-export const DataTable = ({ dataPromise, columns, sort, order, year, searchCountry }: DataTableProps) => {
+export const DataTable = memo(({ dataPromise, columns, sort, order, year, searchCountry }: DataTableProps) => {
 	const data = use(dataPromise)
 
-	console.log(data)
-
-	const sortedData = Object.entries(data)
-		.filter(createFilterBySearchCountry(searchCountry))
-		.map(createTransformCountryData(year))
-		.sort(createSortData(sort, order))
+	const sortedData = useMemo(
+		() =>
+			Object.entries(data)
+				.filter(createFilterBySearchCountry(searchCountry))
+				.map(createTransformCountryData(year))
+				.sort(createSortData(sort, order)),
+		[data, sort, order, year, searchCountry]
+	)
 
 	return (
 		<Table>
@@ -51,4 +53,4 @@ export const DataTable = ({ dataPromise, columns, sort, order, year, searchCount
 			</TableBody>
 		</Table>
 	)
-}
+})
