@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useReducer } from 'react'
+import { Suspense, useCallback, useDeferredValue, useReducer } from 'react'
 
 import { Skeleton } from '@/shared'
 
@@ -11,6 +11,7 @@ const initialDataPromise = getDataTable()
 
 export const HomePage = () => {
 	const [state, dispatch] = useReducer(tableReducer, tableState)
+	const deferredSearchCountry = useDeferredValue(state.searchCountry)
 
 	const handleChangeOrder = useCallback((value: string) => dispatch({ type: 'order', payload: value }), [])
 	const handleChangeSort = useCallback((value: string) => dispatch({ type: 'sort', payload: value }), [])
@@ -56,7 +57,7 @@ export const HomePage = () => {
 						sort={state.sort}
 						order={state.order}
 						year={state.year}
-						searchCountry={state.searchCountry}
+						searchCountry={deferredSearchCountry}
 					/>
 				</Suspense>
 
